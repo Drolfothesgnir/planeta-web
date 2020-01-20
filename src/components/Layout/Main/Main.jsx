@@ -7,13 +7,13 @@ import classes from './Main.module.less';
 
 function Main() {
   return (
-    <main className={classes['main-content']}>
+    <main className={`${classes.mainContent} fc`}>
       <Container>
-        <div className={classes['main-inner']}>
-          <div className={classes['main-logo']}>
+        <div className={classes.mainInner}>
+          <div className={classes.mainLogo}>
             <img src={imageSrc} alt="main-logo" />
           </div>
-          <div className={classes['main-text']}>
+          <div className={classes.mainText}>
             <p>
               Мы знаем, что кратчайший путь к развитию прибыльного бизнеса –
               реализация нестандартных решений, при использовании новейших
@@ -21,7 +21,7 @@ function Main() {
               Вашего бизнеса – вопрос нашей репутации.
             </p>
           </div>
-          <button className={classes['form-toggle']}>
+          <button className={classes.formToggle}>
             <span>Напишите нам</span>
             <FontAwesomeIcon icon="long-arrow-alt-right" />
           </button>

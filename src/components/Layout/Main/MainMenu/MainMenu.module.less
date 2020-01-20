@@ -1,27 +1,33 @@
-@import (reference) '../../../../less/position';
-@import (reference) '../../../../less/fonts';
-@import (reference) '../../../../less/flex';
+@import (reference) "../../../../less/fonts";
 
-@grey:#3C3C3C;
+@grey: #3c3c3c;
 
-.main-menu {
-  .overlay;
+.mainMenu {
   transition: 0.5s;
   opacity: 0;
 
-  &.open {
-    opacity: 1;
+  .mainMenuLinks,
+  .mainMenuFooter {
+    transition:  0.4s;
+    transform: translateX(-100%);
   }
 
-  ul {
-    .f-c;
-    .jcsb;
+  &.open {
+    opacity: 1;
+
+    .mainMenuLinks,
+    .mainMenuFooter {
+      transform: translateX(0);
+    }
+  }
+
+  .mainMenuLinks {
     height: calc(100% - 80px);
     counter-reset: nav-counter;
     padding: 20px 0;
   }
 
-  li {
+  .navLink {
     counter-increment: nav-counter;
     a {
       display: block;
@@ -32,26 +38,57 @@
       text-align: center;
 
       &::before {
-        content: counters(nav-counter, '.', decimal-leading-zero);
+        content: counters(nav-counter, ".", decimal-leading-zero);
         font-family: @roboto;
         font-weight: 600;
         display: block;
-        font-size: 60px;
+        font-size: 55px;
         overflow: hidden;
         margin-bottom: 5px;
-        height: 40px;
+        height: 35px;
         color: @grey;
       }
     }
   }
 
-  footer {
+  .mainMenuFooter {
     height: 80px;
-    border-top: 1px solid #3e3e3e;
+    border-top: 1px solid @grey;
+    padding: 15px 0;
+    color: #fff;
+    font-size: 13px;
   }
 
+  .socialLinks {
+    margin-bottom: 15px;
+
+    span {
+      margin: 0 10px;
+      color: @grey;
+    }
+
+    svg {
+      display: block;
+    }
+  }
+
+  .mailLink {
+    text-align: center;
+
+    svg {
+      vertical-align: middle;
+    }
+
+    span {
+      margin: 0 10px;
+      display: inline-block;
+      color: #757778;
+    }
+  }
+
+
   @media (max-width: 767px) {
-    background-image: url('../../../../assets/images/nav_moby.jpg');
+    background-image: url("../../../../assets/images/nav_moby.jpg");
     background-position: center;
     background-size: cover;
   }

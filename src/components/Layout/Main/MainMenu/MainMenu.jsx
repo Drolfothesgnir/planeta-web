@@ -1,36 +1,50 @@
-import React, { useState, useEffect } from 'react';
+import React from "react";
 import withToggle from "../../../hoc/withToggle";
-import classes from './MainMenu.module.less';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import classes from "./MainMenu.module.less";
 
 function MainMenu(props) {
-
   return (
     <nav
-      className={[classes['main-menu'], props.isToggled ? classes['open'] : ''].join(
-        ' '
-      )}
+      className={`${classes.mainMenu} ${
+        props.isToggled ? classes.open : ""
+      } overlay`}
     >
-      <ul className="main-menu-links">
-        <li className="nav-link">
+      <ul className={`${classes.mainMenuLinks} f-c jcsb`}>
+        <li className={classes.navLink}>
           <a href="/about">о компании</a>
         </li>
-        <li className="nav-link">
+        <li className={classes.navLink}>
           <a href="/services">услуги</a>
         </li>
-        <li className="nav-link">
+        <li className={classes.navLink}>
           <a href="/tech">технологии</a>
         </li>
-        <li className="nav-link">
+        <li className={classes.navLink}>
           <a href="/portfolio">портфолио</a>
         </li>
-        <li className="nav-link">
+        <li className={classes.navLink}>
           <a href="/contacts">контакты</a>
         </li>
       </ul>
-      <footer className="main-menu-footer">
-        <a href=""></a><a href="">  </a>
+      <footer className={classes.mainMenuFooter}>
+        <div className={`${classes.socialLinks} aic jcc`}>
+          <a href="/facebook">
+            <FontAwesomeIcon icon={["fab", "facebook-f"]} />
+          </a>
+          <span>|</span>
+          <a href="/behance">
+            <FontAwesomeIcon icon={["fab", "behance"]} />
+          </a>
+        </div>
+        <div className={classes.mailLink}>
+          <a href="mailto: order@planeta-web.com.ua">
+            <FontAwesomeIcon icon="envelope"/>
+            <span>order@planeta-web.com.ua</span>
+          </a>
+        </div>
       </footer>
     </nav>
   );
 }
-export default withToggle(MainMenu, 'nav-toggle');
+export default withToggle(MainMenu, "nav-toggle");

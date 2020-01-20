@@ -11,10 +11,10 @@ function Header() {
     return (
         <header>
            <Container>
-               <div className={classes["header-content"]}>
+               <div className={classes.headerContent}>
                 <Logo/>
-                <div className={classes["nav-toggle-container"]}>
-                    <button className={[classes['nav-toggle'], toggled ? classes.open : ''].join(' ')} onClick={e => {
+                <div className={classes.navToggleContainer}>
+                    <button className={`${classes.navToggle} ${toggled ? classes.open : ''}`} onClick={e => {
                         navBarToggle(e);
                         toggleFunc(!toggled);
                     }}>
