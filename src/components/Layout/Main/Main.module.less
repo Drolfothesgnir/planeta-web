@@ -1,0 +1,51 @@
+@import (reference) '../../../less/fonts';
+@import (reference) '../../../less/flex';
+@import (reference) '../../../less/position';
+
+@main-bgc: #d6e9f1;
+
+.main-content {
+  background-color: @main-bgc;
+  background-image: url(../../../assets/images/planete_bg.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  .fc;
+}
+
+.main-inner {
+  padding: 40px 0;
+  font-family: @roboto, serif;
+  font-weight: normal;
+}
+
+.main-logo {
+  margin-bottom: 35px;
+}
+
+.main-text {
+  line-height: 23px;
+  margin-bottom: 35px;
+}
+
+.form-toggle {
+  font-family: @open-sans, serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+  text-transform: uppercase;
+  position: relative;
+  display: block;
+  height: 45px;
+  line-height: 45px;
+  width: 100%;
+  text-align: center;
+  transition: 0.01s 0.23s ease-out all;
+  overflow: hidden;
+  background-color: #000;
+
+  span {
+    margin: 0 25px;
+  }
+}

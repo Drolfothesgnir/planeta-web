@@ -1,0 +1,58 @@
+@import (reference) '../../../../less/position';
+@import (reference) '../../../../less/fonts';
+@import (reference) '../../../../less/flex';
+
+@grey:#3C3C3C;
+
+.main-menu {
+  .overlay;
+  transition: 0.5s;
+  opacity: 0;
+
+  &.open {
+    opacity: 1;
+  }
+
+  ul {
+    .f-c;
+    .jcsb;
+    height: calc(100% - 80px);
+    counter-reset: nav-counter;
+    padding: 20px 0;
+  }
+
+  li {
+    counter-increment: nav-counter;
+    a {
+      display: block;
+      text-transform: uppercase;
+      color: #ffffff;
+      font-family: @bebas;
+      font-size: 24px;
+      text-align: center;
+
+      &::before {
+        content: counters(nav-counter, '.', decimal-leading-zero);
+        font-family: @roboto;
+        font-weight: 600;
+        display: block;
+        font-size: 60px;
+        overflow: hidden;
+        margin-bottom: 5px;
+        height: 40px;
+        color: @grey;
+      }
+    }
+  }
+
+  footer {
+    height: 80px;
+    border-top: 1px solid #3e3e3e;
+  }
+
+  @media (max-width: 767px) {
+    background-image: url('../../../../assets/images/nav_moby.jpg');
+    background-position: center;
+    background-size: cover;
+  }
+}
