@@ -26,7 +26,7 @@ const formItems = [
 ];
 
 function ContactForm() {
-  const { register, errors, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm();
   const [focusedInputs, setFocus] = React.useState({});
   const focusHandler = ({ target }) =>
     setFocus(state => ({ ...state, [target.name]: true }));
@@ -39,7 +39,9 @@ function ContactForm() {
             {formItems.map(item => {
               return (
                 <fieldset key={item.name}>
-                  <label className={`${focusedInputs[item.name] ? 'focused' : ''}`}>
+                  <label
+                    className={`${focusedInputs[item.name] ? "focused" : ""}`}
+                  >
                     <span>{item.label}</span>
                     <input
                       type="text"
@@ -53,7 +55,6 @@ function ContactForm() {
             })}
             <button>Click</button>
           </form>
-          <div>{errors.name && <h1>Fuck you</h1>}</div>
         </div>
       </div>
     </div>

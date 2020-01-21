@@ -16,6 +16,12 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
+        test: /\.jsx?$/,
+        enforce: "pre",
+        exclude: /node_modules/,
+        loader: "eslint-loader"
+      },
+      {
         test: /\.less$/,
         use: [
           "style-loader",
@@ -73,7 +79,7 @@ module.exports = merge(common, {
     port: 3000,
     publicPath: "http://localhost:3000/",
     hotOnly: true,
-    clientLogLevel: "silent"
+    clientLogLevel: "error"
   },
   plugins: [new webpack.HotModuleReplacementPlugin()]
 });
