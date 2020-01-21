@@ -2,6 +2,7 @@ import React from 'react';
 import Container from '../../UtilityComponents/Container';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import MainMenu from './MainMenu/MainMenu';
+import ContactForm from "./ContactForm/ContactForm";
 import imageSrc from '../../../assets/images/web-word.png';
 import classes from './Main.module.less';
 
@@ -28,6 +29,7 @@ function Main() {
         </div>
       </Container>
       <MainMenu />
+      {/*<ContactForm/>*/}
     </main>
   );
 }
