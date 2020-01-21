@@ -1,5 +1,4 @@
 import React from 'react';
-import Container from '../../UtilityComponents/Container';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import MainMenu from './MainMenu/MainMenu';
 import ContactForm from "./ContactForm/ContactForm";
@@ -9,7 +8,7 @@ import classes from './Main.module.less';
 function Main() {
   return (
     <main className={`${classes.mainContent} fc`}>
-      <Container>
+      <div className='container'>
         <div className={classes.mainInner}>
           <div className={classes.mainLogo}>
             <img src={imageSrc} alt="main-logo" />
@@ -27,7 +26,7 @@ function Main() {
             <FontAwesomeIcon icon="long-arrow-alt-right" />
           </button>
         </div>
-      </Container>
+      </div>
       <MainMenu />
       <ContactForm/>
     </main>

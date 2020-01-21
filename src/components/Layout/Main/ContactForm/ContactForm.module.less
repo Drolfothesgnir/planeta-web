@@ -1,3 +1,23 @@
 .contactForm {
-  background-color: fuchsia;
+  background-image: url(../../../../assets/images/form.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+
+  label, span {
+    display: block;
+  }
+
+  span {
+    text-transform: uppercase;
+  }
+
+  input {
+    color: fuchsia;
+
+    &[value=""] {
+      border: 2px solid red;
+    }
+  }
 }

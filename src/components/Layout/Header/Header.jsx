@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Container from "../../UtilityComponents/Container";
 import Logo from "../../Logo/Logo";
 import { createDispatcher } from "../../../utilities/CustomEventOperator";
 import classes from './Header.module.less';
@@ -10,7 +9,7 @@ function Header() {
     const [toggled, toggleFunc] = useState(false);
     return (
         <header>
-           <Container>
+           <div className='container'>
                <div className={classes.headerContent}>
                 <Logo/>
                 <div className={classes.navToggleContainer}>
@@ -25,7 +24,7 @@ function Header() {
                     </button>
                 </div>
                </div>
-           </Container>
+           </div>
         </header>
     );
 }

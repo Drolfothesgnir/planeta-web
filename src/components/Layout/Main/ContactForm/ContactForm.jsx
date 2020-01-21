@@ -1,11 +1,15 @@
 import React from "react";
-import FormItem from "./FormItem/FormItem";
+import { useForm } from "react-hook-form";
 import classes from "./ContactForm.module.less";
 
 const formItems = [
   {
     label: "Имя",
-    name: "name"
+    name: "name",
+    config: {
+      required: true,
+      minLength: 10
+    }
   },
   {
     label: "ТЕЛЕФОН",
@@ -21,57 +25,39 @@ const formItems = [
   }
 ];
 
-function getStateFromFormFields(formFields) {
-  const formData = {};
-  formFields.forEach(field => {
-    formData[field.name] = {
-      value: field.value,
-      focused: field.focused
-    };
-  });
-  return formData;
+function ContactForm() {
+  const { register, errors, handleSubmit } = useForm();
+  const [focusedInputs, setFocus] = React.useState({});
+  const focusHandler = ({ target }) =>
+    setFocus(state => ({ ...state, [target.name]: true }));
+
+  return (
+    <div className={`overlay ${classes.contactForm}`}>
+      <div className="container">
+        <div className={classes.formInner}>
+          <form onSubmit={handleSubmit(data => console.log(data))}>
+            {formItems.map(item => {
+              return (
+                <fieldset key={item.name}>
+                  <label className={`${focusedInputs[item.name] ? 'focused' : ''}`}>
+                    <span>{item.label}</span>
+                    <input
+                      type="text"
+                      name={item.name}
+                      ref={register(item.config || {})}
+                      onFocus={focusHandler}
+                    />
+                  </label>
+                </fieldset>
+              );
+            })}
+            <button>Click</button>
+          </form>
+          <div>{errors.name && <h1>Fuck you</h1>}</div>
+        </div>
+      </div>
+    </div>
+  );
 }
-
-class ContactForm extends React.Component {
-    state = getStateFromFormFields(formItems);
-
-    changeHandler = ({target}) => {
-        this.setState({[target.name]:target.value})
-    }
-
-    render() {
-        return null
-    }
-}
-// function ContactForm() {
-//   const [formData, setFormData] = React.useState(initFormData),
-//     changeHandler = ({ target }) =>{
-//         console.log(target.value)
-//         setFormData(data => ({ ...data, [target.name]: target.value }))
-//     }
-//       ,
-//    submitHandler = event => {
-//         event.preventDefault();
-//         console.log(formData);
-//     };
-//   return (
-//     <div className={`${classes.contactForm} overlay`}>
-//       <form action="">
-//         {formItems.map(item => {
-//           return (
-//             <FormItem
-//               name={item.name}
-//               value={formData[item.name].value}
-//               label={item.label}
-//               change={changeHandler}
-//               key={item.name}
-//             />
-//           );
-//         })}
-//         <button>Click</button>
-//       </form>
-//     </div>
-//   );
-// }
 
 export default ContactForm;
