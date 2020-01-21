@@ -29,7 +29,7 @@ function Main() {
         </div>
       </Container>
       <MainMenu />
-      {/*<ContactForm/>*/}
+      <ContactForm/>
     </main>
   );
 }

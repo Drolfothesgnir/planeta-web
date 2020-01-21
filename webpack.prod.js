@@ -77,7 +77,7 @@ module.exports = merge(common, {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: "Planeta Web",
-      template: "public/index.html",
+      template: "public/template.html",
       hash: true,
       cache: true
     }),

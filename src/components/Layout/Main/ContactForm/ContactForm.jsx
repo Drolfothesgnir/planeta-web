@@ -32,38 +32,46 @@ function getStateFromFormFields(formFields) {
   return formData;
 }
 
-const initFormData = getStateFromFormFields(formItems);
+class ContactForm extends React.Component {
+    state = getStateFromFormFields(formItems);
 
-
-function ContactForm() {
-  const [formData, setFormData] = React.useState(initFormData),
-    changeHandler = ({ target }) =>{
-        console.log(target.value)
-        setFormData(data => ({ ...data, [target.name]: target.value }))
+    changeHandler = ({target}) => {
+        this.setState({[target.name]:target.value})
     }
-      ,
-   submitHandler = event => {
-        event.preventDefault();
-        console.log(formData);
-    };
-  return (
-    <div className={`${classes.contactForm} overlay`}>
-      <form action="">
-        {formItems.map(item => {
-          return (
-            <FormItem
-              name={item.name}
-              value={formData[item.name].value}
-              label={item.label}
-              change={changeHandler}
-              key={item.name}
-            />
-          );
-        })}
-        <button>Click</button>
-      </form>
-    </div>
-  );
+
+    render() {
+        return null
+    }
 }
+// function ContactForm() {
+//   const [formData, setFormData] = React.useState(initFormData),
+//     changeHandler = ({ target }) =>{
+//         console.log(target.value)
+//         setFormData(data => ({ ...data, [target.name]: target.value }))
+//     }
+//       ,
+//    submitHandler = event => {
+//         event.preventDefault();
+//         console.log(formData);
+//     };
+//   return (
+//     <div className={`${classes.contactForm} overlay`}>
+//       <form action="">
+//         {formItems.map(item => {
+//           return (
+//             <FormItem
+//               name={item.name}
+//               value={formData[item.name].value}
+//               label={item.label}
+//               change={changeHandler}
+//               key={item.name}
+//             />
+//           );
+//         })}
+//         <button>Click</button>
+//       </form>
+//     </div>
+//   );
+// }
 
 export default ContactForm;
