@@ -5,6 +5,7 @@
 .mainMenu {
   transition: 0.5s;
   opacity: 0;
+  z-index: -1;
 
   .mainMenuLinks,
   .mainMenuFooter {
@@ -14,6 +15,7 @@
 
   &.open {
     opacity: 1;
+    z-index: 2;
 
     .mainMenuLinks,
     .mainMenuFooter {

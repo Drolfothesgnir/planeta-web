@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import MainMenu from './MainMenu/MainMenu';
 import ContactForm from "./ContactForm/ContactForm";
+import {contactFormToggle} from "../../../utilities/toggles";
 import imageSrc from '../../../assets/images/web-word.png';
 import classes from './Main.module.less';
 
@@ -21,7 +22,7 @@ function Main() {
               Вашего бизнеса – вопрос нашей репутации.
             </p>
           </div>
-          <button className={classes.formToggle}>
+          <button className={classes.formToggle} onClick={contactFormToggle}>
             <span>Напишите нам</span>
             <FontAwesomeIcon icon="long-arrow-alt-right" />
           </button>

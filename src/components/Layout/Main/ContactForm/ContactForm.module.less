@@ -4,6 +4,18 @@
   background-size: cover;
   background-repeat: no-repeat;
   color: #fff;
+  opacity: 0;
+  transition:  0.5s;
+  z-index: -1;
+
+  :global .container {
+    flex: 1;
+  }
+
+  &.open {
+    opacity: 1;
+    z-index: 2;
+  }
 
   label, span {
     display: block;
@@ -11,13 +23,52 @@
 
   span {
     text-transform: uppercase;
+    font-size: 18px;
+    transition:  0.3s;
+    position: absolute;
+    top: 0;
   }
 
   input {
-    color: fuchsia;
+    border-bottom: 1px solid #727b7f;
+    width: 100%;
+    padding: 8px 0;
+  }
 
-    &[value=""] {
-      border: 2px solid red;
+  input:focus, .touched {
+    border-bottom-color: #fff;
+    
+    + span {
+      top: -15px;
+      font-size: 14px;
     }
   }
+
+  fieldset {
+    margin-bottom: 25px;
+  }
+
+  label {
+    position: relative;
+  }
+
+  button[type='submit'] {
+    display: block;
+    border: 1px solid #fff;
+    width: 100%;
+    text-transform: uppercase;
+    padding: 15px;
+    font-size: 18px;
+  }
+}
+
+.closeButton {
+  position: absolute;
+  font-size: 20px;
+  right: 30px;
+  top: 30px;
+}
+
+.formInner {
+  padding: 0;
 }

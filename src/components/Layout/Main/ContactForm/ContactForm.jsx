@@ -1,15 +1,14 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import withToggle from "../../../hoc/withToggle";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { contactFormToggle } from "../../../../utilities/toggles";
 import classes from "./ContactForm.module.less";
 
 const formItems = [
   {
     label: "Имя",
-    name: "name",
-    config: {
-      required: true,
-      minLength: 10
-    }
+    name: "name"
   },
   {
     label: "ТЕЛЕФОН",
@@ -25,35 +24,41 @@ const formItems = [
   }
 ];
 
-function ContactForm() {
+function ContactForm(props) {
   const { register, handleSubmit } = useForm();
-  const [focusedInputs, setFocus] = React.useState({});
-  const focusHandler = ({ target }) =>
-    setFocus(state => ({ ...state, [target.name]: true }));
-
+  const [inputs, setFocus] = React.useState({});
+  const changeHandler = ({target}) => {
+    setFocus(state => ({...state, [target.name]: !!target.value}))
+  };
   return (
-    <div className={`overlay ${classes.contactForm}`}>
+    <div
+      className={`overlay aic ${classes.contactForm} ${
+        props.isToggled ? classes.open : ""
+      }`}
+    >
+      <button className={`${classes.closeButton}`} onClick={contactFormToggle}>
+        <FontAwesomeIcon icon="times" />
+      </button>
       <div className="container">
-        <div className={classes.formInner}>
+        <div className={`${classes.formInner}`}>
           <form onSubmit={handleSubmit(data => console.log(data))}>
             {formItems.map(item => {
               return (
                 <fieldset key={item.name}>
-                  <label
-                    className={`${focusedInputs[item.name] ? "focused" : ""}`}
-                  >
-                    <span>{item.label}</span>
+                  <label>
                     <input
                       type="text"
                       name={item.name}
+                      className={`${inputs[item.name] ? classes.touched : ''}`}
                       ref={register(item.config || {})}
-                      onFocus={focusHandler}
+                      onChange={changeHandler}
                     />
+                    <span>{item.label}</span>
                   </label>
                 </fieldset>
               );
             })}
-            <button>Click</button>
+            <button type="submit">отправить</button>
           </form>
         </div>
       </div>
@@ -61,4 +66,4 @@ function ContactForm() {
   );
 }
 
-export default ContactForm;
+export default withToggle(ContactForm, "contact-form");
