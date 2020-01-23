@@ -6,6 +6,9 @@
   transition: 0.5s;
   opacity: 0;
   z-index: -1;
+  background-image: url("../../../../assets/images/nav_moby.jpg");
+  background-position: center;
+  background-size: cover;
 
   .mainMenuLinks,
   .mainMenuFooter {
@@ -27,6 +30,9 @@
     height: calc(100% - 80px);
     counter-reset: nav-counter;
     padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .navLink {
@@ -63,6 +69,9 @@
 
   .socialLinks {
     margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     span {
       margin: 0 10px;
@@ -86,12 +95,5 @@
       display: inline-block;
       color: #757778;
     }
-  }
-
-
-  @media (max-width: 767px) {
-    background-image: url("../../../../assets/images/nav_moby.jpg");
-    background-position: center;
-    background-size: cover;
   }
 }

@@ -12,11 +12,17 @@ const formItems = [
   },
   {
     label: "ТЕЛЕФОН",
-    name: "tel"
+    name: "tel",
+    config: {
+      className: "halfWidth"
+    }
   },
   {
     label: "e-mail",
-    name: "mail"
+    name: "mail",
+    config: {
+      className: "halfWidth"
+    }
   },
   {
     label: "сообщение",
@@ -27,12 +33,12 @@ const formItems = [
 function ContactForm(props) {
   const { register, handleSubmit } = useForm();
   const [inputs, setFocus] = React.useState({});
-  const changeHandler = ({target}) => {
-    setFocus(state => ({...state, [target.name]: !!target.value}))
+  const changeHandler = ({ target }) => {
+    setFocus(state => ({ ...state, [target.name]: !!target.value }));
   };
   return (
     <div
-      className={`overlay aic ${classes.contactForm} ${
+      className={`overlay ${classes.contactForm} ${
         props.isToggled ? classes.open : ""
       }`}
     >
@@ -43,14 +49,18 @@ function ContactForm(props) {
         <div className={`${classes.formInner}`}>
           <form onSubmit={handleSubmit(data => console.log(data))}>
             {formItems.map(item => {
+              const { config: { className } = {} } = item;
               return (
-                <fieldset key={item.name}>
+                <fieldset
+                  key={item.name}
+                  className={className ? classes[className] : ""}
+                >
                   <label>
                     <input
                       type="text"
                       name={item.name}
-                      className={`${inputs[item.name] ? classes.touched : ''}`}
-                      ref={register(item.config || {})}
+                      className={`${inputs[item.name] ? classes.touched : ""}`}
+                      ref={register}
                       onChange={changeHandler}
                     />
                     <span>{item.label}</span>

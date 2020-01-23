@@ -1,30 +1,21 @@
-import React, { useState } from 'react';
+import React from "react";
 import Logo from "../../Logo/Logo";
-import {navToggle} from "../../../utilities/toggles";
-import classes from './Header.module.less';
+import NavToggle from "./NavToggle/NavToggle";
+import LangSelector from "./LangSelector/LangSelector";
+import classes from "./Header.module.less";
 
 function Header() {
-    const [toggled, toggleFunc] = useState(false);
-    return (
-        <header>
-           <div className='container'>
-               <div className={classes.headerContent}>
-                <Logo/>
-                <div className={classes.navToggleContainer}>
-                    <button className={`${classes.navToggle} ${toggled ? classes.open : ''}`} onClick={e => {
-                        navToggle(e);
-                        toggleFunc(!toggled);
-                    }}>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                </div>
-               </div>
-           </div>
-        </header>
-    );
+  return (
+    <header>
+      <div className="container">
+        <div className={classes.headerContent}>
+          <Logo className={classes.logo}/>
+          <NavToggle className={classes.navToggle}/>
+          <LangSelector className={classes.langSelector}/>
+        </div>
+      </div>
+    </header>
+  );
 }
 
 export default Header;

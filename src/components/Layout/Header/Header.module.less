@@ -8,64 +8,21 @@ header {
   align-items: center;
 }
 
-.navToggleContainer {
-  margin-top: 10px;
+.langSelector {
+  display: none;
 }
 
-.navToggle {
-  width: 17px;
-  height: 21px;
-  position: relative;
-  transform: rotate(0deg);
-  transition: 0.5s ease-in-out;
-  display: block;
-
-  span {
-    display: block;
-    position: absolute;
-    height: 2px;
-    width: 17px;
-    background: #000;
-    opacity: 1;
-    left: 0;
-    transform: rotate(0deg);
-    transition: 0.25s ease-in-out;
-
-    &:nth-child(1) {
-      top: 1px;
-    }
-
-    &:nth-child(2),
-    &:nth-child(3) {
-      top: 7px;
-    }
-
-    &:nth-child(4) {
-      top: 13px;
-    }
+@media (min-width: 768px) {
+  .logo {
+    order: 2;
   }
 
-  &.open {
-    span {
-      &:nth-child(1) {
-        top: 8px;
-        width: 0;
-        left: 50%;
-      }
+  .navToggle {
+    order: 1
+  }
 
-      &:nth-child(2) {
-        transform: rotate(45deg);
-      }
-
-      &:nth-child(3) {
-        transform: rotate(-45deg);
-      }
-
-      &:nth-child(4) {
-        top: 8px;
-        width: 0%;
-        left: 50%;
-      }
-    }
+  .langSelector {
+    order: 3;
+    display: block;
   }
 }

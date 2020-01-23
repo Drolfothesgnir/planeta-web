@@ -10,7 +10,7 @@ function MainMenu(props) {
         props.isToggled ? classes.open : ""
       } overlay`}
     >
-      <ul className={`${classes.mainMenuLinks} f-c jcsb`}>
+      <ul className={`${classes.mainMenuLinks} `}>
         <li className={classes.navLink}>
           <a href="/about">о компании</a>
         </li>
@@ -28,7 +28,7 @@ function MainMenu(props) {
         </li>
       </ul>
       <footer className={classes.mainMenuFooter}>
-        <div className={`${classes.socialLinks} aic jcc`}>
+        <div className={`${classes.socialLinks}`}>
           <a href="/facebook">
             <FontAwesomeIcon icon={["fab", "facebook-f"]} />
           </a>
