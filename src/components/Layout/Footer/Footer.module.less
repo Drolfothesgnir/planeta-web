@@ -1,16 +1,17 @@
-@import (reference) '../../../less/fonts';
+@import (reference) "../../../less/fonts";
 
 .footer {
-  padding: 20px 0;
+  padding: 10px 0;
 }
 
 .footerContent {
+  color: #717171;
   text-align: center;
 
   a {
     font-family: @roboto, serif;
     font-size: 14px;
-    color: #717171;
+    margin-bottom: 10px;
 
     span {
       margin: 0 10px;
@@ -19,5 +20,16 @@
 
   svg {
     color: #000000;
+  }
+}
+
+.link {
+  margin-bottom: 6px;
+}
+
+@media (min-width: 768px) {
+  .footerContent {
+    display: flex;
+    text-align: left;
   }
 }

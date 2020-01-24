@@ -1,4 +1,4 @@
-@import (reference) '../../../less/fonts';
+@import (reference) "../../../less/fonts";
 
 @main-bgc: #d6e9f1;
 
@@ -19,7 +19,6 @@
 }
 
 .mainInner {
-  padding: 40px 0;
   font-family: @roboto, serif;
   font-weight: normal;
 }
@@ -55,17 +54,68 @@
 }
 
 @media (min-width: 768px) {
-    .mainBg {
-      margin: 0 15px;
-    }
+  .mainBg {
+    margin: 0 15px;
+  }
 
   .mainLogo {
-    width: 60%;
+    width: 70%;
+  }
+
+  .mainText {
+    font-size: 18px;
   }
 
   .formToggle {
     width: auto;
     padding: 0 20px;
+    background-color: transparent;
+    position: relative;
+    color: #999999;
+    transition: 0.5s;
+
+    &::before {
+      content: "";
+      position: absolute;
+      height: 100%;
+      left: 0;
+      top: 0;
+      background-color: #202020;
+      width: 50%;
+      transition: 0.4s ease-in-out;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      opacity: 0;
+      border: 1px solid #8ccce8;
+      left: 10px;
+      top: 50%;
+      width: 10%;
+      transition: 0.4s ease-in-out;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      &::before {
+        transform: translateX(200%);
+      }
+
+      &::after {
+        opacity: 1;
+      }
+
+      & {
+        color: #8ccce8;
+      }
+    }
+
+    span {
+      position: relative;
+      z-index: 1;
+    }
   }
 }
 
