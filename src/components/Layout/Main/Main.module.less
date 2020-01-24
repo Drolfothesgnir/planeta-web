@@ -4,18 +4,18 @@
 
 .mainContent {
   position: relative;
+}
 
-  .mainBg {
-    height: 100%;
-    background-color: @main-bgc;
-    background-image: url(../../../assets/images/planete_bg.png);
-    background-position: left -60% center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.mainBg {
+  height: 100%;
+  background-color: @main-bgc;
+  background-image: url(../../../assets/images/planete_bg.png);
+  background-position: 40vw;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .mainInner {
@@ -58,4 +58,25 @@
     .mainBg {
       margin: 0 15px;
     }
+
+  .mainLogo {
+    width: 60%;
+  }
+
+  .formToggle {
+    width: auto;
+    padding: 0 20px;
+  }
+}
+
+@media (min-width: 1680px) {
+  .mainBg {
+    background-image: none;
+    margin: 0 auto;
+    max-width: 1680px;
+  }
+
+  .mainLogo {
+    width: 30%;
+  }
 }
