@@ -1,6 +1,5 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import withToggle from "../../../hoc/withToggle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { contactFormToggle } from "../../../../utilities/toggles";
 import classes from "./ContactForm.module.less";
@@ -76,4 +75,4 @@ function ContactForm(props) {
   );
 }
 
-export default withToggle(ContactForm, "contact-form");
+export default ContactForm;

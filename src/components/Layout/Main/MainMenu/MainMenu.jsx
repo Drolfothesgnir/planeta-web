@@ -1,5 +1,4 @@
 import React from "react";
-import withToggle from "../../../hoc/withToggle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classes from "./MainMenu.module.less";
 
@@ -39,7 +38,7 @@ function MainMenu(props) {
         </div>
         <div className={classes.mailLink}>
           <a href="mailto: order@planeta-web.com.ua">
-            <FontAwesomeIcon icon="envelope"/>
+            <FontAwesomeIcon icon="envelope" />
             <span>order@planeta-web.com.ua</span>
           </a>
         </div>
@@ -47,4 +46,4 @@ function MainMenu(props) {
     </nav>
   );
 }
-export default withToggle(MainMenu, "nav-toggle");
+export default MainMenu;

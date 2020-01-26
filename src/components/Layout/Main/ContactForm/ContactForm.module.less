@@ -5,7 +5,7 @@
   background-repeat: no-repeat;
   color: #fff;
   opacity: 0;
-  transition:  0.5s;
+  transition: 0.5s;
   z-index: -1;
   display: flex;
   align-items: center;
@@ -19,14 +19,15 @@
     z-index: 2;
   }
 
-  label, span {
+  label,
+  span {
     display: block;
   }
 
   span {
     text-transform: uppercase;
     font-size: 18px;
-    transition:  0.3s;
+    transition: 0.3s;
     position: absolute;
     top: 0;
   }
@@ -37,9 +38,10 @@
     padding: 8px 0;
   }
 
-  input:focus, .touched {
+  input:focus,
+  .touched {
     border-bottom-color: #fff;
-    
+
     + span {
       top: -15px;
       font-size: 14px;
@@ -51,7 +53,7 @@
     width: 100%;
 
     &.halfWidth {
-      width: 45%;
+      width: 47%;
     }
   }
 
@@ -59,7 +61,7 @@
     position: relative;
   }
 
-  button[type='submit'] {
+  button[type="submit"] {
     display: block;
     border: 1px solid #fff;
     width: 100%;
