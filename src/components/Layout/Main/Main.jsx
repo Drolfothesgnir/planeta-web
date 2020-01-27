@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MainMenu from "./MainMenu/MainMenu";
 import ContactForm from "./ContactForm/ContactForm";
+import Canvas from "./Canvas/Canvas";
 import { contactFormToggle } from "../../../utilities/toggles";
 import Toggle from "../../hoc/Toggle";
 import imageSrc from "../../../assets/images/web-word.png";
@@ -11,7 +12,7 @@ function Main() {
   return (
     <main className={`${classes.mainContent}`}>
       <div className={classes.mainBg}>
-        <div className="container">
+        <div className={`container ${classes.container}`}>
           <div className={classes.mainInner}>
             <div className={classes.mainLeft}>
               <div className={classes.mainLogo}>
@@ -32,6 +33,9 @@ function Main() {
                 <span>Напишите нам</span>
                 <FontAwesomeIcon icon="long-arrow-alt-right" />
               </button>
+            </div>
+            <div className={classes.mainRight}>
+              <Canvas/>
             </div>
           </div>
         </div>

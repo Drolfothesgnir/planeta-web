@@ -4,6 +4,10 @@
 
 .mainContent {
   position: relative;
+
+  .container {
+    height: 100%;
+  }
 }
 
 .mainBg {
@@ -13,14 +17,16 @@
   background-position: 40vw;
   background-repeat: no-repeat;
   background-size: contain;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
+
 
 .mainInner {
   font-family: @roboto, serif;
   font-weight: normal;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .mainLogo {
@@ -51,6 +57,10 @@
   span {
     margin: 0 25px;
   }
+}
+
+.mainRight {
+  display: none;
 }
 
 @media (min-width: 768px) {
@@ -120,6 +130,10 @@
 }
 
 @media (min-width: 1280px) {
+  .mainInner {
+    display: flex;
+  }
+
   .mainLeft {
     width: 50%;
     padding-left: 50px;
@@ -127,6 +141,12 @@
 
   .mainBg {
     background-image: none;
+  }
+
+  .mainRight {
+    display: block;
+    width: 50%;
+    align-self: stretch;
   }
 }
 
