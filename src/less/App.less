@@ -1,6 +1,7 @@
 @import "reset";
 @import "fonts";
 @import "utility";
+@import 'colors';
 
 html,
 body,
@@ -31,4 +32,15 @@ canvas {
   main {
     flex: 1;
   }
+}
+
+.app-placeholder {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color:   @main-bgc;
 }

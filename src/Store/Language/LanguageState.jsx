@@ -1,13 +1,19 @@
 import React from "react";
 import { createStore } from "../../utilities/createStore";
 
-const state = createStore();
-const StateProvider = state[0];
+const [StateProvider, _useLanguageState] = createStore();
 const initialState = {
   lang: "ru",
-    translations: {
-
+  mainMenuToggle: {
+    en: ['close', 'menu'],
+    ru: ['закрыть', "меню"],
+    uk: ['закрити', 'меню']
+  },
+  translations: {
+    main: {
+      body: null
     }
+  }
 };
 export const SET_LANG = "SET_LANG";
 
@@ -19,12 +25,12 @@ const reducer = (state, { type, payload }) => {
       return state;
   }
 };
-export const Provider = ({ children, init }) => {
+export const Provider = ({ children, init = {} }) => {
   return (
-    <StateProvider initialState={init || initialState} reducer={reducer}>
+    <StateProvider initialState={{...initialState, ...init}} reducer={reducer}>
       {children}
     </StateProvider>
   );
 };
 
-export const useLanguageState = state[1];
+export const useLanguageState = _useLanguageState;

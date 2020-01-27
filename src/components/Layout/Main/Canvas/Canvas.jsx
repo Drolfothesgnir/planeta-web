@@ -16,8 +16,8 @@ function init(ref) {
     const container = ref.current;
   let mouseX = 0,
     mouseY = 0,
-    windowHalfX = container.offsetWidth,
-    windowHalfY = container.offsetHeight;
+    windowHalfX = container.offsetWidth - (container.offsetWidth/ 100) * 20,
+    windowHalfY = container.offsetHeight - (container.offsetHeight/ 100) * 20;
 
     const camera = new PerspectiveCamera(
       23,
@@ -39,7 +39,7 @@ function init(ref) {
     mesh = new Mesh(geometry, material),
     renderer = new WebGLRenderer({ antialias: true });
 
-  camera.position.z = 1600;
+  camera.position.z = 1500;
   scene.background = new Color(0xd6e9f1);
   light.position.set(0, 0, 1);
   scene.add(light);
@@ -102,7 +102,7 @@ function Canvas() {
     }
   }, []);
 
-  return <div style={{height: '100%'}} ref={canvasRef}/>;
+  return <div style={{height: '90%', width: '100%'}} ref={canvasRef}/>;
 }
 
 export default Canvas;

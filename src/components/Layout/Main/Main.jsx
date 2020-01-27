@@ -2,11 +2,35 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MainMenu from "./MainMenu/MainMenu";
 import ContactForm from "./ContactForm/ContactForm";
-import Canvas from "./Canvas/Canvas";
+// import Canvas from "./Canvas/Canvas";
 import { contactFormToggle } from "../../../utilities/toggles";
+import { useLanguageState } from "../../../Store/Language/LanguageState";
 import Toggle from "../../hoc/Toggle";
 import imageSrc from "../../../assets/images/web-word.png";
 import classes from "./Main.module.less";
+
+function MainBody(props) {
+  const [state] = useLanguageState();
+  return (
+    <div
+    className={props.className}
+    dangerouslySetInnerHTML={{__html: state.translations.main.body}}
+    />
+  );
+}
+
+function FormToggle() {
+  const [langState] = useLanguageState();
+  return (
+      <button
+          className={classes.formToggle}
+          onClick={contactFormToggle}
+      >
+        <span>{langState.translations.main.button}</span>
+        <FontAwesomeIcon icon="long-arrow-alt-right" />
+      </button>
+  )
+}
 
 function Main() {
   return (
@@ -18,24 +42,11 @@ function Main() {
               <div className={classes.mainLogo}>
                 <img src={imageSrc} alt="main-logo" />
               </div>
-              <div className={classes.mainText}>
-                <p>
-                  Мы знаем, что кратчайший путь к развитию прибыльного бизнеса –
-                  реализация нестандартных решений, при использовании новейших
-                  технологий. Каждый сайт – эксклюзив, а конкурентоспособность
-                  Вашего бизнеса – вопрос нашей репутации.
-                </p>
-              </div>
-              <button
-                className={classes.formToggle}
-                onClick={contactFormToggle}
-              >
-                <span>Напишите нам</span>
-                <FontAwesomeIcon icon="long-arrow-alt-right" />
-              </button>
+              <MainBody className={classes.mainText} />
+              <FormToggle/>
             </div>
             <div className={classes.mainRight}>
-              <Canvas/>
+              {/*<Canvas />*/}
             </div>
           </div>
         </div>

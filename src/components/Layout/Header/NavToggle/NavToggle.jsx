@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import {useLanguageState} from "../../../../Store/Language/LanguageState";
 import classes from "./NavToggle.module.less";
 import { navToggle } from "../../../../utilities/toggles";
 
 function NavToggle(props) {
-  const [toggled, toggleFunc] = useState(false);
+  const [toggled, toggleFunc] = useState(false),
+  [{lang, mainMenuToggle}] = useLanguageState(),
+  text = mainMenuToggle[lang][+!toggled];
   return (
     <div className={`${classes.navToggleContainer} ${props.className}`}>
       <button
@@ -14,13 +17,13 @@ function NavToggle(props) {
         }}
       >
         <div className={classes.burger}>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
+          <span/>
+          <span/>
+          <span/>
+          <span/>
         </div>
         <span className={classes.menuStatus}>
-          {toggled ? "закрыть" : "меню"}
+          {text}
         </span>
       </button>
     </div>
