@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MainMenu from "./MainMenu/MainMenu";
 import ContactForm from "./ContactForm/ContactForm";
-// import Canvas from "./Canvas/Canvas";
+import Canvas from "./Canvas/Canvas";
 import { contactFormToggle } from "../../../utilities/toggles";
 import { useLanguageState } from "../../../Store/Language/LanguageState";
 import Toggle from "../../hoc/Toggle";
@@ -14,7 +14,7 @@ function MainBody(props) {
   return (
     <div
     className={props.className}
-    dangerouslySetInnerHTML={{__html: state.translations.main.body}}
+    dangerouslySetInnerHTML={{__html: state.translations.front_page.body}}
     />
   );
 }
@@ -26,7 +26,7 @@ function FormToggle() {
           className={classes.formToggle}
           onClick={contactFormToggle}
       >
-        <span>{langState.translations.main.button}</span>
+        <span>{langState.translations.front_page.button}</span>
         <FontAwesomeIcon icon="long-arrow-alt-right" />
       </button>
   )
@@ -46,7 +46,7 @@ function Main() {
               <FormToggle/>
             </div>
             <div className={classes.mainRight}>
-              {/*<Canvas />*/}
+              <Canvas />
             </div>
           </div>
         </div>

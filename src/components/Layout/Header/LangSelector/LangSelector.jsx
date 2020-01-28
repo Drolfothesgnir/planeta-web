@@ -1,34 +1,36 @@
 import React from "react";
-import { useLanguageState, SET_LANG } from "../../../../Store/Language/LanguageState";
+import {NavLink} from "react-router-dom";
+import {fetchLang} from "../../../../Store/Language/actions";
 import classes from "./LangSelector.module.less";
+import {useLanguageState} from "../../../../Store/Language/LanguageState";
 const availableLanguages = [{
     lang: "ru",
-    label: "ru"
+    label: "ru",
+    path: 'ru'
 }, {
     lang: 'uk',
-    label: "ua"
+    label: "ua",
+    path: ''
 }, {
     lang: "en",
-    label: "en"
+    label: "en",
+    path: 'en'
 }];
 function LangSelector(props) {
-  const [state, dispatch] = useLanguageState();
+    const [, dispatch] = useLanguageState();
   return (
     <div className={`${classes.LangSelector} ${props.className}`}>
       <ul>
-        {availableLanguages.map(({lang, label}) => {
+        {availableLanguages.map(({lang, label, path}) => {
           return (
             <li key={lang}>
-              <a
-                href={`#${lang}`}
-                className={`${lang === state.lang ? classes.active : ""}`}
-                onClick={e => {
-                  e.preventDefault();
-                  dispatch({ type: SET_LANG, payload: { lang } });
-                }}
-              >
-                {label}
-              </a>
+                <NavLink onClick={() => {
+                    fetchLang(dispatch, path || null)
+                }} exact activeClassName={classes.active} to={{
+                    pathname: '/'+path
+                }}>
+                    {label}
+                </NavLink>
             </li>
           );
         })}

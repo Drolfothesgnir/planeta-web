@@ -76,6 +76,9 @@ module.exports = merge(common, {
   },
   devServer: {
     contentBase: path.join(__dirname, "public/"),
+    historyApiFallback: {
+      index: '/index.html'
+    },
     port: 3000,
     publicPath: "http://localhost:3000/",
     hotOnly: true,
