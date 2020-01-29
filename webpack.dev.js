@@ -6,7 +6,8 @@ const webpack = require("webpack"),
     loader: "less-loader",
     options: {
       strictUnits: true,
-      sourceMap: true
+      sourceMap: true,
+      javascriptEnabled: true
     }
   };
 

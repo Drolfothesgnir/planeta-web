@@ -8,7 +8,10 @@ const merge = require("webpack-merge"),
 
 module.exports = merge(common, {
   optimization: {
-    minimizer: [new TerserPlugin(), new OptimizeCSSAssetsPlugin({})]
+    minimizer: [
+        new TerserPlugin(),
+      new OptimizeCSSAssetsPlugin({})
+    ]
   },
   mode: "production",
   entry: "./src/index.js",
@@ -50,7 +53,8 @@ module.exports = merge(common, {
           {
             loader: "less-loader",
             options: {
-              strictUnits: true
+              strictUnits: true,
+              javascriptEnabled: true
             }
           }
         ],
@@ -64,7 +68,8 @@ module.exports = merge(common, {
           {
             loader: "less-loader",
             options: {
-              strictUnits: true
+              strictUnits: true,
+              javascriptEnabled: true
             }
           },
           "postcss-loader"
