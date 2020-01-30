@@ -10,9 +10,9 @@ function Footer() {
       <div className="container">
         <div className={classes.footerContent}>
           <div className={classes.telLink}>
-            <a className="footer_phone" href="tel:+380 (93) 254 35 65">
+            <a className="footer_phone" href="tel:+38(044)3621209 ">
               <FontAwesomeIcon icon="phone-alt" />
-              <span>+380 (93) 254 35 65</span>
+              <span>+38 (044) 362 12 09 </span>
             </a>
           </div>
           <div className={classes.mailLink}>
@@ -21,7 +21,7 @@ function Footer() {
               <span>order@planeta-web.com.ua</span>
             </a>
           </div>
-          <div className="copyright">&copy; 2006-{date}</div>
+          <div className="copyright">&copy; 2010-{date}</div>
         </div>
       </div>
     </footer>
