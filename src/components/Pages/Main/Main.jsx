@@ -13,8 +13,8 @@ function MainBody(props) {
   const [state] = useLanguageState();
   return (
     <div
-    className={props.className}
-    dangerouslySetInnerHTML={{__html: state.translations.front_page.body}}
+      className={props.className}
+      dangerouslySetInnerHTML={{ __html: state.translations.front_page.body }}
     />
   );
 }
@@ -22,19 +22,16 @@ function MainBody(props) {
 function FormToggle() {
   const [langState] = useLanguageState();
   return (
-      <button
-          className={classes.formToggle}
-          onClick={contactFormToggle}
-      >
-        <span>{langState.translations.front_page.button}</span>
-        <FontAwesomeIcon icon="long-arrow-alt-right" />
-      </button>
-  )
+    <button className={classes.formToggle} onClick={contactFormToggle}>
+      <span>{langState.translations.front_page.button}</span>
+      <FontAwesomeIcon icon="long-arrow-alt-right" />
+    </button>
+  );
 }
 
 function Main() {
   return (
-    <main className={`${classes.mainContent}`}>
+    <>
       <div className={classes.mainBg}>
         <div className={`container ${classes.container}`}>
           <div className={classes.mainInner}>
@@ -43,17 +40,15 @@ function Main() {
                 <img src={imageSrc} alt="main-logo" />
               </div>
               <MainBody className={classes.mainText} />
-              <FormToggle/>
+              <FormToggle />
             </div>
-            <div className={classes.mainRight}>
-              {/*<Canvas />*/}
-            </div>
+            <div className={classes.mainRight}>{/*<Canvas />*/}</div>
           </div>
         </div>
       </div>
       <Toggle component={MainMenu} escape eventName="nav-toggle" />
       <Toggle component={ContactForm} escape eventName="contact-form" />
-    </main>
+    </>
   );
 }
 

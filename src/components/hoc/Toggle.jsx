@@ -9,18 +9,18 @@ export default class Toggle extends Component {
     this.setState(state => ({ isToggled: !state.isToggled }));
   };
 
-  close = e => {
-    if (e.key === "Escape") {
-      this.setState({ isToggled: false });
-    }
-  };
+  // close = e => {
+  //   if (e.key === "Escape") {
+  //     this.setState({ isToggled: false });
+  //   }
+  // };
 
   componentDidMount() {
     if (document) {
       document.addEventListener(this.props.eventName, this.toggle);
-      if (this.props.escape) {
-        document.addEventListener("keydown", this.close);
-      }
+      // if (this.props.escape) {
+      //   document.addEventListener("keydown", this.close);
+      // }
     }
   }
 

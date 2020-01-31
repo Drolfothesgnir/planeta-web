@@ -1,37 +1,73 @@
 import { ADD_CONTENT, SET_ERROR, START_LOADING } from "./actionTypes";
 
 const init = {
-  pending: 0,
-  error: null
+  loading: {
+    layout: true
+  },
+  error: {
+    layout: null
+  },
+  en: {},
+  ua: {
+    layout: {}
+  },
+  ru: {}
 };
 
-export default (state = init, action) => {
-  switch (action.type) {
+const loadReducer = (state, {type, payload: {name}}) => {
+  switch (type) {
+    case START_LOADING: {
+      return {
+        ...state,
+        [name]: true
+      };
+    }
+
+    case SET_ERROR:
+    case ADD_CONTENT: {
+      return {
+        ...state,
+        [name]: false
+      }
+    }
+
+    default:
+      return state;
+  }
+}
+
+export default (state = init, { type, payload }) => {
+  switch (type) {
+
     case START_LOADING:
       return {
         ...state,
-        pending: state.pending + 1
+        loading: loadReducer(state.loading, {type, payload})
       };
 
-    case ADD_CONTENT:
-      const {
-        payload: { lang, name, content }
-      } = action;
+    case ADD_CONTENT: {
+      const { lang, name, content } = payload;
       return {
         ...state,
-        pending: state.pending - 1,
+        loading: loadReducer(state.loading, {type, payload}),
         [lang]: {
           ...(state[lang] || {}),
           [name]: content
         }
       };
+    }
 
-    case SET_ERROR:
+    case SET_ERROR: {
+      const {name, error} = payload;
       return {
         ...state,
-        error: action.payload,
-        pending: state.pending - 1
+        error: {
+          ...state.error,
+          [name]: error
+        },
+        loading: loadReducer(state.loading, {type, payload}),
       };
+    }
 
     default:
       return state;
