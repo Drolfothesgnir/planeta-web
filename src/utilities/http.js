@@ -5,9 +5,11 @@ export const http = axios.create({
 });
 
 http.interceptors.request.use(config => {
-    config.params = {
-        ...config.params,
-        _format: 'json'
-    };
+    if (config.method.toLowerCase() === 'get') {
+        config.params = {
+            ...config.params,
+            _format: 'json'
+        };
+    }
     return config;
 });

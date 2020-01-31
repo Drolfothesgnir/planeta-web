@@ -13,8 +13,16 @@ const submitHandler = data => {
   }).then(console.log).catch(console.log);
 };
 
+const changeHandler = ({target:t}) => {
+  if (t.value) {
+    t.classList.add(classes.touched);
+  } else {
+    t.classList.remove(classes.touched);
+  }
+};
+
 function ContactForm(props) {
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit } = useForm({
     mode: 'onChange'
   });
   const [
@@ -38,14 +46,11 @@ function ContactForm(props) {
           <form onSubmit={handleSubmit(submitHandler)}>
             {fields.map(({ name, title, type }) => {
               return (
-                <fieldset key={name}>
+                <fieldset key={name} data-field={name}>
                   <label>
-                    <input onChange={() => console.log(errors)} type={type} name={name} ref={register({
-                      maxLength: 15
-                    })} />
+                    <input onChange={changeHandler} type={type} name={name} ref={register} />
                     <span>{title}</span>
                   </label>
-
                 </fieldset>
               );
             })}
