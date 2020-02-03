@@ -4,14 +4,12 @@ const merge = require("webpack-merge"),
   OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin"),
   TerserPlugin = require("terser-webpack-plugin"),
   HtmlWebpackPlugin = require("html-webpack-plugin"),
-  { CleanWebpackPlugin } = require("clean-webpack-plugin");
+  { CleanWebpackPlugin } = require("clean-webpack-plugin"),
+  { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
 module.exports = merge(common, {
   optimization: {
-    minimizer: [
-        new TerserPlugin(),
-      new OptimizeCSSAssetsPlugin({})
-    ]
+    minimizer: [new TerserPlugin(), new OptimizeCSSAssetsPlugin({})]
   },
   mode: "production",
   entry: "./src/index.js",
@@ -86,6 +84,7 @@ module.exports = merge(common, {
       hash: true,
       cache: true
     }),
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin(),
+    new BundleAnalyzerPlugin()
   ]
 });
