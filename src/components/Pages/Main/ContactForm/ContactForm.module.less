@@ -1,3 +1,5 @@
+@import (reference) "../../../../less/fonts";
+
 .contactForm {
   background-image: url(../../../../assets/images/form.jpg);
   background-position: center;
@@ -36,11 +38,18 @@
     border-bottom: 1px solid #727b7f;
     width: 100%;
     padding: 8px 0;
+
+    &.error {
+      border-bottom-color: red;
+    }
+    
+    &:focus:not(.error) {
+      border-bottom-color: #fff;
+    }
   }
 
   input:focus,
-  .touched {
-    border-bottom-color: #fff;
+  input[data-empty="false"] {
 
     + span {
       top: -15px;
@@ -69,12 +78,33 @@
     text-transform: uppercase;
     padding: 15px;
     font-size: 18px;
+    margin-bottom: 20px;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: #fff;
+      color: #000;
+    }
   }
 
   form {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    position: relative;
+  }
+}
+
+.errorList {
+  position: absolute;
+  top: 100%;
+  color: red;
+  font-family: @open-sans;
+  font-weight: 600;
+
+  li {
+    margin-bottom: 10px;
   }
 }
 

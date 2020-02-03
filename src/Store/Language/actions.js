@@ -11,8 +11,9 @@ const parseFormData = data => {
     email: "email",
     textfield: "text",
     webform_actions: "submit",
-    tel: "text"
+    tel: "tel"
   };
+
   const result = {};
   const dataArr = Object.entries(data);
   const submit = dataArr.findIndex(

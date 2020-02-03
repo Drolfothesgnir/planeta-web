@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MainMenu from "./MainMenu/MainMenu";
 import ContactForm from "./ContactForm/ContactForm";
-// import Canvas from "./Canvas/Canvas";
+import Canvas from "./Canvas/Canvas";
 import { contactFormToggle } from "../../../utilities/toggles";
 import { useLanguageState } from "../../../Store/Language/LanguageState";
 import Toggle from "../../hoc/Toggle";
@@ -42,7 +42,7 @@ function Main() {
               <MainBody className={classes.mainText} />
               <FormToggle />
             </div>
-            <div className={classes.mainRight}>{/*<Canvas />*/}</div>
+            <div className={classes.mainRight}>{<Canvas />}</div>
           </div>
         </div>
       </div>
