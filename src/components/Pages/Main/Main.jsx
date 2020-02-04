@@ -42,7 +42,9 @@ function Main() {
               <MainBody className={classes.mainText} />
               <FormToggle />
             </div>
-            <div className={classes.mainRight}>{<Canvas />}</div>
+            <div className={classes.mainRight}>
+                {<Canvas />}
+            </div>
           </div>
         </div>
       </div>

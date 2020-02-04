@@ -16,6 +16,7 @@ import "./less/App.less";
 
 function App() {
   const [{ loading }, dispatch] = useLanguageState();
+
   React.useEffect(() => {
     fetchLang(dispatch);
   }, []);
