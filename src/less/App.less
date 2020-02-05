@@ -50,9 +50,28 @@ canvas {
   position: relative;
 }
 
+.btn {
+  display: inline-block;
+  border: 1px solid #fff;
+  text-transform: uppercase;
+  padding: 15px;
+  font-size: 18px;
+  margin-bottom: 20px;
+  font-family: @open-sans;
+  transition:  0.3s;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: #fff;
+    color: #000;
+  }
+}
+
 @media (min-width: 768px) {
   .main-content {
     max-width: 90%;
+    width: 100%;
     margin: 0 auto;
   }
 }

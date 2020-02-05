@@ -11,4 +11,4 @@ export default ({ children }) => {
   return <context.Provider value={[state, dispatch]}>{children}</context.Provider>;
 };
 
-export const useState = () => useContext(context);
+export const useContentState = () => useContext(context);

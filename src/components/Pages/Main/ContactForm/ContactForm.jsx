@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { contactFormToggle } from "../../../../utilities/toggles";
@@ -6,19 +7,40 @@ import { useLanguageState } from "../../../../Store/Language/LanguageState";
 import classes from "./ContactForm.module.less";
 import { http } from "../../../../utilities/http";
 import Inputmask from "inputmask";
+import { SET_FORM_SUBMISSION_FLAG } from "../../../../Store/Language/actionTypes";
 
-const pattern = /\+380\s?\d{2}\s?\d{3}\s?\d{2}\s?\d{2}\s?$/;
+const pattern = /^\+380\s?\d{2}\s?\d{3}\s?\d{2}\s?\d{2}$/;
 
-const im = new Inputmask("+380 99 999 99 99", { placeholder: " ", removeMaskOnSubmit: true });
-const { log } = console;
-const submitHandler = data => {
-  log(data);
-  data.webform_id = "call_back";
-  http
-    .post("/webform_rest/submit", data)
-    .then(log)
-    .catch(log);
+const im = new Inputmask("+380999999999", {
+  placeholder: " ",
+  removeMaskOnSubmit: true,
+  showMaskOnHover: false
+});
+
+const formErrors = {
+  name: {
+    en: "Incorrect name",
+    ru: "Некорректное имя",
+    uk: "Некоректне імʼя"
+  },
+  email: {
+    en: "Incorrect e-mail",
+    ru: "Некорректный e-mail",
+    uk: "Некоректний e-mail"
+  },
+  tel: {
+    en: "Incorrect telephone",
+    ru: "Некорректный телефон",
+    uk: "Некоректний телефон"
+  },
+  message: {
+    en: "Incorrect message",
+    ru: "Некорректное сообщение",
+    uk: "Некоректне повідомлення"
+  }
 };
+
+const { log } = console;
 
 const changeHandler = ({ target: t }) => {
   if (t.value) {
@@ -28,28 +50,40 @@ const changeHandler = ({ target: t }) => {
   }
 };
 
-const renderErrors = errors => {
-  const list = Object.entries(errors).map(([name, { types }]) => {
-    return Object.entries(types).map(([type, message]) => (
-      <li key={`${name}_${type}`}>{message}</li>
-    ));
-  });
-  return list.length ? <ul className={classes.errorList}>{list}</ul> : null;
-};
-
 function ContactForm(props) {
   const { register, handleSubmit, errors } = useForm({
-    mode: "onSubmit",
+    mode: "onChange",
     validateCriteriaMode: "all"
   });
+
+  const [success, setStatus] = useState(false);
+
   const [
     {
+      lang,
       translations: {
         form: { fields, submit }
       }
-    }
+    },
+    dispatch
   ] = useLanguageState();
-  return (
+
+  const submitHandler = data => {
+    data.webform_id = "call_back";
+    http
+      .post("/webform_rest/submit", data)
+      .then(res => {
+        if (!res.data.error) {
+          dispatch({ type: SET_FORM_SUBMISSION_FLAG, payload: true });
+          setStatus(true);
+        }
+      })
+      .catch(log);
+  };
+
+  return success ? (
+    <Redirect to="/thank-you" />
+  ) : (
     <div
       className={`overlay ${classes.contactForm} ${
         props.isToggled ? classes.open : ""
@@ -61,48 +95,55 @@ function ContactForm(props) {
       <div className="container">
         <div className={`${classes.formInner}`}>
           <form onSubmit={handleSubmit(submitHandler)}>
-            {fields.map(({ name, title, type }) => {
-              return (
-                <fieldset key={name} data-field={name}>
-                  <label>
-                    <input
+            <div className={classes.fields}>
+              {fields.map(({ name, title, type }) => {
+                return (
+                  <fieldset key={name} data-field={name}>
+                    <label>
+                      <input
+                        maxLength={50}
                         className={errors[name] && classes.error}
-                      data-label={title}
-                      onChange={e => {
-                        changeHandler(e);
-                        log(errors);
-                      }}
-                      type={type}
-                      name={name}
-                      ref={e => {
-                        if (e && type === "tel") {
-                          im.mask(e);
-                        }
-
-                        const regObject = {
-                          required: `${title}: Field is required!`,
-                          maxLength: {
-                            message: `${title}: Field maximum length reached!`,
-                            value: 50
-                          },
-                        };
-                        register(e, type === 'tel' ? {
-                          ...regObject,
-                          pattern: {
-                            message: 'Invalid telephone number!',
-                            value: pattern
+                        data-label={title}
+                        onChange={e => {
+                          changeHandler(e);
+                        }}
+                        type={type}
+                        name={name}
+                        ref={e => {
+                          if (e && type === "tel") {
+                            im.mask(e);
                           }
-                        } : regObject);
-                      }}
-                    />
 
-                    <span>{title}</span>
-                  </label>
-                </fieldset>
-              );
-            })}
-            <button type="submit">{submit}</button>
-            {renderErrors(errors)}
+                          const regObject = {
+                            required: true,
+                            maxLength: 50
+                          };
+                          register(
+                            e,
+                            type === "tel"
+                              ? {
+                                  ...regObject,
+                                  pattern
+                                }
+                              : regObject
+                          );
+                        }}
+                      />
+
+                      <span>{title}</span>
+                    </label>
+                    {errors[name] && (
+                      <span className={classes.error}>
+                        {formErrors[name][lang]}
+                      </span>
+                    )}
+                  </fieldset>
+                );
+              })}
+            </div>
+            <button type="submit" className="btn">
+              {submit}
+            </button>
           </form>
         </div>
       </div>

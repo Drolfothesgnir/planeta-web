@@ -32,17 +32,20 @@ const parseFormData = data => {
 };
 
 export const fetchLang = (dispatch, lang) => {
+  const config = lang ? { params: { lang } } : null;
   Promise.all([
-    http.get("/" + (lang || "")).then(response),
-    http.get((lang ? "/" + lang : "") + "/api/menu_items/main").then(response),
-    http
-      .get((lang ? "/" + lang : "") + "/webform_rest/call_back/fields")
-      .then(response)
+    http.get("/", config).then(response),
+    http.get("/api/menu_items/main", config).then(response),
+    http.get("/webform/call_back/get", config).then(response),
   ])
-    .then(([langData, mainMenu, formFields]) => {
+    .then(([langData, mainMenu,  formConfig]) => {
       const data = parseLanguageData(langData);
       data.translations.main_menu = mainMenu;
-      data.translations.form = parseFormData(formFields);
+      data.translations.form = parseFormData(formConfig.elements);
+      data.translations.thankYou = {
+        text: formConfig.settings.confirmation_title,
+        button: formConfig.settings.confirmation_back_label
+      };
       dispatch({ type: SET_LANG, payload: data });
     })
     .catch(err => {

@@ -1,5 +1,7 @@
 @import (reference) "../../../../less/fonts";
 
+@error: #e8244e;
+
 .contactForm {
   background-image: url(../../../../assets/images/form.jpg);
   background-position: center;
@@ -26,12 +28,11 @@
     display: block;
   }
 
-  span {
-    text-transform: uppercase;
-    font-size: 18px;
-    transition: 0.3s;
+  span.error {
+    color: @error;
     position: absolute;
-    top: 0;
+    right: 0;
+    margin-top: 5px;
   }
 
   input {
@@ -40,7 +41,8 @@
     padding: 8px 0;
 
     &.error {
-      border-bottom-color: red;
+      border-bottom-color: @error;
+      color: @error;
     }
     
     &:focus:not(.error) {
@@ -58,53 +60,29 @@
   }
 
   fieldset {
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     width: 100%;
-
-    &[data-field="tel"],
-    &[data-field="email"] {
-      width: 47%;
-    }
   }
 
   label {
     position: relative;
-  }
 
-  button[type="submit"] {
-    display: block;
-    border: 1px solid #fff;
-    width: 100%;
-    text-transform: uppercase;
-    padding: 15px;
-    font-size: 18px;
-    margin-bottom: 20px;
-
-    &:hover,
-    &:active,
-    &:focus {
-      background-color: #fff;
-      color: #000;
+    span {
+      text-transform: uppercase;
+      font-size: 18px;
+      transition: 0.3s;
+      position: absolute;
+      top: 0;
     }
   }
 
   form {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
     position: relative;
-  }
-}
 
-.errorList {
-  position: absolute;
-  top: 100%;
-  color: red;
-  font-family: @open-sans;
-  font-weight: 600;
-
-  li {
-    margin-bottom: 10px;
+    :global .btn {
+      display: block;
+      width: 100%;
+    }
   }
 }
 
@@ -117,6 +95,10 @@
 
 .formInner {
   padding: 0;
+}
+
+.fields {
+  margin-bottom: 60px;
 }
 
 @media (min-width: 768px) {

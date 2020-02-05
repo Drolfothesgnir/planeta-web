@@ -10,6 +10,11 @@ http.interceptors.request.use(config => {
             ...config.params,
             _format: 'json'
         };
+
+        if (config.params.lang) {
+            config.url = `/${config.params.lang}${config.url}`;
+        }
     }
+
     return config;
 });
