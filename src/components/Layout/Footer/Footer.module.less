@@ -12,6 +12,7 @@
   a {
     font-family: @roboto, serif;
     margin-bottom: 10px;
+    display: block;
 
     span {
       margin: 0 10px;
@@ -23,11 +24,6 @@
   }
 }
 
-.telLink,
-.mailLink {
-  margin-bottom: 6px;
-}
-
 @media (min-width: 768px) {
   .footer {
     padding: 35px 0;
@@ -37,15 +33,10 @@
     display: flex;
     text-align: left;
     justify-content: space-between;
-  }
 
-  .telLink {
-    margin-right: 15px;
-  }
-
-  .mailLink {
-    flex: 1;
+    a {
+      display: inline-block;
+      margin-right: 6px;
+    }
   }
 }
-
-

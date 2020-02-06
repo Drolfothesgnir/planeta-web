@@ -1,8 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import MainMenu from "./MainMenu/MainMenu";
 import ContactForm from "./ContactForm/ContactForm";
-import Canvas from "./Canvas/Canvas";
+// import Canvas from "./Canvas/Canvas";
 import { contactFormToggle } from "../../../utilities/toggles";
 import { useLanguageState } from "../../../Store/Language/LanguageState";
 import Toggle from "../../hoc/Toggle";
@@ -43,13 +42,12 @@ function Main() {
               <FormToggle />
             </div>
             <div className={classes.mainRight}>
-                {<Canvas />}
+                {/*{<Canvas />}*/}
             </div>
           </div>
         </div>
       </div>
-      <Toggle component={MainMenu} escape eventName="nav-toggle" />
-      <Toggle component={ContactForm} escape eventName="contact-form" />
+      <Toggle component={ContactForm} eventName="contact-form" />
     </>
   );
 }

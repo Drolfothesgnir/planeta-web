@@ -1,5 +1,5 @@
-@import (reference) "../../../../less/fonts";
-@import (reference) "../../../../less/glitch";
+@import (reference) "../../../less/fonts";
+@import (reference) "../../../less/glitch";
 
 @grey: #3c3c3c;
 
@@ -13,7 +13,7 @@
   transition: 0.5s;
   opacity: 0;
   z-index: -1;
-  background-image: url("../../../../assets/images/nav_moby.jpg");
+  background-image: url("../../../assets/images/nav_moby.jpg");
   background-position: center;
   background-size: cover;
   display: flex;
@@ -21,7 +21,7 @@
 
   &.open {
     opacity: 1;
-    z-index: 2;
+    z-index: 10;
 
     .mainMenuLinks,
     .mainMenuFooter {
@@ -68,12 +68,10 @@
 
 .mainMenuLinks {
   flex: 1;
-  height: calc(100% - 80px);
   counter-reset: nav-counter;
-  padding: 20px 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .navLink {
@@ -85,10 +83,9 @@
     font-family: @open-sans;
     font-weight: 800;
     display: block;
-    font-size: 55px;
+    font-size: 45px;
     overflow: hidden;
-    margin-bottom: 5px;
-    height: 45px;
+    height: 38px;
     color: @grey;
   }
 
@@ -97,9 +94,33 @@
     text-transform: uppercase;
     color: #ffffff;
     font-family: @oswald;
-    font-size: 24px;
+    font-size: 20px;
     text-align: center;
     .glitch-hover(span);
+  }
+}
+
+@media (min-width: 375px) {
+  .navLink {
+
+    &::before {
+      font-size: 55px;
+      height: 45px;
+    }
+
+    a {
+      font-size: 24px;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .navLink {
+
+    &::before {
+      font-size: 100px;
+      height: 85px;
+    }
   }
 }
 
@@ -120,7 +141,7 @@
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      top: calc(50% - 60px);
+      top: calc(50% - 118px);
     }
 
     a {
@@ -130,6 +151,7 @@
       align-items: center;
       justify-content: center;
       font-size: 34px;
+      position: relative;
     }
   }
 

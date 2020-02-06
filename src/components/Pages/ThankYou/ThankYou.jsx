@@ -17,7 +17,9 @@ function ThankYou() {
     dispatch
   ] = useLanguageState();
   return contactForm ? (
-    <div className={`${formClasses.contactForm} ${formClasses.open} overlay`}>
+    <div
+      className={`${formClasses.contactForm} ${formClasses.open} ${classes.content} overlay`}
+    >
       <div className="container">
         <div className={classes.page}>
           <div className={classes.check}>

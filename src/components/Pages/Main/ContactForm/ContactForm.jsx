@@ -9,7 +9,28 @@ import { http } from "../../../../utilities/http";
 import Inputmask from "inputmask";
 import { SET_FORM_SUBMISSION_FLAG } from "../../../../Store/Language/actionTypes";
 
-const pattern = /^\+380\s?\d{2}\s?\d{3}\s?\d{2}\s?\d{2}$/;
+const pattern = /^[0-9+]+[0-9-]{3,15}$/;
+
+const regObject = {
+   maxLength: 255,
+  required: true
+};
+
+const validation = {
+  name: {
+    ...regObject,
+    pattern: /^[a-z]+$/i
+  },
+  email: regObject,
+  tel: {
+    ...regObject,
+    pattern
+  },
+  message: {
+    ...regObject,
+    maxLength: 350
+  }
+};
 
 const im = new Inputmask("+380999999999", {
   placeholder: " ",
@@ -114,18 +135,9 @@ function ContactForm(props) {
                             im.mask(e);
                           }
 
-                          const regObject = {
-                            required: true,
-                            maxLength: 50
-                          };
                           register(
                             e,
-                            type === "tel"
-                              ? {
-                                  ...regObject,
-                                  pattern
-                                }
-                              : regObject
+                            validation[name]
                           );
                         }}
                       />
