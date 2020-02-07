@@ -6,7 +6,7 @@
 .mainMenuLinks,
 .mainMenuFooter {
   transition:  0.4s;
-  transform: translateX(-100%);
+  //transform: translateX(-100%);
 }
 
 .navLink {
@@ -51,7 +51,7 @@
 
     .mainMenuLinks,
     .mainMenuFooter {
-      transform: translateX(0);
+      //transform: translateX(0);
     }
   }
 
@@ -195,16 +195,18 @@
   }
 
   .mainMenu {
+    background-image: url('../../../assets/images/mainMenu_bg.jpg');
     &.open {
+      animation: shutters .5s reverse;
       .navLink {
         &::before {
           line-height: 140px;
-          transition:  0.5s ease-in-out 0.2s;
+          transition:  0.5s ease-in-out 0.3s;
         }
 
         span {
           line-height: 1;
-          transition: 0.4s ease-in 0.2s;
+          transition: 0.4s ease-in 0.3s;
         }
       }
     }
@@ -219,12 +221,11 @@
   }
 }
 
-@keyframes slide-up {
+@keyframes shutters {
   0% {
-    line-height: 0;
+    clip-path: polygon(0% 0%, 20% 0%, 20% 100%, 20% 100%, 20% 0%, 40% 0%, 40% 100%, 40% 100%, 40% 0%, 60% 0%, 60% 100%, 60% 100%, 60% 0%, 80% 0%, 80% 100%, 80% 100%, 80% 0%, 100% 0%, 100% 100%, 0% 100%);
   }
-  
   100% {
-    line-height: 140px;
+    clip-path: polygon(20% 0%, 20% 0%, 20% 100%, 40% 100%, 40% 0%, 40% 0%, 40% 100%, 60% 100%, 60% 0%, 60% 0%, 60% 100%, 80% 100%, 80% 0%, 80% 0%, 80% 100%, 100% 100%, 100% 0%, 100% 0%, 100% 100%, 20% 100%);
   }
 }
