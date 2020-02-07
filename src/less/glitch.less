@@ -1,82 +1,54 @@
-@glitch-skew: glitch-skew 1s infinite linear alternate-reverse;
-@glitch-anim: glitch-anim 5s infinite linear alternate-reverse;
-@glitch-anim2: glitch-anim2 1s infinite linear alternate-reverse;
-.glitchCopy {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
 .glitch {
-  position: relative;
-  color: #fff;
-  animation: @glitch-skew;
+  @offset1: 1px;
+  @offset2: -1px;
+  @highlight1: #49FC00;
+  @highlight2: spin(@highlight1, 180);
 
-  &::before{
-    .glitchCopy;
-    left: 2px;
-    text-shadow: -2px 0 #ff00c1;
-    clip: rect(44px, 450px, 56px, 0);
-    animation: @glitch-anim;
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+
+  &::before,
+  &::after  {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &::before {
+    left: @offset1;
+    text-shadow: -1px 0 @highlight1;
+    clip: rect(24px, 550px, 90px, 0);
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
   }
 
   &::after {
-    .glitchCopy;
-    left: -2px;
-    text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
-    animation: @glitch-anim2;
+    left: @offset2;
+    text-shadow: -1px 0 @highlight2;
+    clip: rect(85px, 550px, 140px, 0);
+    animation: glitch-anim 3.5s infinite linear alternate-reverse;
   }
 }
-@steps: 20;
-.anim {
-  each(range(@steps), {
-    @prop: percentage(@value * (1/@steps));
-    @random1:`(Math.random()*100)+'px'`;
-    @random2:`(Math.random()*100)+'px'`;
-    @random3:`Math.random()+'deg'`;
-    @{prop} {
-      clip: rect(~'@{random1}', 9999px, ~'@{random2}', 0);
-      transform: skew(~'@{random3}');
-    }
-  })
+
+.glitch-frames (@n: 20, @index: 0) when (@index <= @n) {
+  @keyframeSel: percentage(@index/@n);
+  @rand1: unit(round(`Math.random()*150`),px);
+  @rand2: unit(round(`Math.random()*150`), px);
+  @{keyframeSel} {
+    clip: rect(@rand1, 9999px, @rand2, 0);
+  }
+  .glitch-frames(@n, (@index + 1));
 }
+
 @keyframes glitch-anim {
-  .anim;
+  .glitch-frames(24);
 }
 
-.anim-2 {
-  each(range(@steps), {
-    @prop: percentage(@value * (1/@steps));
-    @random1:`(Math.random()*100)+'px'`;
-    @random2:`(Math.random()*100)+'px'`;
-    @random3:`Math.random()+'deg'`;
-    @{prop} {
-      clip: rect(~'@{random1}', 9999px, ~'@{random2}', 0);
-      transform: skew(~'@{random3}');
-    }
-  })
-}
-
-@keyframes glitch-anim2 {
-  .anim-2;
-}
-
-@steps-skew: 10;
-.anim-skew {
-  each(range(@steps-skew), {
-    @prop: percentage(@value * (1/@steps));
-    @random: `(Math.random() * 10 - 5) + 'deg'`;
-    @{prop} {
-      transform: skew(~'@{random}');
-    }
-  })
-}
-
-@keyframes glitch-skew {
-  .anim-skew;
+@keyframes glitch-anim-2 {
+  .glitch-frames(30,2);
 }
 
 .glitch-hover(@selector) {

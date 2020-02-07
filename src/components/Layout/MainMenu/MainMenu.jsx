@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useLanguageState } from "../../../Store/Language/LanguageState";
+import LangSelector from "../../Utilities/LangSelector/LangSelector";
 import classes from "./MainMenu.module.less";
 
 function MainMenu(props) {
@@ -28,6 +29,7 @@ function MainMenu(props) {
           );
         })}
       </ul>
+      <LangSelector className={classes.langSelector} activeClassName={classes.activeLang}/>
     </nav>
   );
 }

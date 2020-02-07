@@ -2,7 +2,7 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useLanguageState } from "../../../Store/Language/LanguageState";
 import formClasses from "../Main/ContactForm/ContactForm.module.less";
-import imgSrc from "../../../assets/images/thank-you.png";
+import imgSrc from "../../../assets/images/thank_you.gif";
 import classes from "./ThankYou.module.less";
 import { SET_FORM_SUBMISSION_FLAG } from "../../../Store/Language/actionTypes";
 

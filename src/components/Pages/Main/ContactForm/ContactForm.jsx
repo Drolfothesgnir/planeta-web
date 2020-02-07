@@ -153,7 +153,7 @@ function ContactForm(props) {
                 );
               })}
             </div>
-            <button type="submit" className="btn">
+            <button type="submit" className="btn btn-light">
               {submit}
             </button>
           </form>

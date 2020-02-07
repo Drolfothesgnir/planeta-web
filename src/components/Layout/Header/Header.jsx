@@ -1,7 +1,7 @@
 import React from "react";
-import Logo from "../../Logo/Logo";
+import Logo from "../../Utilities/Logo/Logo";
 import NavToggle from "./NavToggle/NavToggle";
-import LangSelector from "./LangSelector/LangSelector";
+import LangSelector from "../../Utilities/LangSelector/LangSelector";
 import classes from "./Header.module.less";
 
 function Header() {

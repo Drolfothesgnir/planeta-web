@@ -9,6 +9,32 @@
   transform: translateX(-100%);
 }
 
+.navLink {
+  counter-increment: nav-counter;
+  text-align: center;
+
+  &::before {
+    content: counters(nav-counter, ".", decimal-leading-zero);
+    font-family: @open-sans;
+    font-weight: 800;
+    display: block;
+    font-size: 45px;
+    overflow: hidden;
+    height: 38px;
+    color: @grey;
+  }
+
+  a {
+    display: block;
+    text-transform: uppercase;
+    color: #ffffff;
+    font-family: @oswald;
+    font-size: 20px;
+    text-align: center;
+    .glitch-hover(span);
+  }
+}
+
 .mainMenu {
   transition: 0.5s;
   opacity: 0;
@@ -74,29 +100,29 @@
   justify-content: space-around;
 }
 
-.navLink {
-  counter-increment: nav-counter;
-  text-align: center;
+.langSelector {
+  position: absolute;
+  right: 15px;
+  top: 30px;
 
-  &::before {
-    content: counters(nav-counter, ".", decimal-leading-zero);
-    font-family: @open-sans;
-    font-weight: 800;
-    display: block;
-    font-size: 45px;
-    overflow: hidden;
-    height: 38px;
-    color: @grey;
+  ul {
+    display: flex;
+    flex-direction: column;
+  }
+
+  li {
+    margin-left: 0;
+    margin-bottom: 10px;
   }
 
   a {
-    display: block;
-    text-transform: uppercase;
-    color: #ffffff;
-    font-family: @oswald;
-    font-size: 20px;
-    text-align: center;
-    .glitch-hover(span);
+    color: #626262;
+
+    &.activeLang,
+    &:active,
+    &:hover {
+      color: #fff;
+    }
   }
 }
 
@@ -122,9 +148,14 @@
       height: 85px;
     }
   }
+
+  .langSelector {
+    display: none;
+  }
 }
 
 @media (min-width: 1280px) {
+
   .mainMenuLinks {
     flex-direction: row;
     justify-content: space-around;
@@ -142,6 +173,8 @@
       left: 50%;
       transform: translateX(-50%);
       top: calc(50% - 118px);
+
+      line-height: 300px;
     }
 
     a {
@@ -152,6 +185,28 @@
       justify-content: center;
       font-size: 34px;
       position: relative;
+
+      span {
+        height: 35px;
+        line-height: 4;
+        overflow: hidden;
+      }
+    }
+  }
+
+  .mainMenu {
+    &.open {
+      .navLink {
+        &::before {
+          line-height: 140px;
+          transition:  0.5s ease-in-out 0.2s;
+        }
+
+        span {
+          line-height: 1;
+          transition: 0.4s ease-in 0.2s;
+        }
+      }
     }
   }
 
@@ -161,5 +216,15 @@
     bottom: 0;
     width: 100%;
     border: 0;
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    line-height: 0;
+  }
+  
+  100% {
+    line-height: 140px;
   }
 }

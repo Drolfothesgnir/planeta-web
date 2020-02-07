@@ -8,7 +8,7 @@ function NavToggle(props) {
   [{lang, mainMenuToggle}] = useLanguageState(),
   text = mainMenuToggle[lang][+!toggled];
   return (
-    <div className={`${classes.navToggleContainer} ${props.className}`}>
+    <div className={`${classes.navToggleContainer} ${props.className || ''}`}>
       <button
         className={`${classes.navToggle} ${toggled ? classes.open : ""}`}
         onClick={e => {

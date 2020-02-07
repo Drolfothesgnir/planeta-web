@@ -12,7 +12,7 @@ http.interceptors.request.use(config => {
         };
 
         if (config.params.lang) {
-            config.url = `/${config.params.lang}${config.url}`;
+            config.url = `/${config.params.lang + config.url}`;
         }
     }
 

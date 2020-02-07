@@ -1,11 +1,10 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ContactForm from "./ContactForm/ContactForm";
-// import Canvas from "./Canvas/Canvas";
 import { contactFormToggle } from "../../../utilities/toggles";
 import { useLanguageState } from "../../../Store/Language/LanguageState";
 import Toggle from "../../hoc/Toggle";
 import imageSrc from "../../../assets/images/web-word.png";
+import planetimgSrc from '../../../assets/images/planet.svg';
 import classes from "./Main.module.less";
 
 function MainBody(props) {
@@ -21,9 +20,8 @@ function MainBody(props) {
 function FormToggle() {
   const [langState] = useLanguageState();
   return (
-    <button className={classes.formToggle} onClick={contactFormToggle}>
+    <button className={`${classes.formToggle} btn`} onClick={contactFormToggle}>
       <span>{langState.translations.front_page.button}</span>
-      <FontAwesomeIcon icon="long-arrow-alt-right" />
     </button>
   );
 }
@@ -42,7 +40,9 @@ function Main() {
               <FormToggle />
             </div>
             <div className={classes.mainRight}>
-                {/*{<Canvas />}*/}
+              <div className={classes.planetImage}>
+                <img src={planetimgSrc} alt=""/>
+              </div>
             </div>
           </div>
         </div>
