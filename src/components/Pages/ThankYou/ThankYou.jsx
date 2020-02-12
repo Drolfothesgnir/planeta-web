@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useLanguageState } from "../../../Store/Language/LanguageState";
 import formClasses from "../Main/ContactForm/ContactForm.module.less";
 import imgSrc from "../../../assets/images/thank_you.gif";
@@ -9,14 +9,13 @@ import { SET_FORM_SUBMISSION_FLAG } from "../../../Store/Language/actionTypes";
 function ThankYou() {
   const [
     {
-      contactForm,
       translations: {
         thankYou: { text, button: buttonText }
       }
     },
     dispatch
   ] = useLanguageState();
-  return contactForm ? (
+  return (
     <div
       className={`${formClasses.contactForm} ${formClasses.open} ${classes.content} overlay`}
     >
@@ -29,7 +28,7 @@ function ThankYou() {
             <span>{text}</span>
           </p>
           <Link
-            className="btn"
+            className="btn btn-light"
             to={"/"}
             onClick={() =>
               dispatch({ type: SET_FORM_SUBMISSION_FLAG, payload: false })
@@ -40,8 +39,6 @@ function ThankYou() {
         </div>
       </div>
     </div>
-  ) : (
-    <Redirect to={"/"} />
   );
 }
 

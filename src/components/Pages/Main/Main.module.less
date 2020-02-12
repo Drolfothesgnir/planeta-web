@@ -1,12 +1,12 @@
 @import (reference) "../../../less/fonts";
-@import (reference) '../../../less/colors';
+@import (reference) "../../../less/colors";
 
 @bg-gradient: linear-gradient(10deg, #d3e7f0 1%, #ebeff1 100%);
 
 .mainBg {
   height: 100%;
-  background-image:url(../../../assets/images/planete_bg.png), @bg-gradient ;
-  background-position:40vw, 0;
+  background-image: url(../../../assets/images/planete_bg.png), @bg-gradient;
+  background-position: 40vw, 0;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -52,7 +52,6 @@
 }
 
 @media (min-width: 768px) {
-
   .mainLogo {
     width: 70%;
   }
@@ -96,8 +95,10 @@
   }
 
   .planetImage {
-    width: 70%;
-    margin: auto;
+    img {
+      width: 60%;
+      margin: auto;
+    }
   }
 }
 

@@ -4,14 +4,14 @@ import { contactFormToggle } from "../../../utilities/toggles";
 import { useLanguageState } from "../../../Store/Language/LanguageState";
 import Toggle from "../../hoc/Toggle";
 import imageSrc from "../../../assets/images/web-word.png";
-import planetimgSrc from '../../../assets/images/planet.svg';
+import planetimgSrc from "../../../assets/images/planet.svg";
 import classes from "./Main.module.less";
 
-function MainBody(props) {
+function MainBody() {
   const [state] = useLanguageState();
   return (
     <div
-      className={props.className}
+      className={classes.mainText}
       dangerouslySetInnerHTML={{ __html: state.translations.front_page.body }}
     />
   );
@@ -36,12 +36,12 @@ function Main() {
               <div className={classes.mainLogo}>
                 <img src={imageSrc} alt="main-logo" />
               </div>
-              <MainBody className={classes.mainText} />
+              <MainBody />
               <FormToggle />
             </div>
             <div className={classes.mainRight}>
               <div className={classes.planetImage}>
-                <img src={planetimgSrc} alt=""/>
+                <img src={planetimgSrc} alt="planet" />
               </div>
             </div>
           </div>

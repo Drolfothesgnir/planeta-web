@@ -35,12 +35,12 @@ export const fetchLang = (dispatch, lang) => {
   const config = lang ? { params: { lang } } : null;
   Promise.all([
     http.get("/", config).then(response),
-    http.get("/api/menu_items/main", config).then(response),
-    http.get("/webform/call_back/get", config).then(response),
+    // http.get("/api/menu_items/main", config).then(response),
+    http.get("/webform/call_back/get", config).then(response)
   ])
-    .then(([langData, mainMenu,  formConfig]) => {
+    .then(([langData, /* mainMenu, */ formConfig]) => {
       const data = parseLanguageData(langData);
-      data.translations.main_menu = mainMenu;
+      // data.translations.main_menu = mainMenu;
       data.translations.form = parseFormData(formConfig.elements);
       data.translations.thankYou = {
         text: formConfig.settings.confirmation_title,
