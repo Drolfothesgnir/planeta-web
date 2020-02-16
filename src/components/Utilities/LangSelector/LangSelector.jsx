@@ -26,7 +26,7 @@ function LangSelector(props) {
             <li key={lang}>
               <a
                 onClick={() => {
-                  fetchLang(dispatch, lang === "uk" ? null : lang);
+                  fetchLang(dispatch, lang);
                 }}
                 className={
                   lang === stateLang

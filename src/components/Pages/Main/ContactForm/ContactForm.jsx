@@ -8,11 +8,46 @@ import classes from "./ContactForm.module.less";
 import { http } from "../../../../utilities/http";
 import Inputmask from "inputmask";
 import { SET_FORM_SUBMISSION_FLAG } from "../../../../Store/Language/actionTypes";
+import { useContentState } from "../../../../Store/Content/store";
+import { fetchContent } from "../../../../Store/Content/actions";
+
+const parseFormData = data => {
+  const typeMap = {
+    email: "email",
+    textfield: "text",
+    webform_actions: "submit",
+    tel: "tel"
+  };
+
+  const result = {};
+  const dataArr = Object.entries(data);
+  const submit = dataArr.findIndex(
+    ([, item]) => item["#type"] === "webform_actions"
+  );
+  result.submit = dataArr[submit][1][["#title"]];
+  dataArr.splice(submit, 1);
+  result.fields = dataArr.map(([name, item]) => {
+    return {
+      name,
+      title: item["#title"],
+      type: typeMap[item["#type"]]
+    };
+  });
+  return result;
+};
+
+const parser = data => ({
+  form: parseFormData(data.elements),
+  thankYou: {
+    text: data.settings.confirmation_title,
+    button: data.settings.confirmation_back_label
+  }
+});
 
 const pattern = /^[0-9+]+[0-9-]{3,15}$/;
 
 const regObject = {
-   maxLength: 255,
+  maxLength: 255,
   required: true
 };
 
@@ -79,15 +114,21 @@ function ContactForm(props) {
 
   const [success, setStatus] = useState(false);
 
-  const [
-    {
-      lang,
-      translations: {
-        form: { fields, submit }
-      }
-    },
-    dispatch
-  ] = useLanguageState();
+  const [{ lang }, dispatch] = useLanguageState();
+
+  const [state, disp] = useContentState();
+  React.useEffect(() => {
+    if (!state.contactForm || !state.contactForm[lang]) {
+      disp(
+        fetchContent({
+          url: "/webform/call_back/get?lang=" + lang,
+          parser,
+          lang,
+          name: "contactForm"
+        })
+      );
+    }
+  }, [lang]);
 
   const submitHandler = data => {
     data.webform_id = "call_back";
@@ -115,48 +156,49 @@ function ContactForm(props) {
       </button>
       <div className="container">
         <div className={`${classes.formInner}`}>
-          <form onSubmit={handleSubmit(submitHandler)}>
-            <div className={classes.fields}>
-              {fields.map(({ name, title, type }) => {
-                return (
-                  <fieldset key={name} data-field={name}>
-                    <label>
-                      <input
-                        maxLength={50}
-                        className={errors[name] && classes.error}
-                        data-label={title}
-                        onChange={e => {
-                          changeHandler(e);
-                        }}
-                        type={type}
-                        name={name}
-                        ref={e => {
-                          if (e && type === "tel") {
-                            im.mask(e);
-                          }
+          {state.contactForm ? (
+            "Loading..."
+          ) : (
+            <form onSubmit={handleSubmit(submitHandler)}>
+              {/* <div className={classes.fields}>
+                {contactForm.content.fields.map(({ name, title, type }) => {
+                  return (
+                    <fieldset key={name} data-field={name}>
+                      <label>
+                        <input
+                          maxLength={50}
+                          className={errors[name] && classes.error}
+                          data-label={title}
+                          onChange={e => {
+                            changeHandler(e);
+                          }}
+                          type={type}
+                          name={name}
+                          ref={e => {
+                            if (e && type === "tel") {
+                              im.mask(e);
+                            }
 
-                          register(
-                            e,
-                            validation[name]
-                          );
-                        }}
-                      />
+                            register(e, validation[name]);
+                          }}
+                        />
 
-                      <span>{title}</span>
-                    </label>
-                    {errors[name] && (
-                      <span className={classes.error}>
-                        {formErrors[name][lang]}
-                      </span>
-                    )}
-                  </fieldset>
-                );
-              })}
-            </div>
-            <button type="submit" className="btn btn-light">
-              {submit}
-            </button>
-          </form>
+                        <span>{title}</span>
+                      </label>
+                      {errors[name] && (
+                        <span className={classes.error}>
+                          {formErrors[name][lang]}
+                        </span>
+                      )}
+                    </fieldset>
+                  );
+                })}
+              </div>
+              <button type="submit" className="btn btn-light">
+                {contactForm.content.submit}
+              </button> */}
+            </form>
+          )}
         </div>
       </div>
     </div>

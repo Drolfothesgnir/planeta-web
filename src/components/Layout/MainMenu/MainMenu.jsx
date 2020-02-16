@@ -1,29 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useLanguageState } from "../../../Store/Language/LanguageState";
 import { navToggle } from "../../../utilities/toggles";
 import LangSelector from "../../Utilities/LangSelector/LangSelector";
-import { http } from "../../../utilities/http";
-import storage from "../../../utilities/storage";
 import classes from "./MainMenu.module.less";
+import useFetchedContent from "../../../utilities/useFetchedContent";
+
+const parser = data =>
+  data.map(({ title, relative, key }) => ({ title, relative, key }));
 
 function MainMenu(props) {
-  const [{ lang }] = useLanguageState();
-  const [content, setContent] = React.useState(
-    storage.getItem("__mainMenu") || {}
-  );
-  React.useEffect(() => {
-    if (!content[lang]) {
-      http
-        .get("/api/menu_items/main", { params: { lang } })
-        .then(({ data }) => {
-          const newContent = { ...content, [lang]: data };
-          storage.setItem("__mainMenu", newContent);
-          setContent(newContent);
-        });
-    }
-  }, [lang, content]);
-  const links = content[lang];
+  const links = useFetchedContent({
+    url: "/api/menu_items/main",
+    parser,
+    name: "mainMenu"
+  });
   return (
     <nav
       className={`${classes.mainMenu} ${

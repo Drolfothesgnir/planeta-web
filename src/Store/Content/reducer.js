@@ -1,18 +1,9 @@
 import { ADD_CONTENT, SET_ERROR, START_LOADING } from "./actionTypes";
 
-export const init = {
-  layout: {
-    loading: false,
-    en: {},
-    ru: {},
-    ua: {},
-    error: null
-  }
-};
+export const init = {};
 
 export default (state = init, { type, payload }) => {
   switch (type) {
-
     case START_LOADING:
       return {
         ...state,
@@ -35,7 +26,7 @@ export default (state = init, { type, payload }) => {
     }
 
     case SET_ERROR: {
-      const {name, error} = payload;
+      const { name, error } = payload;
       return {
         ...state,
         [name]: {

@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const defaultLang = "uk";
-
-export const http = axios.create({
+const http = axios.create({
   baseURL: "http://back.planeta-web.co.ua/"
 });
 
@@ -20,3 +19,5 @@ http.interceptors.request.use(config => {
 
   return config;
 });
+
+export default http;

@@ -1,10 +1,12 @@
-import React from 'react';
-import classes from './Spinner.module.less';
+import React from "react";
+import classes from "./Spinner.module.less";
 
-function Spinner() {
-    return (
-        <div className={classes.loader}>Loading...</div>
-    );
+function Spinner(props) {
+  return (
+    <div className={`${classes.loader} ${props.className || ""}`}>
+      Loading...
+    </div>
+  );
 }
 
 export default Spinner;

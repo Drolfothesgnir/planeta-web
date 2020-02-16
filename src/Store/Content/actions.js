@@ -1,5 +1,6 @@
 import { ADD_CONTENT, SET_ERROR, START_LOADING } from "./actionTypes";
-import { http } from "../../utilities/http";
+import http from "../../utilities/http";
+import storage from "../../utilities/storage";
 
 export const addContent = data => ({
   type: ADD_CONTENT,
@@ -17,21 +18,19 @@ export const setError = err => ({
 });
 
 export const fetchContent = ({ url, parser, lang, name }) => dispatch => {
-  //  cache logic;
-  let cache = false;
-  if (!cache) {
+  const content = storage.getItem("__content:" + name);
+  if (!content) {
     dispatch(startLoading({ name }));
     http
-      .get(url)
+      .get(url, { params: { lang } })
       .then(({ data }) => {
-        const content = parser(data);
-        dispatch(
-          addContent({
-            content,
-            lang,
-            name
-          })
-        );
+        const newContent = {
+          content: parser(data),
+          lang,
+          name
+        };
+        dispatch(addContent(newContent));
+        storage.setItem("__content:" + name, newContent);
       })
       .catch(error => {
         dispatch(
@@ -41,5 +40,7 @@ export const fetchContent = ({ url, parser, lang, name }) => dispatch => {
           })
         );
       });
+  } else {
+    dispatch(addContent(content));
   }
 };
