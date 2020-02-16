@@ -11,13 +11,9 @@ const storage = {
     }
   },
   setItem(key, value) {
-    if (typeof value === "object") {
-      try {
-        localStorage.setItem(key, JSON.stringify(value));
-      } catch (e) {
-        localStorage.setItem(key, value);
-      }
-    } else {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+    } catch (e) {
       localStorage.setItem(key, value);
     }
   },
