@@ -1,8 +1,6 @@
 import { ADD_CONTENT, SET_ERROR, START_LOADING } from "./actionTypes";
 
-export const init = {};
-
-export default (state = init, { type, payload }) => {
+export default (state, { type, payload }) => {
   switch (type) {
     case START_LOADING:
       return {
