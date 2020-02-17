@@ -5,7 +5,7 @@
 
 .mainMenuLinks,
 .mainMenuFooter {
-  transition:  0.4s;
+  transition: 0.4s;
 }
 
 .navLink {
@@ -122,7 +122,6 @@
 
 @media (min-width: 375px) {
   .navLink {
-
     &::before {
       font-size: 55px;
       height: 45px;
@@ -136,7 +135,6 @@
 
 @media (min-width: 768px) {
   .navLink {
-
     &::before {
       font-size: 100px;
       height: 85px;
@@ -149,7 +147,6 @@
 }
 
 @media (min-width: 1280px) {
-
   .mainMenuLinks {
     flex-direction: row;
     justify-content: space-around;
@@ -188,13 +185,13 @@
   }
 
   .mainMenu {
-    background-image: url('../../../assets/images/mainMenu_bg.jpg');
+    background-image: url("../../../assets/images/mainMenu_bg.jpg");
     &.open {
-      animation: shutters .5s reverse;
+      animation: shutters 0.5s;
       .navLink {
         &::before {
           line-height: 140px;
-          transition:  0.5s ease-in-out 0.3s;
+          transition: 0.5s ease-in-out 0.3s;
         }
 
         span {
@@ -215,10 +212,53 @@
 }
 
 @keyframes shutters {
-  0% {
-    clip-path: polygon(0% 0%, 20% 0%, 20% 100%, 20% 100%, 20% 0%, 40% 0%, 40% 100%, 40% 100%, 40% 0%, 60% 0%, 60% 100%, 60% 100%, 60% 0%, 80% 0%, 80% 100%, 80% 100%, 80% 0%, 100% 0%, 100% 100%, 0% 100%);
+  from {
+    clip-path: polygon(
+      0% 0%,
+      0% 100%,
+      0% 100%,
+      0% 0,
+      20% 0,
+      20% 100%,
+      20% 100%,
+      20% 0,
+      40% 0,
+      40% 100%,
+      40% 100%,
+      40% 0,
+      60% 0,
+      60% 100%,
+      60% 100%,
+      60% 0,
+      80% 0,
+      80% 100%,
+      80% 100%,
+      80% 0
+    );
   }
-  100% {
-    clip-path: polygon(20% 0%, 20% 0%, 20% 100%, 40% 100%, 40% 0%, 40% 0%, 40% 100%, 60% 100%, 60% 0%, 60% 0%, 60% 100%, 80% 100%, 80% 0%, 80% 0%, 80% 100%, 100% 100%, 100% 0%, 100% 0%, 100% 100%, 20% 100%);
+
+  to {
+    clip-path: polygon(
+      0% 0%,
+      0% 100%,
+      20% 100%,
+      20% 0,
+      20% 0,
+      20% 100%,
+      40% 100%,
+      40% 0,
+      40% 0,
+      40% 100%,
+      60% 100%,
+      60% 0,
+      60% 0,
+      60% 100%,
+      80% 100%,
+      80% 0,
+      80% 0,
+      80% 100%,
+      100% 100%,
+      100% 0
+    );
   }
 }
