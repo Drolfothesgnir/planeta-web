@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLanguageState } from "../../../../Store/Language/LanguageState";
+import { useLanguageState } from "../../../../utilities/language";
 import classes from "./NavToggle.module.less";
 import { navToggle } from "../../../../utilities/toggles";
 const mainMenuToggle = {
@@ -9,7 +9,7 @@ const mainMenuToggle = {
 };
 function NavToggle(props) {
   const [toggled, toggleFunc] = useState(false),
-    [{ lang }] = useLanguageState();
+    [lang] = useLanguageState();
   const text = mainMenuToggle[lang][+!toggled];
   return (
     <div className={`${classes.navToggleContainer} ${props.className || ""}`}>

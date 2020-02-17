@@ -1,25 +1,27 @@
-import { ADD_CONTENT, SET_ERROR, START_LOADING } from "./actionTypes";
+import {
+  ADD_CONTENT,
+  SET_ERROR,
+  SET_CONTACT_FORM_SUBMISSION_FLAG,
+    SET_CONTENT
+} from "./actionTypes";
 
 export default (state, { type, payload }) => {
   switch (type) {
-    case START_LOADING:
-      return {
-        ...state,
-        [payload.name]: {
-          ...state[payload.name],
-          loading: true
-        }
-      };
-
     case ADD_CONTENT: {
       const { lang, name, content } = payload;
       return {
         ...state,
         [name]: {
           ...state[name],
-          [lang]: content,
-          loading: false
+          [lang]: content
         }
+      };
+    }
+
+    case SET_CONTENT: {
+      return {
+        ...state,
+        [payload.name]: payload.content
       };
     }
 
@@ -29,11 +31,16 @@ export default (state, { type, payload }) => {
         ...state,
         [name]: {
           ...state[name],
-          error,
-          loading: false
+          error
         }
       };
     }
+
+    case SET_CONTACT_FORM_SUBMISSION_FLAG:
+      return {
+        ...state,
+        contactFormSuccess: payload
+      };
 
     default:
       return state;

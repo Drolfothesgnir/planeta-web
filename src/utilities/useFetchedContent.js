@@ -1,10 +1,10 @@
 import storage from "./storage";
 import http from "./http";
 import { useState, useEffect } from "react";
-import { useLanguageState } from "../Store/Language/LanguageState";
+import { useLanguageState } from "./language";
 
 export default ({ url, parser, name, error }) => {
-  const [{ lang }] = useLanguageState();
+  const [lang] = useLanguageState();
   const [fetchedContent, setContent] = useState(storage.getItem(name) || {});
   const content = fetchedContent[lang];
   useEffect(() => {

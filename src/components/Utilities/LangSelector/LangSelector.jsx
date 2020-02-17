@@ -1,7 +1,6 @@
 import React from "react";
-import { fetchLang } from "../../../Store/Language/actions";
 import classes from "./LangSelector.module.less";
-import { useLanguageState } from "../../../Store/Language/LanguageState";
+import { useLanguageState } from "../../../utilities/language";
 const availableLanguages = [
   {
     lang: "ru",
@@ -17,7 +16,7 @@ const availableLanguages = [
   }
 ];
 function LangSelector(props) {
-  const [{ lang: stateLang }, dispatch] = useLanguageState();
+  const [stateLang, setLang] = useLanguageState();
   return (
     <div className={`${classes.LangSelector} ${props.className || ""}`}>
       <ul>
@@ -26,7 +25,7 @@ function LangSelector(props) {
             <li key={lang}>
               <a
                 onClick={() => {
-                  fetchLang(dispatch, lang);
+                  setLang(lang);
                 }}
                 className={
                   lang === stateLang

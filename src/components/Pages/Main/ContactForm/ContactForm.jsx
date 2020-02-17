@@ -3,13 +3,13 @@ import { Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { contactFormToggle } from "../../../../utilities/toggles";
-import { useLanguageState } from "../../../../Store/Language/LanguageState";
 import classes from "./ContactForm.module.less";
-import { http } from "../../../../utilities/http";
+import http from "../../../../utilities/http";
 import Inputmask from "inputmask";
-import { SET_FORM_SUBMISSION_FLAG } from "../../../../Store/Language/actionTypes";
+import useFetchedContentState from "../../../../Store/Content/useFetchedContentState";
+import { useLanguageState } from "../../../../utilities/language";
 import { useContentState } from "../../../../Store/Content/store";
-import { fetchContent } from "../../../../Store/Content/actions";
+import {setContactFormSubmission} from "../../../../Store/Content/actions";
 
 const parseFormData = data => {
   const typeMap = {
@@ -96,14 +96,8 @@ const formErrors = {
   }
 };
 
-const { log } = console;
-
 const changeHandler = ({ target: t }) => {
-  if (t.value) {
-    t.dataset.empty = "false";
-  } else {
-    t.dataset.empty = "true";
-  }
+  t.dataset.empty = t.value ? "false" : "true";
 };
 
 function ContactForm(props) {
@@ -112,23 +106,16 @@ function ContactForm(props) {
     validateCriteriaMode: "all"
   });
 
+  const content = useFetchedContentState({
+    url: "/webform/call_back/get",
+    name: "contactForm",
+    parser
+  });
+
+  const [lang] = useLanguageState();
+  const [, dispatch] = useContentState();
+
   const [success, setStatus] = useState(false);
-
-  const [{ lang }, dispatch] = useLanguageState();
-
-  const [state, disp] = useContentState();
-  React.useEffect(() => {
-    if (!state.contactForm || !state.contactForm[lang]) {
-      disp(
-        fetchContent({
-          url: "/webform/call_back/get?lang=" + lang,
-          parser,
-          lang,
-          name: "contactForm"
-        })
-      );
-    }
-  }, [lang]);
 
   const submitHandler = data => {
     data.webform_id = "call_back";
@@ -136,15 +123,15 @@ function ContactForm(props) {
       .post("/webform_rest/submit", data)
       .then(res => {
         if (!res.data.error) {
-          dispatch({ type: SET_FORM_SUBMISSION_FLAG, payload: true });
+          dispatch(setContactFormSubmission(true));
           setStatus(true);
         }
       })
-      .catch(log);
+      .catch(console.log);
   };
 
   return success ? (
-    <Redirect to="/thank-you" />
+    <Redirect to={"/thank-you"} />
   ) : (
     <div
       className={`overlay ${classes.contactForm} ${
@@ -156,12 +143,12 @@ function ContactForm(props) {
       </button>
       <div className="container">
         <div className={`${classes.formInner}`}>
-          {state.contactForm ? (
+          {!content ? (
             "Loading..."
           ) : (
             <form onSubmit={handleSubmit(submitHandler)}>
-              {/* <div className={classes.fields}>
-                {contactForm.content.fields.map(({ name, title, type }) => {
+              <div className={classes.fields}>
+                {content.form.fields.map(({ name, title, type }) => {
                   return (
                     <fieldset key={name} data-field={name}>
                       <label>
@@ -195,8 +182,8 @@ function ContactForm(props) {
                 })}
               </div>
               <button type="submit" className="btn btn-light">
-                {contactForm.content.submit}
-              </button> */}
+                {content.form.submit}
+              </button>
             </form>
           )}
         </div>

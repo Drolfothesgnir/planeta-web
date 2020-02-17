@@ -4,8 +4,7 @@ const storage = {
   },
   getItem(key) {
     try {
-      const item = JSON.parse(localStorage.getItem(key));
-      return item;
+      return JSON.parse(localStorage.getItem(key));
     } catch (e) {
       return localStorage.getItem(key);
     }

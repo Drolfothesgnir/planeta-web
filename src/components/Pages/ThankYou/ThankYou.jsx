@@ -1,21 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useLanguageState } from "../../../Store/Language/LanguageState";
+import { Link, Redirect } from "react-router-dom";
 import formClasses from "../Main/ContactForm/ContactForm.module.less";
 import imgSrc from "../../../assets/images/thank_you.gif";
 import classes from "./ThankYou.module.less";
-import { SET_FORM_SUBMISSION_FLAG } from "../../../Store/Language/actionTypes";
+import { useContentState } from "../../../Store/Content/store";
+import { useLanguageState } from "../../../utilities/language";
+import { setContactFormSubmission } from "../../../Store/Content/actions";
 
 function ThankYou() {
-  const [
-    {
-      translations: {
-        thankYou: { text, button: buttonText }
-      }
-    },
-    dispatch
-  ] = useLanguageState();
-  return (
+  const [{ contactForm, contactFormSuccess: success }, dispatch] = useContentState();
+  const [lang] = useLanguageState();
+  const {
+    thankYou: { text, button }
+  } = contactForm[lang];
+  return !success ? <Redirect to={'/'}/> : (
     <div
       className={`${formClasses.contactForm} ${formClasses.open} ${classes.content} overlay`}
     >
@@ -30,11 +28,9 @@ function ThankYou() {
           <Link
             className="btn btn-light"
             to={"/"}
-            onClick={() =>
-              dispatch({ type: SET_FORM_SUBMISSION_FLAG, payload: false })
-            }
+            onClick={() => dispatch(setContactFormSubmission(false))}
           >
-            {buttonText}
+            {button}
           </Link>
         </div>
       </div>
