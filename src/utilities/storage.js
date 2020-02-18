@@ -3,18 +3,23 @@ const storage = {
     return localStorage.length;
   },
   getItem(key) {
-    try {
-      return JSON.parse(localStorage.getItem(key));
-    } catch (e) {
-      return localStorage.getItem(key);
+    const item = JSON.parse(localStorage.getItem(key));
+    if (!item || item.expires <= Date.now()) {
+      return null;
     }
+    return JSON.parse(item.content);
   },
-  setItem(key, value) {
+  setItem(key, value, expires = Date.now() + 1000 * 60 * 30) {
+    let content;
     try {
-      localStorage.setItem(key, JSON.stringify(value));
+      content = JSON.stringify(value);
     } catch (e) {
-      localStorage.setItem(key, value);
+      content = value.toString();
     }
+    localStorage.setItem(key, JSON.stringify({
+      content,
+      expires
+    }));
   },
   removeItem(key) {
     localStorage.removeItem(key);

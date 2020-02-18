@@ -3,7 +3,7 @@ import http from "./http";
 import { useState, useEffect } from "react";
 import { useLanguageState } from "./language";
 
-export default ({ url, parser, name, error }) => {
+export default ({ url, parser, name, error, expires }) => {
   const [lang] = useLanguageState();
   const [fetchedContent, setContent] = useState(storage.getItem(name) || {});
   const content = fetchedContent[lang];
@@ -14,10 +14,11 @@ export default ({ url, parser, name, error }) => {
         .then(({ data }) => {
           const newContent = { ...fetchedContent, [lang]: parser(data) };
           setContent(newContent);
-          storage.setItem(name, newContent);
+          storage.setItem(name, newContent, expires && expires);
         })
         .catch(error || console.log);
     }
   });
   return content;
 };
+

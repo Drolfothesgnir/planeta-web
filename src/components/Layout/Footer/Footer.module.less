@@ -7,10 +7,12 @@
 .footerContent {
   color: #717171;
   text-align: center;
+  font-family: @open-sans, serif;
+  font-weight: 600;
   font-size: 14px;
 
+
   a {
-    font-family: @roboto, serif;
     margin-bottom: 10px;
     display: block;
 
@@ -33,16 +35,18 @@
     display: flex;
     text-align: left;
     justify-content: space-between;
+    font-size: 16px;
 
     a {
       display: inline-block;
       margin-right: 6px;
+      margin-bottom: 0;
     }
   }
 }
 
 @media (min-width: 1280px) {
-  footer {
+  .footer {
     margin: 0 -15px;
   }
 }

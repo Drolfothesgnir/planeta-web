@@ -82,7 +82,15 @@ module.exports = merge(common, {
       title: "Planeta Web",
       template: "public/template.html",
       hash: true,
-      cache: true
+      cache: true,
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        useShortDoctype: true
+      },
     }),
     new MiniCssExtractPlugin(),
     new BundleAnalyzerPlugin()
