@@ -1,6 +1,6 @@
 @colors: {
-  light: #fff #000;
-  dark: #000 #fff;
+  light: #fff #000 fade(#fff, 70%);
+  dark: #000 #fff fade(#000, 70%);
 }
 
 .btn {
@@ -25,6 +25,7 @@ a.btn {
 each(@colors, {
   @bd-color: extract(@value, 1);
   @color: extract(@value, 2);
+  @disabled: extract(@value, 3);
   .btn-@{key} {
     border-color: @bd-color;
     color: @bd-color;
@@ -32,8 +33,16 @@ each(@colors, {
     &:hover,
     &:active,
     &:focus {
-      background-color: @bd-color;
-      color: @color;
+      &:not(:disabled) {
+        background-color: @bd-color;
+        color: @color;
+      }
+    }
+
+    &:disabled {
+      border-color: @disabled;
+      color: @disabled;
+      cursor: not-allowed;
     }
   }
 })

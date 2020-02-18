@@ -115,16 +115,17 @@ function ContactForm(props) {
   const [lang] = useLanguageState();
   const [, dispatch] = useContentState();
 
-  const [success, setStatus] = useState(false);
+  const [{success, loading}, setStatus] = useState({success: false, loading: false});
 
   const submitHandler = data => {
     data.webform_id = "call_back";
+    setStatus({success: false, loading: true});
     http
       .post("/webform_rest/submit", data)
       .then(res => {
         if (!res.data.error) {
           dispatch(setContactFormSubmission(true));
-          setStatus(true);
+          setStatus({success: true, loading: false});
         }
       })
       .catch(console.log);
@@ -181,7 +182,7 @@ function ContactForm(props) {
                   );
                 })}
               </div>
-              <button type="submit" className="btn btn-light">
+              <button type="submit" className="btn btn-light" disabled={loading}>
                 {content.form.submit}
               </button>
             </form>
