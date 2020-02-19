@@ -1,5 +1,5 @@
 import axios from "axios";
-import { DEFAULT_LANG } from "./language";
+import { DEFAULT_LANG } from "../Context/language";
 
 const http = axios.create({
   baseURL: "http://back.planeta-web.co.ua/"

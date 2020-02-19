@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { contactFormToggle } from "../../../../utilities/toggles";
 import classes from "./ContactForm.module.less";
 import http from "../../../../utilities/http";
 import Inputmask from "inputmask";
 import useFetchedContentState from "../../../../Store/Content/useFetchedContentState";
-import { useLanguageState } from "../../../../utilities/language";
+import { useLanguageState } from "../../../../Context/language";
 import { useContentState } from "../../../../Store/Content/store";
-import {setContactFormSubmission} from "../../../../Store/Content/actions";
+import { setContactFormSubmission } from "../../../../Store/Content/actions";
 
 const parseFormData = data => {
   const typeMap = {
@@ -100,7 +99,7 @@ const changeHandler = ({ target: t }) => {
   t.dataset.empty = t.value ? "false" : "true";
 };
 
-function ContactForm(props) {
+function ContactForm({useFormState}) {
   const { register, handleSubmit, errors } = useForm({
     mode: "onChange",
     validateCriteriaMode: "all"
@@ -114,18 +113,21 @@ function ContactForm(props) {
 
   const [lang] = useLanguageState();
   const [, dispatch] = useContentState();
-
-  const [{success, loading}, setStatus] = useState({success: false, loading: false});
+  const [{ success, loading }, setStatus] = useState({
+    success: false,
+    loading: false
+  });
+  const [toggled, toggle] = useFormState();
 
   const submitHandler = data => {
     data.webform_id = "call_back";
-    setStatus({success: false, loading: true});
+    setStatus({ success: false, loading: true });
     http
       .post("/webform_rest/submit", data)
       .then(res => {
         if (!res.data.error) {
           dispatch(setContactFormSubmission(true));
-          setStatus({success: true, loading: false});
+          setStatus({ success: true, loading: false });
         }
       })
       .catch(console.log);
@@ -136,10 +138,13 @@ function ContactForm(props) {
   ) : (
     <div
       className={`overlay ${classes.contactForm} ${
-        props.isToggled ? classes.open : ""
+        toggled ? classes.open : ""
       }`}
     >
-      <button className={`${classes.closeButton}`} onClick={contactFormToggle}>
+      <button
+        className={`${classes.closeButton}`}
+        onClick={() => toggle(false)}
+      >
         <FontAwesomeIcon icon="times" />
       </button>
       <div className="container">
@@ -182,7 +187,11 @@ function ContactForm(props) {
                   );
                 })}
               </div>
-              <button type="submit" className="btn btn-light" disabled={loading}>
+              <button
+                type="submit"
+                className="btn btn-light"
+                disabled={loading}
+              >
                 {content.form.submit}
               </button>
             </form>

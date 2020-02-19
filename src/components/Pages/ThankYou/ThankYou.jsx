@@ -4,7 +4,7 @@ import formClasses from "../Main/ContactForm/ContactForm.module.less";
 import imgSrc from "../../../assets/images/thank_you.gif";
 import classes from "./ThankYou.module.less";
 import { useContentState } from "../../../Store/Content/store";
-import { useLanguageState } from "../../../utilities/language";
+import { useLanguageState } from "../../../Context/language";
 import { setContactFormSubmission } from "../../../Store/Content/actions";
 
 function ThankYou() {

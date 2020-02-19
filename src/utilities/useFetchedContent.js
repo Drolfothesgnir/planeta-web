@@ -1,7 +1,7 @@
 import storage from "./storage";
 import http from "./http";
 import { useState, useEffect } from "react";
-import { useLanguageState } from "./language";
+import { useLanguageState } from "../Context/language";
 
 export default ({ url, parser, name, error, expires }) => {
   const [lang] = useLanguageState();
@@ -12,7 +12,7 @@ export default ({ url, parser, name, error, expires }) => {
       http
         .get(url, { params: { lang } })
         .then(({ data }) => {
-          const newContent = { ...fetchedContent, [lang]: parser(data) };
+          const newContent = { ...fetchedContent, [lang]: parser(data, lang) };
           setContent(newContent);
           storage.setItem(name, newContent, expires && expires);
         })
@@ -21,4 +21,3 @@ export default ({ url, parser, name, error, expires }) => {
   });
   return content;
 };
-

@@ -1,22 +1,21 @@
-import React, { useState } from "react";
-import { useLanguageState } from "../../../../utilities/language";
+import React from "react";
+import { useLanguageState } from "../../../../Context/language";
 import classes from "./NavToggle.module.less";
-import { navToggle } from "../../../../utilities/toggles";
+
 const mainMenuToggle = {
   en: ["close", "menu"],
   ru: ["закрыть", "меню"],
   uk: ["закрити", "меню"]
 };
 function NavToggle(props) {
-  const [toggled, toggleFunc] = useState(false),
+  const [toggled, toggleFunc] = props.useMenuState(),
     [lang] = useLanguageState();
   const text = mainMenuToggle[lang][+!toggled];
   return (
     <div className={`${classes.navToggleContainer} ${props.className || ""}`}>
       <button
         className={`${classes.navToggle} ${toggled ? classes.open : ""}`}
-        onClick={e => {
-          navToggle(e);
+        onClick={() => {
           toggleFunc(!toggled);
         }}
       >

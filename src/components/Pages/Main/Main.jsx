@@ -1,22 +1,37 @@
 import React from "react";
 import ContactForm from "./ContactForm/ContactForm";
-import { contactFormToggle } from "../../../utilities/toggles";
-import Toggle from "../../hoc/Toggle";
 import Spinner from "../../Utilities/Spinner/Spinner";
 import imageSrc from "../../../assets/images/web-word.png";
 import planetimgSrc from "../../../assets/images/planet.svg";
 import classes from "./Main.module.less";
 import useFetchedContent from "../../../utilities/useFetchedContent";
+import createContext from "../../../utilities/createContext";
+
+export const [Provider, useFormState] = createContext(false);
 
 const parser = data => ({
   body: data.body[0].value,
   button: data.field_button_text[0].value
 });
 
+const Button = ({ text }) => {
+  const [, toggle] = useFormState();
+  return (
+    <button
+      className={`${classes.formToggle} btn`}
+      onClick={() => {
+        toggle(true);
+      }}
+    >
+      <span>{text}</span>
+    </button>
+  );
+};
+
 function Main() {
   const text = useFetchedContent({ url: "/", name: "main:text", parser });
   return (
-    <>
+    <Provider>
       <div className={classes.mainBg}>
         <div className={`container ${classes.container}`}>
           <div className={classes.mainInner}>
@@ -32,12 +47,7 @@ function Main() {
                       __html: text.body
                     }}
                   />
-                  <button
-                    className={`${classes.formToggle} btn`}
-                    onClick={contactFormToggle}
-                  >
-                    <span>{text.button}</span>
-                  </button>
+                  <Button text={text.button} />
                 </div>
                 <div className={classes.mainRight}>
                   <div className={classes.planetImage}>
@@ -51,8 +61,8 @@ function Main() {
           </div>
         </div>
       </div>
-      <Toggle component={ContactForm} eventName="contact-form" />
-    </>
+      <ContactForm useFormState={useFormState} />
+    </Provider>
   );
 }
 

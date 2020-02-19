@@ -4,6 +4,7 @@ import NotFound from "../../Pages/NotFound/NotFound";
 
 const Main = React.lazy(() => import("../../Pages/Main/Main"));
 const ThankYou = React.lazy(() => import("../../Pages/ThankYou/ThankYou"));
+const Portfolio = React.lazy(() => import('../../Pages/Portfolio/Portfolio'));
 
 export default function Routes() {
   return (
@@ -11,6 +12,9 @@ export default function Routes() {
       <Switch>
         <Route exact path="/thank-you">
           <ThankYou />
+        </Route>
+        <Route exact path={'/portfolio'}>
+          <Portfolio/>
         </Route>
         <Route exact path="/">
           <Main />

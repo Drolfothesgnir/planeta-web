@@ -2,18 +2,20 @@ import React from "react";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import MainMenu from "./MainMenu/MainMenu";
-import Toggle from "../hoc/Toggle";
+import createContext from "../../utilities/createContext";
+
+export const [Provider, useMenuState] = createContext(false);
 
 function Layout(props) {
   return (
-    <>
-      <Header />
+    <Provider>
+      <Header useMenuState={useMenuState}/>
       <main className="main-content">
           {props.children}
-          <Toggle component={MainMenu} eventName="nav-toggle" />
+          <MainMenu useMenuState={useMenuState}/>
       </main>
       <Footer />
-    </>
+    </Provider>
   );
 }
 

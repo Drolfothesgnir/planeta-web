@@ -1,4 +1,4 @@
-import { useLanguageState } from "../../utilities/language";
+import { useLanguageState } from "../../Context/language";
 import { useContentState } from "./store";
 import { useEffect } from "react";
 import storage from "../../utilities/storage";

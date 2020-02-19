@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./LangSelector.module.less";
-import { useLanguageState } from "../../../utilities/language";
+import { useLanguageState } from "../../../Context/language";
 const availableLanguages = [
   {
     lang: "ru",
