@@ -1,6 +1,7 @@
 import React from "react";
 import { useLanguageState } from "../../../../Context/language";
 import classes from "./NavToggle.module.less";
+import {useMenuState} from "../../menuContext";
 
 const mainMenuToggle = {
   en: ["close", "menu"],
@@ -8,7 +9,7 @@ const mainMenuToggle = {
   uk: ["закрити", "меню"]
 };
 function NavToggle(props) {
-  const [toggled, toggleFunc] = props.useMenuState(),
+  const [toggled, toggleFunc] = useMenuState(),
     [lang] = useLanguageState();
   const text = mainMenuToggle[lang][+!toggled];
   return (

@@ -3,9 +3,10 @@ import http from "./http";
 import { useState, useEffect } from "react";
 import { useLanguageState } from "../Context/language";
 
-export default ({ url, parser, name, error, expires }) => {
+export default ({ url, parser, name, expires }) => {
   const [lang] = useLanguageState();
   const [fetchedContent, setContent] = useState(storage.getItem(name) || {});
+  const [error, setError] = useState(null);
   const content = fetchedContent[lang];
   useEffect(() => {
     if (!content) {
@@ -16,8 +17,8 @@ export default ({ url, parser, name, error, expires }) => {
           setContent(newContent);
           storage.setItem(name, newContent, expires && expires);
         })
-        .catch(error || console.log);
+        .catch(error => setError(error));
     }
   });
-  return content;
+  return [content, error];
 };

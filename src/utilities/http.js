@@ -1,8 +1,10 @@
 import axios from "axios";
 import { DEFAULT_LANG } from "../Context/language";
 
+export const BASE_URL = "http://back.planeta-web.co.ua/";
+
 const http = axios.create({
-  baseURL: "http://back.planeta-web.co.ua/"
+  baseURL: BASE_URL
 });
 
 http.interceptors.request.use(config => {

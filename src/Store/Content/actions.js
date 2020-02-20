@@ -5,14 +5,14 @@ import {
   SET_ERROR
 } from "./actionTypes";
 
-export const addContent = data => ({
+export const addContent = (name, content, lang) => ({
   type: ADD_CONTENT,
-  payload: data
+  payload: { name, content, lang }
 });
 
-export const setError = err => ({
+export const setError = (name, error) => ({
   type: SET_ERROR,
-  payload: err
+  payload: { name, error }
 });
 
 export const setContent = (name, content) => ({

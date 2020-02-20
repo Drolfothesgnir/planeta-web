@@ -5,66 +5,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classes from "./ContactForm.module.less";
 import http from "../../../../utilities/http";
 import Inputmask from "inputmask";
-import useFetchedContentState from "../../../../Store/Content/useFetchedContentState";
+import useFetchedContentCallback from "../../../../utilities/useFetchedContentCallback";
 import { useLanguageState } from "../../../../Context/language";
 import { useContentState } from "../../../../Store/Content/store";
-import { setContactFormSubmission } from "../../../../Store/Content/actions";
-
-const parseFormData = data => {
-  const typeMap = {
-    email: "email",
-    textfield: "text",
-    webform_actions: "submit",
-    tel: "tel"
-  };
-
-  const result = {};
-  const dataArr = Object.entries(data);
-  const submit = dataArr.findIndex(
-    ([, item]) => item["#type"] === "webform_actions"
-  );
-  result.submit = dataArr[submit][1][["#title"]];
-  dataArr.splice(submit, 1);
-  result.fields = dataArr.map(([name, item]) => {
-    return {
-      name,
-      title: item["#title"],
-      type: typeMap[item["#type"]]
-    };
-  });
-  return result;
-};
-
-const parser = data => ({
-  form: parseFormData(data.elements),
-  thankYou: {
-    text: data.settings.confirmation_title,
-    button: data.settings.confirmation_back_label
-  }
-});
-
-const pattern = /^[0-9+]+[0-9-]{3,15}$/;
-
-const regObject = {
-  maxLength: 255,
-  required: true
-};
-
-const validation = {
-  name: {
-    ...regObject,
-    pattern: /^[a-z]+$/i
-  },
-  email: regObject,
-  tel: {
-    ...regObject,
-    pattern
-  },
-  message: {
-    ...regObject,
-    maxLength: 350
-  }
-};
+import parser from "./parser";
+import { validation, formErrors } from "./validation";
+import {
+  setContactFormSubmission,
+  setError,
+  addContent
+} from "../../../../Store/Content/actions";
 
 const im = new Inputmask("+380999999999", {
   placeholder: " ",
@@ -72,52 +22,40 @@ const im = new Inputmask("+380999999999", {
   showMaskOnHover: false
 });
 
-const formErrors = {
-  name: {
-    en: "Incorrect name",
-    ru: "Некорректное имя",
-    uk: "Некоректне імʼя"
-  },
-  email: {
-    en: "Incorrect e-mail",
-    ru: "Некорректный e-mail",
-    uk: "Некоректний e-mail"
-  },
-  tel: {
-    en: "Incorrect telephone",
-    ru: "Некорректный телефон",
-    uk: "Некоректний телефон"
-  },
-  message: {
-    en: "Incorrect message",
-    ru: "Некорректное сообщение",
-    uk: "Некоректне повідомлення"
-  }
-};
-
 const changeHandler = ({ target: t }) => {
   t.dataset.empty = t.value ? "false" : "true";
 };
 
-function ContactForm({useFormState}) {
-  const { register, handleSubmit, errors } = useForm({
-    mode: "onChange",
-    validateCriteriaMode: "all"
-  });
-
-  const content = useFetchedContentState({
-    url: "/webform/call_back/get",
-    name: "contactForm",
-    parser
-  });
-
+function ContactForm({ useFormState }) {
+  const name = "contactForm";
   const [lang] = useLanguageState();
-  const [, dispatch] = useContentState();
+  const [state, dispatch] = useContentState();
+  const content = state[name] && state[name][lang];
   const [{ success, loading }, setStatus] = useState({
     success: false,
     loading: false
   });
   const [toggled, toggle] = useFormState();
+  const { register, handleSubmit, errors } = useForm({
+    mode: "onChange",
+    validateCriteriaMode: "all"
+  });
+
+  useFetchedContentCallback(
+    {
+      url: "/webform/call_back/get",
+      name,
+      parser
+    },
+    (fetchedContent, error) => {
+      if (!content) {
+        if (error) {
+          return dispatch(setError(name, error));
+        }
+        return dispatch(addContent(name, fetchedContent, lang));
+      }
+    }
+  );
 
   const submitHandler = data => {
     data.webform_id = "call_back";

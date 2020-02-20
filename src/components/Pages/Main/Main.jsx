@@ -29,7 +29,7 @@ const Button = ({ text }) => {
 };
 
 function Main() {
-  const text = useFetchedContent({ url: "/", name: "main:text", parser });
+  const [text] = useFetchedContent({ url: "/", name: "main:text", parser });
   return (
     <Provider>
       <div className={classes.mainBg}>

@@ -97,7 +97,7 @@
 .langSelector {
   position: absolute;
   right: 15px;
-  top: 30px;
+  top: 55px;
 
   ul {
     display: flex;
@@ -117,6 +117,21 @@
     &:hover {
       color: #fff;
     }
+  }
+}
+
+.close {
+  position: absolute;
+  color: #fff;
+  right: 15px;
+  top: 25px;
+  font-size: 20px;
+  width: 22px;
+}
+
+@media (max-width: 767px) {
+  .mainMenu:global(.overlay) {
+    position: fixed;
   }
 }
 
@@ -141,7 +156,8 @@
     }
   }
 
-  .langSelector {
+  .langSelector,
+  .close {
     display: none;
   }
 }

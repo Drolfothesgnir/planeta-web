@@ -6,10 +6,12 @@ import "./utilities/FontAwesomeLibrary";
 import "./less/App.less";
 
 // http://back.planeta-web.co.ua/node/1?_format=json
-//http://back.planeta-web.co.ua/webform/call_back?_format=json
-//http://back.planeta-web.co.ua/api/menu_items/main
+// http://back.planeta-web.co.ua/webform/call_back?_format=json
+// http://back.planeta-web.co.ua/api/menu_items/main
 // http://back.planeta-web.co.ua/webform/call_back/get
-///webform_rest/submit
+// /webform_rest/submit
+// http://back.planeta-web.co.ua/portfolio
+// http://back.planeta-web.co.ua/block-layout?_format=json&path=/portfolio
 
 function App() {
   return (

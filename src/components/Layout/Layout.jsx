@@ -2,17 +2,15 @@ import React from "react";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import MainMenu from "./MainMenu/MainMenu";
-import createContext from "../../utilities/createContext";
-
-export const [Provider, useMenuState] = createContext(false);
+import { Provider } from "./menuContext";
 
 function Layout(props) {
   return (
     <Provider>
-      <Header useMenuState={useMenuState}/>
+      <Header />
       <main className="main-content">
-          {props.children}
-          <MainMenu useMenuState={useMenuState}/>
+        {props.children}
+        <MainMenu />
       </main>
       <Footer />
     </Provider>
