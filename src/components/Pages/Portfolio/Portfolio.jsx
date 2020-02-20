@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 import { BASE_URL } from "../../../utilities/http";
 import Spinner from "../../Utilities/Spinner/Spinner";
 import Slick from "react-slick";
-import "slick-carousel/slick/slick-theme.css";
-import "slick-carousel/slick/slick.css";
+import "./Portfolio.less";
 
 const parser = data => {
   return data.map(({ title, view_node, nothing, field_image_preview }) => {
@@ -46,14 +45,16 @@ function Portfolio() {
     <div className={classes.portfolio}>
       <div className={`hello container`}>
         <div className={classes.topContent}></div>
-        <Slick settings={{
+        <Slick
+          settings={{
             dots: true,
             infinite: true,
             speed: 500,
             slidesToShow: 1,
             slidesToScroll: 1
-        }}>
-            {content}
+          }}
+        >
+          {content}
         </Slick>
       </div>
     </div>
