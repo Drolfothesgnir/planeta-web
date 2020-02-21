@@ -1,5 +1,11 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faPhoneAlt, faLongArrowAltRight, faTimes, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPhoneAlt,
+  faLongArrowAltRight,
+  faTimes,
+  faEnvelope,
+  faArrowRight
+} from "@fortawesome/free-solid-svg-icons";
 import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
 
 library.add(
@@ -7,5 +13,6 @@ library.add(
   faLongArrowAltRight,
   faFacebookF,
   faEnvelope,
-  faTimes
+  faTimes,
+  faArrowRight
 );

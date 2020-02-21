@@ -15,11 +15,9 @@ import "./less/App.less";
 
 function App() {
   return (
-    <div className="App">
-      <Layout>
-        <Routes />
-      </Layout>
-    </div>
+    <Layout>
+      <Routes />
+    </Layout>
   );
 }
 

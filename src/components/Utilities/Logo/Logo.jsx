@@ -1,12 +1,12 @@
 import React from "react";
-import imageSrc from "../../../assets/images/logo.svg";
 import { Link } from "react-router-dom";
+import classes from './Logo.module.less';
 
 export default function Logo(props) {
   return (
-    <div className={`${props.className || ""} logo`}>
+    <div className={`${props.className || ""} logo ${classes.logo}`}>
       <Link to="/">
-        <img src={imageSrc} alt="logo" />
+          <span/>
       </Link>
     </div>
   );

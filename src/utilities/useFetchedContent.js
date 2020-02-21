@@ -23,26 +23,26 @@ export default ({ url, parser, name, expires }) => {
   return [content, error];
 };
 
-export const useFetchedGlobalState = (
-  { url, name, parser, expires },
-  useGlobalState,
-  success,
-  fail
-) => {
-  const [state, dispatch] = useGlobalState();
-  const lang = useLanguageState();
-  const content = state[name] && state[name][lang];
-  useEffect(() => {
-    if (!content) {
-      http
-        .get(url, { params: { lang } })
-        .then(({ data }) => {
-          const newContent = parser(data);
-          dispatch(success(newContent));
-          storage.setItem(name, newContent);
-        })
-        .catch(error => dispatch(fail(error)));
-    }
-  });
-  return content;
-};
+// export const useFetchedGlobalState = (
+//   { url, name, parser, expires },
+//   useGlobalState,
+//   success,
+//   fail
+// ) => {
+//   const [state, dispatch] = useGlobalState();
+//   const lang = useLanguageState();
+//   const content = state[name] && state[name][lang];
+//   useEffect(() => {
+//     if (!content) {
+//       http
+//         .get(url, { params: { lang } })
+//         .then(({ data }) => {
+//           const newContent = parser(data);
+//           dispatch(success(newContent));
+//           storage.setItem(name, newContent);
+//         })
+//         .catch(error => dispatch(fail(error)));
+//     }
+//   });
+//   return content;
+// };

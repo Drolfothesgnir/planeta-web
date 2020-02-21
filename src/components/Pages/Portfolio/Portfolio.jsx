@@ -4,8 +4,9 @@ import useFetchedContent from "../../../utilities/useFetchedContent";
 import { Link } from "react-router-dom";
 import { BASE_URL } from "../../../utilities/http";
 import Spinner from "../../Utilities/Spinner/Spinner";
-import Slick from "react-slick";
-import "./Portfolio.less";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import Slick from "react-slick";
+// import "./Portfolio.less";
 
 const parser = data => {
   return data.map(({ title, view_node, nothing, field_image_preview }) => {
@@ -26,16 +27,19 @@ function Portfolio() {
     parser
   });
   const content = items ? (
-    items.map(({ title, link, buttonText, imgSrc }) => {
+    items.map(({ title, link, imgSrc }) => {
       return (
-        <div className={classes.portfolioItem} key={title}>
-          <div
-            className={classes.previewImg}
-            style={{ backgroundImage: `url(${imgSrc})` }}
-          />
-          <h1>{title}</h1>
-          <Link to={link}>{buttonText}</Link>
-        </div>
+        <li className={classes.portfolioItem} key={title}>
+            <Link to={link}
+              className={classes.previewImg}
+              style={{ backgroundImage: `url(${imgSrc})` }}
+            >
+              <span>
+                <FontAwesomeIcon icon="arrow-right" />
+              </span>
+            </Link>
+          <h2>{title}</h2>
+        </li>
       );
     })
   ) : (
@@ -43,19 +47,11 @@ function Portfolio() {
   );
   return (
     <div className={classes.portfolio}>
-      <div className={`hello container`}>
-        <div className={classes.topContent}></div>
-        <Slick
-          settings={{
-            dots: true,
-            infinite: true,
-            speed: 500,
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }}
-        >
-          {content}
-        </Slick>
+      <div className={classes.topContent}>
+        <span>Portfolio</span>
+      </div>
+      <div className={`container`}>
+        <ul>{content}</ul>
       </div>
     </div>
   );

@@ -2,6 +2,7 @@
 @import (reference) "../../../less/glitch";
 
 @grey: #3c3c3c;
+@transition-duration: 0.5s;
 
 .mainMenuLinks,
 .mainMenuFooter {
@@ -14,7 +15,6 @@
 
   &::before {
     content: counters(nav-counter, ".", decimal-leading-zero);
-    font-family: @open-sans;
     font-weight: 800;
     display: block;
     font-size: 45px;
@@ -35,7 +35,7 @@
 }
 
 .mainMenu {
-  transition: 0.5s;
+  transition: @transition-duration;
   opacity: 0;
   z-index: -1;
   background-image: url("../../../assets/images/nav_moby.jpg");
@@ -47,6 +47,7 @@
   &.open {
     opacity: 1;
     z-index: 10;
+    transition: opacity @transition-duration;
   }
 
   .socialLinks {
