@@ -1,7 +1,9 @@
 @import (reference) "../../../less/fonts";
 
+@main: #ebf0f3;
+
 .portfolio {
-  background-color: #ebf0f3;
+  background-color: @main;
 }
 
 .topContent {
@@ -43,10 +45,10 @@
     right: 0;
     bottom: 0;
     color: #fff;
-    width: 20px;
-    height: 20px;
-    background-color: fade(#000, 50%);
-    font-size: 10px;
+    width: 8%;
+    height: 8%;
+    background-color: fade(#000, 30%);
+    font-size: 3vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -58,5 +60,28 @@
     font-size: 34px;
     font-weight: 600;
     padding: 20px 0;
+    position: relative;
+
+    span {
+      position: relative;
+      z-index: 1;
+    }
+
+    &::before {
+      content: attr(data-title);
+      opacity: .15;
+      text-transform: uppercase;
+      transform: translateY(-50%);
+      top: 50%;
+      position: absolute;
+      white-space: nowrap;
+      left: -20%;
+      font-size: 88px;
+      color: @main;
+      text-shadow:   -1px -1px 0 red,
+        1px -1px 0 red,
+      -1px 1px 0 red,
+      1px 1px 0 red;
+    }
   }
 }

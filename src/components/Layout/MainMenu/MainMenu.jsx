@@ -4,53 +4,57 @@ import LangSelector from "../../Utilities/LangSelector/LangSelector";
 import classes from "./MainMenu.module.less";
 import { useMenuState } from "../menuContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {useContentState} from "../../../Store/Content/store";
+import { useContentState } from "../../../Store/Content/store";
 import useFetchedContentCallback from "../../../utilities/useFetchedContentCallback";
-import {useLanguageState} from "../../../Context/language";
-import {addContent, setError} from "../../../Store/Content/actions";
+import { useLanguageState } from "../../../Context/language";
+import { addContent, setError } from "../../../Store/Content/actions";
 
 const parser = (data, lang) => {
-  return data.map(({ title, relative, key, uri }, index) => {
+  const result = {};
+  data.forEach(({ title, relative, key }, index) => {
     const parts = relative.split("/");
     if (parts[1] === lang) {
       parts.splice(1, 1);
       relative = parts.join("/");
     }
-    return {
+    result[key] = {
       title,
       relative,
       key,
-      uri,
       index
     };
   });
+  return result;
 };
 
 function MainMenu() {
   const [state, dispatch] = useContentState();
-  const name = 'mainMenu';
-  const lang = useLanguageState();
+  const name = "mainMenu";
+  const [lang] = useLanguageState();
   const links = state[name] && state[name][lang];
   const [toggled, toggle] = useMenuState();
-  useFetchedContentCallback({
-    url: "/api/menu_items/main",
-    parser,
-    name: "mainMenu"
-  }, (fetchedContent, error) => {
-    if (!links) {
-      if (error) {
-        return dispatch(setError(name, error));
+  useFetchedContentCallback(
+    {
+      url: "/api/menu_items/main",
+      parser,
+      name: "mainMenu"
+    },
+    (fetchedContent, error) => {
+      if (!links) {
+        if (error) {
+          return dispatch(setError(name, error));
+        }
+        return dispatch(addContent(name, fetchedContent, lang));
       }
-      return dispatch(addContent(name, fetchedContent, lang));
     }
-  });
+  );
   return (
     <nav
       className={`${classes.mainMenu} ${toggled ? classes.open : ""} overlay`}
     >
       <ul className={`${classes.mainMenuLinks}`}>
         {links
-          ? links.map(({ title, relative, key, index, uri }) => {
+          ? Object.values(links).map(({ title, relative, key, index, uri }) => {
               return (
                 <li key={key} className={`${classes.navLink}`}>
                   <Link

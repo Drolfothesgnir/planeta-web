@@ -5,10 +5,12 @@ import {
   SET_ERROR
 } from "./actionTypes";
 
-export const addContent = (name, content, lang) => ({
-  type: ADD_CONTENT,
-  payload: { name, content, lang }
-});
+export const addContent = (name, content, lang) => {
+  return {
+    type: ADD_CONTENT,
+    payload: { name, content, lang }
+  }
+};
 
 export const setError = (name, error) => ({
   type: SET_ERROR,
@@ -20,7 +22,8 @@ export const setContent = (name, content) => ({
   payload: { name, content }
 });
 
-export const setContactFormSubmission = (state = false) => ({
+export const setContactFormSubmissionFlag = (state = false) => ({
   type: SET_CONTACT_FORM_SUBMISSION_FLAG,
   payload: state
 });
+

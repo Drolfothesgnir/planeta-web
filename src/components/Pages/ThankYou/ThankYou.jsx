@@ -5,15 +5,20 @@ import imgSrc from "../../../assets/images/thank_you.gif";
 import classes from "./ThankYou.module.less";
 import { useContentState } from "../../../Store/Content/store";
 import { useLanguageState } from "../../../Context/language";
-import { setContactFormSubmission } from "../../../Store/Content/actions";
+import { setContactFormSubmissionFlag } from "../../../Store/Content/actions";
 
 function ThankYou() {
-  const [{ contactForm, contactFormSuccess: success }, dispatch] = useContentState();
+  const [
+    { contactForm, contactFormSuccess: success },
+    dispatch
+  ] = useContentState();
   const [lang] = useLanguageState();
   const {
     thankYou: { text, button }
   } = contactForm[lang];
-  return !success ? <Redirect to={'/'}/> : (
+  return !success ? (
+    <Redirect to={"/"} />
+  ) : (
     <div
       className={`${formClasses.contactForm} ${formClasses.open} ${classes.content} overlay`}
     >
@@ -28,7 +33,7 @@ function ThankYou() {
           <Link
             className="btn btn-light"
             to={"/"}
-            onClick={() => dispatch(setContactFormSubmission(false))}
+            onClick={() => dispatch(setContactFormSubmissionFlag(false))}
           >
             {button}
           </Link>

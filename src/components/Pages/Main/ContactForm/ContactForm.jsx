@@ -11,7 +11,7 @@ import { useContentState } from "../../../../Store/Content/store";
 import parser from "./parser";
 import { validation, formErrors } from "./validation";
 import {
-  setContactFormSubmission,
+  setContactFormSubmissionFlag,
   setError,
   addContent
 } from "../../../../Store/Content/actions";
@@ -64,7 +64,7 @@ function ContactForm({ useFormState }) {
       .post("/webform_rest/submit", data)
       .then(res => {
         if (!res.data.error) {
-          dispatch(setContactFormSubmission(true));
+          dispatch(setContactFormSubmissionFlag(true));
           setStatus({ success: true, loading: false });
         }
       })
