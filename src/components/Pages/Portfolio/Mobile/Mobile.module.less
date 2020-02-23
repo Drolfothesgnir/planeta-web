@@ -1,0 +1,53 @@
+@main: #ebf0f3;
+
+.previewImg {
+  background-position: center;
+  background-size: cover;
+  height: 50vh;
+  position: relative;
+  display: block;
+
+  span {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: #fff;
+    width: 8%;
+    height: 8%;
+    background-color: fade(#000, 30%);
+    font-size: 3vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.portfolioItem {
+  h2 {
+    font-size: 34px;
+    font-weight: 600;
+    padding: 20px 0;
+    position: relative;
+    overflow-x: hidden;
+
+    span {
+      position: relative;
+      z-index: 1;
+    }
+
+    &::before {
+      content: attr(data-title);
+      opacity: 0.15;
+      text-transform: uppercase;
+      transform: translateY(-50%);
+      top: 50%;
+      position: absolute;
+      white-space: nowrap;
+      left: -20%;
+      font-size: 88px;
+      color: @main;
+      text-shadow: -1px -1px 0 red, 1px -1px 0 red, -1px 1px 0 red,
+        1px 1px 0 red;
+    }
+  }
+}

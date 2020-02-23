@@ -1,13 +1,12 @@
 import React from "react";
 import classes from "./Portfolio.module.less";
 import useFetchedContent from "../../../utilities/useFetchedContent";
-import { Link } from "react-router-dom";
 import { BASE_URL } from "../../../utilities/http";
 import Spinner from "../../Utilities/Spinner/Spinner";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContentState } from "../../../Store/Content/store";
-import {routeMap} from "../../../utilities/routeMap";
-import {useLanguageState} from "../../../Context/language";
+import { routeMap } from "../../../utilities/routeMap";
+import { useLanguageState } from "../../../Context/language";
+import Mobile from "./Mobile/Mobile";
 
 const parser = data => {
   return data.map(({ title, view_node, nothing, field_image_preview }) => {
@@ -30,37 +29,17 @@ function Portfolio() {
   const [{ mainMenu }] = useContentState();
   const [lang] = useLanguageState();
   const menu = mainMenu && mainMenu[lang];
-  const content = items ? (
-    items.map(({ title, link, imgSrc }) => {
-      return (
-        <li className={classes.portfolioItem} key={title}>
-          <Link
-            to={link}
-            className={classes.previewImg}
-            style={{ backgroundImage: `url(${imgSrc})` }}
-          >
-            <span>
-              <FontAwesomeIcon icon="arrow-right" />
-            </span>
-          </Link>
-          <h2 data-title={title}>
-            <span>{title}</span>
-          </h2>
-        </li>
-      );
-    })
-  ) : (
-    <Spinner />
-  );
-  return (
+  console.log(items);
+
+  return menu && items ? (
     <div className={classes.portfolio}>
-      <div className={classes.topContent}>
+      <div className={classes.pageLabel}>
         <span>{menu[routeMap.portfolio].title}</span>
       </div>
-      <div className={`container`}>
-        <ul>{content}</ul>
-      </div>
+      <Mobile items={items} />
     </div>
+  ) : (
+    <Spinner />
   );
 }
 
