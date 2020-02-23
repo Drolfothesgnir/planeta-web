@@ -15,10 +15,10 @@ const availableLanguages = [
     label: "en"
   }
 ];
-function LangSelector(props) {
+function LangSelector({ className, activeClassName, onLangChange }) {
   const [stateLang, setLang] = useLanguageState();
   return (
-    <div className={`${classes.LangSelector} ${props.className || ""}`}>
+    <div className={`${classes.LangSelector} ${className || ""}`}>
       <ul>
         {availableLanguages.map(({ lang, label }) => {
           return (
@@ -26,11 +26,10 @@ function LangSelector(props) {
               <a
                 onClick={() => {
                   setLang(lang);
+                  typeof onLangChange === "function" && onLangChange();
                 }}
                 className={
-                  lang === stateLang
-                    ? props.activeClassName || classes.active
-                    : ""
+                  lang === stateLang ? activeClassName || classes.active : ""
                 }
               >
                 {label}

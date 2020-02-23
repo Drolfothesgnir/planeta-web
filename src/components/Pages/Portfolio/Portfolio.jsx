@@ -29,7 +29,6 @@ function Portfolio() {
   const [{ mainMenu }] = useContentState();
   const [lang] = useLanguageState();
   const menu = mainMenu && mainMenu[lang];
-  console.log(items);
 
   return menu && items ? (
     <div className={classes.portfolio}>

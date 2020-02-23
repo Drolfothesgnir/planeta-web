@@ -48,6 +48,7 @@ function MainMenu() {
       }
     }
   );
+  const closeMenu = () => toggle(false);
   return (
     <nav
       className={`${classes.mainMenu} ${toggled ? classes.open : ""} overlay`}
@@ -59,7 +60,7 @@ function MainMenu() {
                 <li key={key} className={`${classes.navLink}`}>
                   <Link
                     to={{ pathname: relative, state: [uri, index] }}
-                    onClick={() => toggle(false)}
+                    onClick={closeMenu}
                   >
                     <span className="glitch" data-text={title}>
                       {title}
@@ -70,10 +71,11 @@ function MainMenu() {
             })
           : "Loading..."}
       </ul>
-      <button onClick={() => toggle(false)} className={classes.close}>
+      <button onClick={closeMenu} className={classes.close}>
         <FontAwesomeIcon icon="times" />
       </button>
       <LangSelector
+        onLangChange={closeMenu}
         className={classes.langSelector}
         activeClassName={classes.activeLang}
       />
