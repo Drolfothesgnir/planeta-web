@@ -7,6 +7,7 @@ import { useContentState } from "../../../Store/Content/store";
 import { routeMap } from "../../../utilities/routeMap";
 import { useLanguageState } from "../../../Context/language";
 import useWindowSize from "../../../utilities/useWindowSize";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Mobile from "./Mobile/Mobile";
 
 const DesktopHorizontal = React.lazy(() =>
@@ -27,6 +28,7 @@ const parser = data => {
 
 function Portfolio() {
   const { width } = useWindowSize();
+  const [pageLabelClosed, setState] = React.useState(false);
   const [items] = useFetchedContent({
     url: "/portfolio",
     name: "portfolio",
@@ -38,17 +40,29 @@ function Portfolio() {
 
   return menu && items ? (
     <div className={classes.portfolio}>
-      <div className={classes.pageLabel}>
+      <div
+        className={`${classes.pageLabel} ${
+          pageLabelClosed ? classes.closed : ""
+        }`}
+      >
         <span
           data-page-index={`${menu[routeMap.portfolio].index}`.padStart(2, "0")}
         >
-          {menu[routeMap.portfolio].title}
+          <span className={classes.text}>{menu[routeMap.portfolio].title}</span>
         </span>
+        <button
+          className={classes.close}
+          onClick={() => setState(prev => !prev)}
+        >
+          <FontAwesomeIcon
+            icon={pageLabelClosed ? "arrow-right" : "arrow-left"}
+          />
+        </button>
       </div>
       <div className={classes.content}>
         <Mobile items={items} />
         <React.Suspense fallback={<Spinner />}>
-          {width >= 1280 ? <DesktopHorizontal items={items}/> : null}
+          {width >= 1280 ? <DesktopHorizontal items={items} /> : null}
         </React.Suspense>
       </div>
     </div>
