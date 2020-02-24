@@ -6,7 +6,12 @@ import Spinner from "../../Utilities/Spinner/Spinner";
 import { useContentState } from "../../../Store/Content/store";
 import { routeMap } from "../../../utilities/routeMap";
 import { useLanguageState } from "../../../Context/language";
+import useWindowSize from "../../../utilities/useWindowSize";
 import Mobile from "./Mobile/Mobile";
+
+const DesktopHorizontal = React.lazy(() =>
+  import("./DesktopHorizontal/DesktopHorizontal")
+);
 
 const parser = data => {
   return data.map(({ title, view_node, nothing, field_image_preview }) => {
@@ -21,6 +26,7 @@ const parser = data => {
 };
 
 function Portfolio() {
+  const { width } = useWindowSize();
   const [items] = useFetchedContent({
     url: "/portfolio",
     name: "portfolio",
@@ -33,9 +39,18 @@ function Portfolio() {
   return menu && items ? (
     <div className={classes.portfolio}>
       <div className={classes.pageLabel}>
-        <span>{menu[routeMap.portfolio].title}</span>
+        <span
+          data-page-index={`${menu[routeMap.portfolio].index}`.padStart(2, "0")}
+        >
+          {menu[routeMap.portfolio].title}
+        </span>
       </div>
-      <Mobile items={items} />
+      <div className={classes.content}>
+        <Mobile items={items} />
+        <React.Suspense fallback={<Spinner />}>
+          {width >= 1280 ? <DesktopHorizontal items={items}/> : null}
+        </React.Suspense>
+      </div>
     </div>
   ) : (
     <Spinner />

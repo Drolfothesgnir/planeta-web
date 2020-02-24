@@ -21,7 +21,7 @@ const parser = (data, lang) => {
       title,
       relative,
       key,
-      index
+      index: index + 1
     };
   });
   return result;
