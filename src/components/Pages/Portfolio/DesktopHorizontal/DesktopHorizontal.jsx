@@ -20,7 +20,27 @@ function DesktopHorizontal({ items }) {
           slidesToShow: 4,
           slidesToScroll: 1,
           swipeToSlide: true,
-          arrows: false
+          arrows: false,
+          responsive: [
+            {
+              breakpoint: 1439,
+              settings: {
+                slidesToShow: 3
+              }
+            },
+            {
+              breakpoint: 1279,
+              settings: {
+                slidesToShow: 2
+              }
+            },
+            {
+              breakpoint: 1023,
+              settings: {
+                slidesToShow: 1
+              }
+            }
+          ]
         }}
       >
         {itemList}

@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classes from "./Mobile.module.less";
 
-function Mobile({ items }) {
+function Mobile({ items, className }) {
   return (
-    <div className={classes.portfolioMobile}>
+    <div className={`${classes.portfolioMobile} ${className || ''}`}>
       <div className="container">
         <ul>
           {items.map(({ title, link, imgSrc }) => {

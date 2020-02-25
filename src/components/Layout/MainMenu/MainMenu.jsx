@@ -10,6 +10,9 @@ import { useLanguageState } from "../../../Context/language";
 import { addContent, setError } from "../../../Store/Content/actions";
 
 const parser = (data, lang) => {
+  if (!data.length) {
+    return null
+  }
   const result = {};
   data.forEach(({ title, relative, key }, index) => {
     const parts = relative.split("/");
@@ -33,9 +36,10 @@ function MainMenu() {
   const [lang] = useLanguageState();
   const links = state[name] && state[name][lang];
   const [toggled, toggle] = useMenuState();
+  const err = state[name] && state[name].error;
   useFetchedContentCallback(
     {
-      url: "/api/menu_items/main",
+      url: "/apis/menu_items/main",
       parser,
       name: "mainMenu"
     },
@@ -49,6 +53,9 @@ function MainMenu() {
     }
   );
   const closeMenu = () => toggle(false);
+  if (err) {
+    return 'Sorry...'
+  }
   return (
     <nav
       className={`${classes.mainMenu} ${toggled ? classes.open : ""} overlay`}

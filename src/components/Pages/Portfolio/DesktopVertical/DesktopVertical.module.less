@@ -1,0 +1,38 @@
+.desktopVertical {
+  height: 100%;
+
+  :global(.slick-slide) {
+    background-color: #F55455;
+    color: #F55455;
+
+    &:nth-child(even) {
+      background-color: #3E71D7;
+      color: #3E71D7;
+    }
+  }
+}
+
+.slide {
+  height: 100%;
+  position: relative;
+}
+
+.bgTitle {
+  content: attr(data-title);
+  display: block;
+  position: absolute;
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
+  1px 1px 0 #fff;
+  font-size: 300px;
+  text-transform: uppercase;
+  line-height: 0.9;
+  width: 200%;
+  top: 50%;
+  transform: translateY(-50%);
+  padding-left: 10%;
+  font-weight: 800;
+
+  &::first-line {
+    text-indent: -10%;
+  }
+}

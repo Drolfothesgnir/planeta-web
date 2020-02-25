@@ -14,6 +14,10 @@ const DesktopHorizontal = React.lazy(() =>
   import("./DesktopHorizontal/DesktopHorizontal")
 );
 
+const DesktopVertical = React.lazy(() =>
+  import("./DesktopVertical/DesktopVertical")
+);
+
 const parser = data => {
   return data.map(({ title, view_node, nothing, field_image_preview }) => {
     const imgSrc = field_image_preview.replace(/^\//, "");
@@ -21,15 +25,16 @@ const parser = data => {
       title,
       link: view_node,
       buttonText: nothing,
-      imgSrc: imgSrc ? BASE_URL + imgSrc : null
+      imgSrc: imgSrc ? BASE_URL + imgSrc : ""
     };
   });
 };
 
 function Portfolio() {
   const { width } = useWindowSize();
-  const [pageLabelClosed, setState] = React.useState(false);
-  const [items] = useFetchedContent({
+  const [pageLabelClosed, setState] = React.useState(true);
+  const [inlineViewMode, setViewMode] = React.useState(false);
+  const [items, error] = useFetchedContent({
     url: "/portfolio",
     name: "portfolio",
     parser
@@ -37,7 +42,9 @@ function Portfolio() {
   const [{ mainMenu }] = useContentState();
   const [lang] = useLanguageState();
   const menu = mainMenu && mainMenu[lang];
-
+  if (error) {
+    return JSON.stringify(error);
+  }
   return menu && items ? (
     <div className={classes.portfolio}>
       <div
@@ -60,10 +67,38 @@ function Portfolio() {
         </button>
       </div>
       <div className={classes.content}>
-        <Mobile items={items} />
         <React.Suspense fallback={<Spinner />}>
-          {width >= 1280 ? <DesktopHorizontal items={items} /> : null}
+          {width >= 768 ? (
+            inlineViewMode ? (
+              <DesktopHorizontal items={items} />
+            ) : (
+              <DesktopVertical items={items} />
+            )
+          ) : (
+            <Mobile items={items} />
+          )}
         </React.Suspense>
+      </div>
+      <div className={classes.viewToggle}>
+        <button
+          className={`${inlineViewMode ? classes.active : ""} ${
+            classes.inline
+          }`}
+          onClick={() => setViewMode(true)}
+        >
+          <span />
+          <span />
+          <span />
+          <span />
+        </button>
+        <button
+          className={`${!inlineViewMode ? classes.active : ""} ${
+            classes.vertical
+          }`}
+          onClick={() => setViewMode(false)}
+        >
+          <span />
+        </button>
       </div>
     </div>
   ) : (
