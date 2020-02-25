@@ -55,7 +55,7 @@
     :global(.slick-list),
     :global(.slick-track),
     :global(.slick-slide),
-    :global(.slick-slide) > div{
+    :global(.slick-slide) > div {
       height: 100% !important;
     }
   }
@@ -122,6 +122,8 @@
     top: 20px;
     display: flex;
 
+    @lightened: lighten(@light-grey, 3 0%);
+
     button {
       width: 22px;
       height: 22px;
@@ -132,10 +134,10 @@
       flex-wrap: wrap;
       justify-content: center;
       align-content: center;
-      border-color: fade(@light-grey, 50%);
+      border-color: @lightened;
 
       span {
-        background-color: fade(@light-grey, 50%);
+        background-color: @lightened;
         display: block;
       }
 

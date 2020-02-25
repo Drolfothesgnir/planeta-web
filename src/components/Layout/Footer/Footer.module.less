@@ -8,7 +8,6 @@
   font-weight: 600;
   font-size: 14px;
 
-
   a {
     margin-bottom: 10px;
     display: block;
@@ -24,14 +23,12 @@
 }
 
 @media (min-width: 768px) {
-  .footer {
-    padding: 35px 0;
-  }
-
   .footerContent {
     display: flex;
     text-align: left;
     justify-content: space-between;
+    align-items: center;
+    height: 35px;
     font-size: 16px;
 
     a {
@@ -40,10 +37,22 @@
       margin-bottom: 0;
     }
   }
+
+  @media (max-width: 1279px) {
+    .footerContent {
+      height: 60px;
+    }
+  }
 }
 
 @media (min-width: 1280px) {
   .footer {
     margin: 0 -15px;
+  }
+}
+
+@media (min-width: 1680px) {
+  .footerContent {
+    height: 60px;
   }
 }

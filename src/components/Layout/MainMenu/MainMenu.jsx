@@ -11,7 +11,7 @@ import { addContent, setError } from "../../../Store/Content/actions";
 
 const parser = (data, lang) => {
   if (!data.length) {
-    return null
+    return null;
   }
   const result = {};
   data.forEach(({ title, relative, key }, index) => {
@@ -39,12 +39,12 @@ function MainMenu() {
   const err = state[name] && state[name].error;
   useFetchedContentCallback(
     {
-      url: "/apis/menu_items/main",
+      url: "/api/menu_items/main",
       parser,
       name: "mainMenu"
     },
     (fetchedContent, error) => {
-      if (!links) {
+      if (!links && !err) {
         if (error) {
           return dispatch(setError(name, error));
         }
@@ -53,9 +53,7 @@ function MainMenu() {
     }
   );
   const closeMenu = () => toggle(false);
-  if (err) {
-    return 'Sorry...'
-  }
+
   return (
     <nav
       className={`${classes.mainMenu} ${toggled ? classes.open : ""} overlay`}
@@ -76,6 +74,8 @@ function MainMenu() {
                 </li>
               );
             })
+          : err
+          ? err.message
           : "Loading..."}
       </ul>
       <button onClick={closeMenu} className={classes.close}>

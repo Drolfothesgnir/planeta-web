@@ -28,13 +28,10 @@ header {
 }
 
 @media (min-width: 768px) {
-  header {
-    padding: 15px 0;
-  }
   .logo {
     order: 2;
     width: 40%;
-    height: 60px;
+    height: 35px;
     background-position: center;
   }
 
@@ -48,10 +45,22 @@ header {
     width: 95px;
     display: block;
   }
+
+  @media (max-width: 1279px) {
+    .logo {
+      height: 60px;
+    }
+  }
 }
 
 @media (min-width: 1280px) {
   header {
     margin: 0 -15px;
+  }
+}
+
+@media (min-width: 1680px) {
+  .logo {
+    height: 60px;
   }
 }

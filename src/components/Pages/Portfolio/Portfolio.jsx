@@ -43,7 +43,7 @@ function Portfolio() {
   const [lang] = useLanguageState();
   const menu = mainMenu && mainMenu[lang];
   if (error) {
-    return JSON.stringify(error);
+    return error.message;
   }
   return menu && items ? (
     <div className={classes.portfolio}>

@@ -29,9 +29,13 @@ const Button = ({ text }) => {
 };
 
 function Main() {
-  const [text, error] = useFetchedContent({ url: "/", name: "main:text", parser });
+  const [text, error] = useFetchedContent({
+    url: "/",
+    name: "main",
+    parser
+  });
   if (error) {
-      return 'Sorry...';
+    return error.message;
   }
   return (
     <Provider>

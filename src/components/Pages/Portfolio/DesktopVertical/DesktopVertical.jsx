@@ -18,8 +18,7 @@ function DesktopVertical({ items }) {
         {items.map(({ title }) => {
           return (
             <div key={title} className={classes.slide}>
-                <span className={classes.bgTitle}>{title}</span>
-              <h1>{title}</h1>
+              <span className={classes.bgTitle}>{title}</span>
             </div>
           );
         })}
