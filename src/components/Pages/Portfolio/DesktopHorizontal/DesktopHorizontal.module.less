@@ -52,7 +52,7 @@
 
   h2 {
     flex-grow: 0;
-    font-size: 40px;
+    font-size: 30px;
   }
 }
 
@@ -63,8 +63,21 @@
   height: 50%;
   margin-bottom: 20px;
   box-shadow: 14.141px 16.853px 16px rgba(34,34,34,0.1);
+
   img {
-    width: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
     height: 100%;
+  }
+}
+
+@media (min-width: 1440px) {
+  .slide {
+    h2 {
+      font-size: 40px;
+    }
   }
 }
