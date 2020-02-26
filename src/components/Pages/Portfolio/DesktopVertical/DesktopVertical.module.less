@@ -1,5 +1,8 @@
+@import (reference) "../../../../less/fonts";
+
 .desktopVertical {
   height: 100%;
+  position: relative;
 
   :global(.slick-slide) {
     background-color: #f55455;
@@ -38,6 +41,7 @@
 }
 
 .image {
+  display: block;
   flex-shrink: 0;
   width: 35vw;
   height: 40vh;
@@ -53,6 +57,7 @@
 .slideContent {
   width: 100%;
   position: absolute;
+  z-index: 3;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -65,18 +70,67 @@
 .leftContent {
   position: relative;
   width: 30vw;
+  margin-top: 6vw;
 
   h2 {
     color: #000000;
-    line-height: 3vw;
-    font-size: 3vw;
+    line-height: 40px;
+    font-size: 40px;
     width: 150%;
-    margin-bottom: 1.5vw;
+    margin-bottom: 30px;
   }
 
   :global(.btn) {
     margin-bottom: 0;
     font-size: 16px;
+  }
+}
+
+.verticalButton {
+  left: 10%;
+  position: absolute;
+  z-index: 2;
+  text-align: left;
+  font-weight: 600;
+  font-size: 18px;
+  transition:  0.3s;
+  max-width: 180px;
+  display: flex;
+  align-items: center;
+
+  &.prev {
+    top: 5%;
+  }
+
+  &.next {
+    bottom: 5%;
+  }
+
+  &:hover {
+    color: #ffffff;
+    border-left-color: #ffffff;
+  }
+}
+
+.counter {
+  position: absolute;
+  top: 17vw;
+  left: 10%;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+
+  button {
+    font-size: 18px;
+
+    &:first-of-type {
+      transform: rotateY(-180deg);
+    }
+  }
+
+  span {
+    margin: 0 1vw;
+    font-weight: 600;
   }
 }
 
