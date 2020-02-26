@@ -22,27 +22,31 @@ a.btn {
   justify-content: center;
 }
 
-each(@colors, {
-  @bd-color: extract(@value, 1);
-  @color: extract(@value, 2);
-  @disabled: extract(@value, 3);
-  .btn-@{key} {
-    border-color: @bd-color;
-    color: @bd-color;
+.coloredBtn(@colors) {
+  each(@colors, {
+    @bd-color: extract(@value, 1);
+    @color: extract(@value, 2);
+    @disabled: extract(@value, 3);
+    .btn-@{key} {
+      border-color: @bd-color;
+      color: @bd-color;
 
-    &:hover,
-    &:active,
-    &:focus {
-      &:not(:disabled) {
-        background-color: @bd-color;
-        color: @color;
+      &:hover,
+      &:active,
+      &:focus {
+        &:not(:disabled) {
+          background-color: @bd-color;
+          color: @color;
+        }
+      }
+
+      &:disabled {
+        border-color: @disabled;
+        color: @disabled;
+        cursor: not-allowed;
       }
     }
+  })
+}
 
-    &:disabled {
-      border-color: @disabled;
-      color: @disabled;
-      cursor: not-allowed;
-    }
-  }
-})
+.coloredBtn(@colors);

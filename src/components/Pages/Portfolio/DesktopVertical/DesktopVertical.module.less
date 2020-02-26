@@ -18,11 +18,12 @@
 }
 
 .bgTitle {
+  opacity: 0.4;
   display: block;
   position: absolute;
   text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
     1px 1px 0 #fff;
-  font-size: 10vw;
+  font-size: 16vh;
   text-transform: uppercase;
   line-height: 0.9;
   width: 200%;
@@ -33,5 +34,54 @@
 
   &::first-line {
     text-indent: -10%;
+  }
+}
+
+.image {
+  flex-shrink: 0;
+  width: 35vw;
+  height: 40vh;
+  box-shadow: 20px 30px 70px rgba(0, 0, 0, 0.35);
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.slideContent {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 10%;
+  padding-right: 26%;
+}
+
+.leftContent {
+  position: relative;
+  width: 30vw;
+
+  h2 {
+    color: #000000;
+    line-height: 3vw;
+    font-size: 3vw;
+    width: 150%;
+    margin-bottom: 1.5vw;
+  }
+
+  :global(.btn) {
+    margin-bottom: 0;
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .bgTitle {
+    font-size: 16vw;
   }
 }

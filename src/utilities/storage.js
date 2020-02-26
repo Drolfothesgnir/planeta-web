@@ -4,7 +4,16 @@ const storage = {
   },
   getItem(key) {
     const item = JSON.parse(localStorage.getItem(key));
-    return !item || item.expires <= Date.now() ? null : item.content;
+    if (!item) {
+      return null;
+    }
+
+    if (item.expires <= Date.now()) {
+      localStorage.removeItem(key);
+      return null;
+    }
+
+    return item.content;
   },
   setItem(key, value, expires = Date.now() + 1000 * 60 * 30) {
     const item = {

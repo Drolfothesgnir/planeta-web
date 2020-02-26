@@ -5,8 +5,11 @@ import { useLanguageState } from "../Context/language";
 
 export default ({ url, parser, name, expires }) => {
   const [lang] = useLanguageState();
-  const [fetchedContent, setContent] = useState(storage.getItem(name) || {});
-  const [error, setError] = useState(null);
+  const stored = storage.getItem(name) || {};
+  const [{ fetchedContent, error }, setState] = useState({
+    fetchedContent: stored,
+    error: null
+  });
   const content = fetchedContent[lang];
   useEffect(() => {
     if (!content && !error) {
@@ -15,11 +18,11 @@ export default ({ url, parser, name, expires }) => {
         .then(({ data }) => {
           const parsed = parser(data, lang);
           const newContent = { ...fetchedContent, [lang]: parsed };
-          setContent(newContent);
+          setState({ fetchedContent: newContent, error: null });
           storage.setItem(name, newContent, expires && expires);
         })
         .catch(err => {
-          setError(err);
+          setState(prev => ({ ...prev, error: err }));
         });
     }
   });
