@@ -13,6 +13,16 @@ function getPrevAndNextIndex(n, current) {
     : [current - 1, current + 1];
 }
 
+const arrow = (
+  <span className={classes.arrow}>
+    <svg viewBox={"10 9 14 38"}>
+      <line x1="17" y1="10" x2="17" y2="46" />
+      <line x1="17" y1="10" x2="11" y2="16" />
+      <line x1="23" y1="16" x2="17" y2="10" />
+    </svg>
+  </span>
+);
+
 function DesktopVertical({ items }) {
   const sliderRef = React.useRef(null);
   const [{ currentSlide }, setState] = React.useState({
@@ -74,12 +84,14 @@ function DesktopVertical({ items }) {
         className={`${classes.verticalButton} ${classes.prev}`}
         onClick={prev}
       >
+          {arrow}
         <span>{items[prevIndex].title}</span>
       </button>
       <button
         className={`${classes.verticalButton} ${classes.next}`}
         onClick={next}
       >
+          {arrow}
         <span>{items[nextIndex].title}</span>
       </button>
     </div>

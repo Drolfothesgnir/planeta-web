@@ -14,6 +14,7 @@ const webpack = require("webpack"),
 module.exports = merge(common, {
   entry: ["react-hot-loader/patch", "./src/index.js"],
   mode: "development",
+  devtool:'eval-source-map',
   module: {
     rules: [
       {

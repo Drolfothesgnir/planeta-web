@@ -85,7 +85,24 @@
     font-size: 16px;
   }
 }
+.arrow {
+  width: 13px;
+  margin-right: 10px;
+  flex-shrink: 0;
 
+  svg {
+    display: block;
+  }
+
+  line {
+    transition:  0.3s;
+    fill: none;
+    stroke: #000000;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
 .verticalButton {
   left: 10%;
   position: absolute;
@@ -93,10 +110,11 @@
   text-align: left;
   font-weight: 600;
   font-size: 18px;
-  transition:  0.3s;
+  transition: 0.3s;
   max-width: 180px;
   display: flex;
   align-items: center;
+
 
   &.prev {
     top: 5%;
@@ -104,11 +122,19 @@
 
   &.next {
     bottom: 5%;
+
+    .arrow {
+      transform: rotateX(180deg);
+    }
   }
 
   &:hover {
     color: #ffffff;
     border-left-color: #ffffff;
+
+    line {
+      stroke: #ffffff;
+    }
   }
 }
 
