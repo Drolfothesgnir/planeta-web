@@ -5,9 +5,8 @@ import classes from "./MainMenu.module.less";
 import { useMenuState } from "../menuContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContentState } from "../../../Store/Content/store";
-import useFetchedContentCallback from "../../../utilities/useFetchedContentCallback";
 import { useLanguageState } from "../../../Context/language";
-import { addContent, setError } from "../../../Store/Content/actions";
+import { fetchContent } from "../../../Store/Content/actions";
 
 const parser = (data, lang) => {
   if (!data.length) {
@@ -37,21 +36,10 @@ function MainMenu() {
   const links = state[name] && state[name][lang];
   const [toggled, toggle] = useMenuState();
   const err = state[name] && state[name].error;
-  useFetchedContentCallback(
-    {
-      url: "/api/menu_items/main",
-      parser,
-      name: "mainMenu"
-    },
-    (fetchedContent, error) => {
-      if (!links && !err) {
-        if (error) {
-          return dispatch(setError(name, error));
-        }
-        return dispatch(addContent(name, fetchedContent, lang));
-      }
-    }
-  );
+
+  if (!links && !err) {
+    dispatch(fetchContent({ url: "/api/menu_items/main", parser, name, lang }));
+  }
   const closeMenu = () => toggle(false);
 
   return (

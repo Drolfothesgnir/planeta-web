@@ -25,7 +25,7 @@ export default ({ url, parser, name, expires }) => {
           const parsed = parser(data, lang);
           const newContent = { ...fetchedContent, [lang]: parsed };
           setState({ fetchedContent: newContent, error: null });
-          storage.setItem(name, newContent, expires && expires);
+          storage.setItem(name, newContent, expires);
         })
         .catch(err => {
           setState(prev => ({ ...prev, error: err }));

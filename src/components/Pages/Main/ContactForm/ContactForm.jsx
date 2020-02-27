@@ -5,15 +5,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classes from "./ContactForm.module.less";
 import http from "../../../../utilities/http";
 import Inputmask from "inputmask";
-import useFetchedContentCallback from "../../../../utilities/useFetchedContentCallback";
 import { useLanguageState } from "../../../../Context/language";
 import { useContentState } from "../../../../Store/Content/store";
 import parser from "./parser";
 import { validation, formErrors } from "./validation";
 import {
   setContactFormSubmissionFlag,
-  setError,
-  addContent
+  fetchContent
 } from "../../../../Store/Content/actions";
 
 const im = new Inputmask("+380999999999", {
@@ -41,21 +39,11 @@ function ContactForm({ useFormState }) {
     validateCriteriaMode: "all"
   });
 
-  useFetchedContentCallback(
-    {
-      url: "/webform/call_back/get",
-      name,
-      parser
-    },
-    (fetchedContent, error) => {
-      if (!content) {
-        if (error) {
-          return dispatch(setError(name, error));
-        }
-        return dispatch(addContent(name, fetchedContent, lang));
-      }
-    }
-  );
+  if (!content) {
+    dispatch(
+      fetchContent({ url: "/webform/call_back/get", lang, name, parser })
+    );
+  }
 
   const submitHandler = data => {
     data.webform_id = "call_back";
