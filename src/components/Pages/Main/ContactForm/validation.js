@@ -31,7 +31,7 @@ const regObject = {
 export const validation = {
     name: {
         ...regObject,
-        pattern: /^[a-z]+$/i
+        pattern: /^[a-z\u0410-\u044f\u0456\u0457]+$/i
     },
     email: regObject,
     tel: {

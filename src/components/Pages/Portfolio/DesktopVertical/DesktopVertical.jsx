@@ -5,11 +5,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons/faCaretRight";
 import classes from "./DesktopVertical.module.less";
 
-function getPrevAndNextIndex(n, current) {
+function getPrevAndNextIndex(max, current) {
+  if (max < 2) {
+    return [current, current];
+  }
+
+  if (max === 2) {
+    return [+!current, +!current];
+  }
   return current === 0
-    ? [n - 1, 1]
-    : current === n - 1
-    ? [n - 2, 0]
+    ? [max - 1, 1]
+    : current === max - 1
+    ? [max - 2, 0]
     : [current - 1, current + 1];
 }
 
@@ -25,12 +32,10 @@ const arrow = (
 
 function DesktopVertical({ items }) {
   const sliderRef = React.useRef(null);
-  const [{ currentSlide }, setState] = React.useState({
-    currentSlide: 0
-  });
+  const [{ currentSlide }, setState] = React.useState({ currentSlide: 0 });
   const [prevIndex, nextIndex] = getPrevAndNextIndex(
     items.length,
-    currentSlide
+    currentSlide >= items.length ? 0 : currentSlide
   );
 
   const prev = () => sliderRef.current.slickPrev();
@@ -45,11 +50,11 @@ function DesktopVertical({ items }) {
           vertical: true,
           verticalSwiping: true,
           dots: false,
+          ref: sliderRef,
           arrows: false,
           beforeChange(_, next) {
-            setState(prev => ({ ...prev, currentSlide: next }));
-          },
-          ref: sliderRef
+            setState(prevState => ({ ...prevState, currentSlide: next }));
+          }
         }}
       >
         {items.map(({ title, buttonText, link, imgSrc }) => {
@@ -63,9 +68,9 @@ function DesktopVertical({ items }) {
                     {buttonText}
                   </Link>
                 </div>
-                <Link to={link} className={classes.image}>
+                <div className={classes.image}>
                   <img src={imgSrc} alt={title} />
-                </Link>
+                </div>
               </div>
             </div>
           );
@@ -84,14 +89,14 @@ function DesktopVertical({ items }) {
         className={`${classes.verticalButton} ${classes.prev}`}
         onClick={prev}
       >
-          {arrow}
+        {arrow}
         <span>{items[prevIndex].title}</span>
       </button>
       <button
         className={`${classes.verticalButton} ${classes.next}`}
         onClick={next}
       >
-          {arrow}
+        {arrow}
         <span>{items[nextIndex].title}</span>
       </button>
     </div>
