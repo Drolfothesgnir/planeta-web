@@ -46,6 +46,8 @@
 @media (min-width: 768px) {
   .portfolio {
     display: flex;
+    background-color: transparent;
+    padding: 0 15px;
 
     div {
       outline: none;
@@ -62,6 +64,8 @@
 
   .content {
     width: calc(100% - 80px);
+    overflow: hidden;
+    flex-shrink: 0;
   }
 
   .pageLabel {
@@ -119,8 +123,8 @@
 
   .viewToggle {
     position: absolute;
-    right: 20px;
-    top: 20px;
+    right: 40px;
+    top: 30px;
     display: flex;
 
     @lightened: lighten(@light-grey, 15%);
@@ -178,6 +182,10 @@
 }
 
 @media (min-width: 1280px) {
+  .portfolio {
+    padding: 0;
+  }
+
   .pageLabel {
     > span {
       font-size: 40px;

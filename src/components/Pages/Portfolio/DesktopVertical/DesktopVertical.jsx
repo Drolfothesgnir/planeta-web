@@ -9,7 +9,6 @@ function getPrevAndNextIndex(max, current) {
   if (max < 2) {
     return [current, current];
   }
-
   if (max === 2) {
     return [+!current, +!current];
   }
@@ -32,14 +31,27 @@ const arrow = (
 
 function DesktopVertical({ items }) {
   const sliderRef = React.useRef(null);
-  const [{ currentSlide }, setState] = React.useState({ currentSlide: 0 });
+  const [currentSlide, setSlide] = React.useState(0);
+  const [angle, setAngle] = React.useState(0);
   const [prevIndex, nextIndex] = getPrevAndNextIndex(
     items.length,
     currentSlide >= items.length ? 0 : currentSlide
   );
 
-  const prev = () => sliderRef.current.slickPrev();
-  const next = () => sliderRef.current.slickNext();
+  const prev = () => {
+    sliderRef.current.slickPrev();
+    right();
+  };
+  const next = () => {
+    sliderRef.current.slickNext();
+    left();
+  };
+  const left = () => {
+    setAngle(prev => prev - 45);
+  };
+  const right = () => {
+    setAngle(prev => prev + 45);
+  };
 
   return (
     <div className={classes.desktopVertical}>
@@ -53,8 +65,20 @@ function DesktopVertical({ items }) {
           ref: sliderRef,
           arrows: false,
           beforeChange(_, next) {
-            setState(prevState => ({ ...prevState, currentSlide: next }));
-          }
+            setSlide(next);
+          },
+          onSwipe(dir) {
+            (dir === "left") || (dir === 'up') ? left() : right();
+          },
+          responsive: [
+            {
+              breakpoint: 1279,
+              settings: {
+                vertical: false,
+                verticalSwiping: false
+              }
+            }
+          ]
         }}
       >
         {items.map(({ title, buttonText, link, imgSrc }) => {
@@ -64,7 +88,7 @@ function DesktopVertical({ items }) {
               <div className={classes.slideContent}>
                 <div className={classes.leftContent}>
                   <h2>{title}</h2>
-                  <Link className={`btn btn-dark`} to={link}>
+                  <Link className={`btn btn-portfolio`} to={link}>
                     {buttonText}
                   </Link>
                 </div>
@@ -99,6 +123,12 @@ function DesktopVertical({ items }) {
         {arrow}
         <span>{items[nextIndex].title}</span>
       </button>
+      <div
+        className={classes.circle}
+        style={{ transform: `rotate(${angle}deg)` }}
+      >
+        <span></span>
+      </div>
     </div>
   );
 }

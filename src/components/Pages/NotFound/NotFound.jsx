@@ -12,7 +12,7 @@ export default function NotFound() {
         <Link to="/" className="btn btn-dark">
           Go to main page
         </Link>
-        <button className="btn btn-dark" onClick={() => history.goBack()}>
+        <button className="btn btn-dark" onClick={history.goBack}>
           Go Back
         </button>
       </div>

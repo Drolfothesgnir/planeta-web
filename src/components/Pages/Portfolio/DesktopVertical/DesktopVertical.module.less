@@ -18,6 +18,8 @@
 .slide {
   height: 100%;
   position: relative;
+  overflow: hidden;
+  display: block !important;
 }
 
 .bgTitle {
@@ -26,7 +28,7 @@
   position: absolute;
   text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
     1px 1px 0 #fff;
-  font-size: 16vh;
+  font-size: 25vh;
   text-transform: uppercase;
   line-height: 0.9;
   width: 200%;
@@ -42,9 +44,7 @@
 
 .image {
   display: block;
-  flex-shrink: 0;
-  width: 35vw;
-  height: 40vh;
+  height: 27vh;
   box-shadow: 20px 30px 70px rgba(0, 0, 0, 0.35);
 
   img {
@@ -58,40 +58,40 @@
   width: 100%;
   position: absolute;
   z-index: 3;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  top: 17vh;
+
   padding-left: 10%;
-  padding-right: 26%;
+  padding-right: 10%;
 }
 
 .leftContent {
   position: relative;
-  width: 30vw;
-  margin-top: 6vw;
+  margin-bottom: 40px;
 
   h2 {
-    color: #000000;
-    line-height: 40px;
-    font-size: 40px;
-    width: 150%;
-    margin-bottom: 30px;
+    font-size: 60px;
+    line-height: 67px;
+    color: #222222;
+    font-weight: 700;
+    margin-bottom: 20px;
+    height: 135px;
+    display: flex;
+    align-items: center;
   }
 
   :global(.btn) {
     margin-bottom: 0;
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 600;
   }
 }
 .arrow {
-  width: 13px;
-  margin-right: 10px;
-  flex-shrink: 0;
+  display: block;
+  height: 30px;
 
   svg {
     display: block;
+    height: 100%;
   }
 
   line {
@@ -104,27 +104,32 @@
   }
 }
 .verticalButton {
-  left: 10%;
   position: absolute;
   z-index: 2;
-  text-align: left;
-  font-weight: 600;
-  font-size: 18px;
+  font-weight: 400;
+  font-size: 14px;
   transition: 0.3s;
-  max-width: 180px;
-  display: flex;
-  align-items: center;
-
+  top: 8%;
+  color: #222;
 
   &.prev {
-    top: 5%;
+    left: 10%;
+
+    .arrow {
+      svg {
+        transform: rotate(-90deg) translateY(10px);
+      }
+    }
   }
 
   &.next {
-    bottom: 5%;
+    right: 10%;
 
     .arrow {
-      transform: rotateX(180deg);
+      svg {
+        margin-left: auto;
+        transform: rotate(90deg) translateY(10px);
+      }
     }
   }
 
@@ -140,9 +145,9 @@
 
 .counter {
   position: absolute;
-  top: 17vw;
+  top: 15vh;
   left: 10%;
-  font-size: 16px;
+  font-size: 14px;
   display: flex;
   align-items: center;
 
@@ -155,13 +160,107 @@
   }
 
   span {
-    margin: 0 1vw;
+    margin: 0 10px;
+  }
+}
+
+.circle {
+  width: 500px;
+  height: 500px;
+  background-image: url(../../../../assets/images/circle_ALL.svg);
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -380px;
+  left: calc(50% - 250px);
+  transition:  0.5s;
+}
+
+@media (min-width: 1024px) {
+  .verticalButton,
+  .counter {
+    font-size: 18px;
     font-weight: 600;
+  }
+
+  .image {
+    height: 40vh;
   }
 }
 
 @media (min-width: 1280px) {
   .bgTitle {
     font-size: 16vw;
+  }
+
+  .counter {
+    left: 5%;
+    top: 25vh;
+  }
+
+  .verticalButton {
+    display: flex;
+    align-items: center;
+    top: auto;
+    text-align: left;
+    max-width: 180px;
+
+    .arrow {
+      width: 13px;
+      margin-right: 10px;
+    }
+
+    &.prev {
+      top: 5%;
+      left: 5%;
+
+      .arrow {
+        svg {
+          transform: none;
+        }
+      }
+    }
+
+    &.next {
+      bottom: 5%;
+      left: 5%;
+
+      .arrow {
+        svg {
+          transform: rotateX(180deg);
+        }
+      }
+    }
+  }
+
+  .image {
+    flex-shrink: 0;
+    width: 35vw;
+  }
+
+  .slideContent {
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .leftContent {
+    width: 25vw;
+    margin-top: 6vw;
+
+    h2 {
+      width: 170%;
+    }
+  }
+
+  .circle {
+    bottom: calc(50% - 250px);
+    left: auto;
+    right: -280px;
   }
 }
