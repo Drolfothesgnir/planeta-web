@@ -13,7 +13,7 @@ export default function Routes() {
         <Route exact path="/thank-you">
           <ThankYou />
         </Route>
-        <Route exact path={"/node/3"}>
+        <Route exact path={"/portfolio"}>
           <Portfolio />
         </Route>
         <Route exact path="/">
