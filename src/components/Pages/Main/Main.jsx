@@ -2,7 +2,7 @@ import React from "react";
 import ContactForm from "./ContactForm/ContactForm";
 import Spinner from "../../Utilities/Spinner/Spinner";
 import imageSrc from "../../../assets/images/web-word.png";
-import planetimgSrc from "../../../assets/images/planet.svg";
+import planetImgSrc from "../../../assets/images/planet.svg";
 import classes from "./Main.module.less";
 import useFetchedContent from "../../../utilities/useFetchedContent";
 import createContext from "../../../utilities/createContext";
@@ -58,7 +58,7 @@ function Main() {
                 </div>
                 <div className={classes.mainRight}>
                   <div className={classes.planetImage}>
-                    <img src={planetimgSrc} alt="planet" />
+                    <img src={planetImgSrc} alt="planet" />
                   </div>
                 </div>
               </>
