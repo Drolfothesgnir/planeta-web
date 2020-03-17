@@ -33,10 +33,12 @@ function ContentPage(props) {
         </button>
       </div>
       <div className={classes.content}>
-        <Component {...props} loaded={!!menu}/>
+        <Component {...props} loaded={!!menu} />
       </div>
     </div>
-  ) : fallback;
+  ) : (
+    fallback
+  );
 }
 
 export default ContentPage;

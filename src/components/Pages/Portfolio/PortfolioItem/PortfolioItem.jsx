@@ -7,11 +7,11 @@ function parser(data) {
   const firstSlide = {
     title: data.title[0].value,
     content: data.field_description_slide
-        .slice(0, 3)
-        .map(({ field_description, field_title }) => ({
-          title: field_title[0].value,
-          text: field_description[0].value
-        }))
+      .slice(0, 3)
+      .map(({ field_description, field_title }) => ({
+        title: field_title[0].value,
+        text: field_description[0].value
+      }))
   };
 
   function getData(item) {
@@ -19,12 +19,14 @@ function parser(data) {
       title: item.field_title[0].value,
       content: {
         description: item.field_description[0].value,
-        pictures: item.field_description_of_the_picture.map(({value:description}, i) => ({
-          description,
-          url: item.field_picture[i].uri[0].url
-        }))
+        pictures: item.field_description_of_the_picture.map(
+          ({ value: description }, i) => ({
+            description,
+            url: item.field_picture[i].uri[0].url
+          })
+        )
       }
-    }
+    };
   }
 
   result.push(firstSlide);
