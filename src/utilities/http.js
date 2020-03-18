@@ -1,7 +1,7 @@
 import axios from "axios";
 import { DEFAULT_LANG } from "../Context/language";
 
-export const BASE_URL = "http://back.planeta-web.co.ua/";
+export const BASE_URL = "http://back.planeta-web.co.ua";
 
 const http = axios.create({
   baseURL: BASE_URL

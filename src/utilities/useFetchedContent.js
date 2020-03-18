@@ -30,6 +30,8 @@ export default ({ url, parser, name, expires }) => {
         .catch(err => {
           setState(prev => ({ ...prev, error: err }));
         });
+    } else if (content && error) {
+      setState(prev => ({...prev, error: null}))
     }
   });
   return [content, error];

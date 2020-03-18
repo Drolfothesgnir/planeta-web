@@ -16,8 +16,7 @@ const DesktopVertical = React.lazy(() =>
 );
 
 const parser = data => {
-  return data.map(({ title, view_node, nothing, field_image_preview }) => {
-    const imgSrc = field_image_preview.replace(/^\//, "");
+  return data.map(({ title, view_node, nothing, field_image_preview:imgSrc }) => {
     return {
       title,
       link: view_node,
@@ -40,10 +39,10 @@ function Portfolio() {
   }
   return (
     <ContentPage
-      className={classes.portfolio}
+      className={`${classes.portfolio} slick-height`}
       menuItem={"portfolio"}
       fallback={<Spinner />}
-      Component={function() {
+      component={function() {
         return items ? (
           <>
             <React.Suspense fallback={<Spinner />}>
