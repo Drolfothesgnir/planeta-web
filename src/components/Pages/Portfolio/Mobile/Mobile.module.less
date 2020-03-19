@@ -1,3 +1,5 @@
+@import (reference) "../../../../less/utility";
+
 @main: #ebf0f3;
 
 .previewImg {
@@ -45,9 +47,7 @@
       white-space: nowrap;
       left: -20%;
       font-size: 88px;
-      color: @main;
-      text-shadow: -1px -1px 0 red, 1px -1px 0 red, -1px 1px 0 red,
-        1px 1px 0 red;
+      .stroked-text(@main, red);
     }
   }
 }

@@ -15,3 +15,9 @@
     height: 100% !important;
   }
 }
+
+.stroked-text(@bg-color: inherit, @stroke-color) {
+  color: @bg-color;
+  text-shadow: -1px -1px 0 @stroke-color, 1px -1px 0 @stroke-color,
+    -1px 1px 0 @stroke-color, 1px 1px 0 @stroke-color;
+}

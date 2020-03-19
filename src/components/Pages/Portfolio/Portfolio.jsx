@@ -16,14 +16,16 @@ const DesktopVertical = React.lazy(() =>
 );
 
 const parser = data => {
-  return data.map(({ title, view_node, nothing, field_image_preview:imgSrc }) => {
-    return {
-      title,
-      link: view_node,
-      buttonText: nothing,
-      imgSrc: imgSrc ? BASE_URL + imgSrc : ""
-    };
-  });
+  return data.map(
+    ({ title, view_node, nothing, field_image_preview: imgSrc }) => {
+      return {
+        title,
+        link: view_node,
+        buttonText: nothing,
+        imgSrc: imgSrc ? new URL(imgSrc, BASE_URL) : ""
+      };
+    }
+  );
 };
 
 function Portfolio() {

@@ -3,6 +3,7 @@ import Slider from "../../../Utilities/Slider/Slider";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons/faCaretRight";
+import Arrow from "../../../Utilities/Arrow/Arrow";
 import classes from "./DesktopVertical.module.less";
 
 function getPrevAndNextIndex(max, current) {
@@ -18,16 +19,6 @@ function getPrevAndNextIndex(max, current) {
     ? [max - 2, 0]
     : [current - 1, current + 1];
 }
-
-const arrow = (
-  <span className={classes.arrow}>
-    <svg viewBox={"10 9 14 38"}>
-      <line x1="17" y1="10" x2="17" y2="46" />
-      <line x1="17" y1="10" x2="11" y2="16" />
-      <line x1="23" y1="16" x2="17" y2="10" />
-    </svg>
-  </span>
-);
 
 function DesktopVertical({ items }) {
   const sliderRef = React.useRef(null);
@@ -113,14 +104,14 @@ function DesktopVertical({ items }) {
         className={`${classes.verticalButton} ${classes.prev}`}
         onClick={prev}
       >
-        {arrow}
+        <Arrow className={classes.arrow}/>
         <span>{items[prevIndex].title}</span>
       </button>
       <button
         className={`${classes.verticalButton} ${classes.next}`}
         onClick={next}
       >
-        {arrow}
+        <Arrow className={classes.arrow}/>
         <span>{items[nextIndex].title}</span>
       </button>
       <div

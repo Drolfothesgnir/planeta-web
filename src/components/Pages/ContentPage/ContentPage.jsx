@@ -6,13 +6,19 @@ import { routeMap } from "../../../utilities/routeMap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function ContentPage(props) {
-  const { className, menuItem, component:Component, fallback } = props;
+  const {
+    className,
+    menuItem,
+    component: Component,
+    fallback,
+    props: addedProps = {}
+  } = props;
   const [pageLabelClosed, setState] = React.useState(true);
   const [{ mainMenu }] = useContentState();
   const [lang] = useLanguageState();
   const menu = mainMenu && mainMenu[lang];
   return menu ? (
-    <div className={`${classes.contentPage} ${className || ''}`}>
+    <div className={`${classes.contentPage} ${className || ""}`}>
       <div
         className={`${classes.pageLabel} ${
           pageLabelClosed ? classes.closed : ""
@@ -33,7 +39,7 @@ function ContentPage(props) {
         </button>
       </div>
       <div className={classes.content}>
-        <Component {...props} loaded={!!menu} />
+        <Component {...props} {...addedProps} loaded={!!menu} />
       </div>
     </div>
   ) : (
