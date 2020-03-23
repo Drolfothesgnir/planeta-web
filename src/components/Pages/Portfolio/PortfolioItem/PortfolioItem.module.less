@@ -184,10 +184,18 @@
       }
     }
 
+    ul {
+      text-align: center;
+      max-width: 1200px;
+      width: 85%;
+      margin: 0 auto;
+    }
+
     .image {
 
       img {
-        width: 200%;
+        width: 250%;
+        margin-left: -110%;
       }
     }
   }
@@ -200,10 +208,19 @@
   }
 
   &.third {
-    display: flex;
+
+    .slideContent {
+      flex-direction: row;
+      align-items: center;
+      padding-right: 70px;
+    }
 
     .left {
       display: flex;
+
+      li {
+        width: 50%;
+      }
     }
   }
 }
