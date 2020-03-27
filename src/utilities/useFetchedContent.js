@@ -3,7 +3,7 @@ import http from "./http";
 import { useState, useEffect } from "react";
 import { useLanguageState } from "../Context/language";
 
-export default ({ url, parser, name, expires }) => {
+export default ({ url, parser, name, expires, onlyData = true }) => {
   const isMultiple = Array.isArray(url);
   const urlList = isMultiple ? url : [url];
   const [lang] = useLanguageState();
@@ -17,7 +17,7 @@ export default ({ url, parser, name, expires }) => {
     if (!content && !error) {
       Promise.all(
         urlList.map(url =>
-          http.get(url, { params: { lang } }).then(({ data }) => data)
+          http.get(url, { params: { lang } }).then(res => onlyData ? res.data : res)
         )
       )
         .then(data => {

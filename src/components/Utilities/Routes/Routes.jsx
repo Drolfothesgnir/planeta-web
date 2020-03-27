@@ -5,8 +5,8 @@ import NotFound from "../../Pages/NotFound/NotFound";
 const Main = React.lazy(() => import("../../Pages/Main/Main"));
 const ThankYou = React.lazy(() => import("../../Pages/ThankYou/ThankYou"));
 const Portfolio = React.lazy(() => import("../../Pages/Portfolio/Portfolio"));
-const PortfolioItem = React.lazy(() =>
-  import("../../Pages/Portfolio/PortfolioItem/PortfolioItem")
+const OschadPortfolio = React.lazy(() =>
+  import("../../Pages/OschadPortfolio/OschadPortfolio")
 );
 
 export default function Routes() {
@@ -16,7 +16,7 @@ export default function Routes() {
         <Route exact path="/thank-you">
           <ThankYou />
         </Route>
-        <Route path={"/portfolio/:path"} component={PortfolioItem} />
+        <Route path={"/portfolio/apple_pay_oschadbank"} component={OschadPortfolio} />
         <Route exact path={"/portfolio"}>
           <Portfolio />
         </Route>

@@ -1,70 +1,23 @@
 @font-path: '../assets/fonts';
 
-@font-face {
-  font-family: 'Open Sans';
-  src: url('@{font-path}/OpenSans-Light.eot');
-  src: local('Open Sans Light'), local('OpenSans-Light'),
-  url('@{font-path}/OpenSans-Light.eot?#iefix') format('embedded-opentype'),
-  url('@{font-path}/OpenSans-Light.woff') format('woff'),
-  url('@{font-path}/OpenSans-Light.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
+.font-face(@name, @font-name, @weight, @style: normal) {
+  @local-name: replace(@font-name, ' ', '-');
+  @font-face {
+    font-family: @name;
+    src: url('@{font-path}/@{font-name}.eot');
+    src: local(@local-name), local(@font-name),
+    url('@{font-path}/@{font-name}.eot?#iefix') format('embedded-opentype'),
+    url('@{font-path}/@{font-name}.woff') format('woff'),
+    url('@{font-path}/@{font-name}.ttf') format('truetype');
+    font-weight: @weight;
+    font-style: @style;
+  }
 }
 
-@font-face {
-  font-family: 'Open Sans';
-  src: url('@{font-path}/OpenSans-Regular.eot');
-  src: local('Open Sans Regular'), local('OpenSans-Regular'),
-  url('@{font-path}/OpenSans-Regular.eot?#iefix') format('embedded-opentype'),
-  url('@{font-path}/OpenSans-Regular.woff') format('woff'),
-  url('@{font-path}/OpenSans-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Open Sans';
-  src: url('@{font-path}/OpenSans-SemiBold.eot');
-  src: local('Open Sans SemiBold'), local('OpenSans-SemiBold'),
-  url('@{font-path}/OpenSans-SemiBold.eot?#iefix') format('embedded-opentype'),
-  url('@{font-path}/OpenSans-SemiBold.woff') format('woff'),
-  url('@{font-path}/OpenSans-SemiBold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Open Sans';
-  src: url('@{font-path}/OpenSans-Bold.eot');
-  src: local('Open Sans Bold'), local('OpenSans-Bold'),
-  url('@{font-path}/OpenSans-Bold.eot?#iefix') format('embedded-opentype'),
-  url('@{font-path}/OpenSans-Bold.woff') format('woff'),
-  url('@{font-path}/OpenSans-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Open Sans';
-  src: url('@{font-path}/OpenSans-ExtraBold.eot');
-  src: local('Open Sans ExtraBold'), local('OpenSans-ExtraBold'),
-  url('@{font-path}/OpenSans-ExtraBold.eot?#iefix') format('embedded-opentype'),
-  url('@{font-path}/OpenSans-ExtraBold.woff') format('woff'),
-  url('@{font-path}/OpenSans-ExtraBold.ttf') format('truetype');
-  font-weight: 800;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Oswald';
-  src: url('@{font-path}/Oswald-Medium.eot');
-  src: local('Oswald'), local('Oswald'),
-  url('@{font-path}/Oswald-Medium.eot?#iefix') format('embedded-opentype'),
-  url('@{font-path}/Oswald-Medium.woff') format('woff'),
-  url('@{font-path}/Oswald-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-}
+.font-face('Open Sans', 'OpenSans-Regular', normal);
+.font-face('Open Sans', 'OpenSans-Bold', 700);
+.font-face('Open Sans', 'OpenSans-ExtraBold', 800);
+.font-face('Oswald', 'Oswald-Medium', 500);
 
 @open-sans: 'Open Sans';
 @oswald: 'Oswald';
