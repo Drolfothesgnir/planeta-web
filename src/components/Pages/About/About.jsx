@@ -30,8 +30,7 @@ function About(props) {
   const [content, error] = useFetchedContent({
     url: "/block-layout?path=" + props.match.url,
     parser,
-    name: "about",
-    expires: 0
+    name: "about"
   });
 
   if (error) {
