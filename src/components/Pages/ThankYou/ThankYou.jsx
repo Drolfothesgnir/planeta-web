@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
-import formClasses from "../Main/ContactForm/ContactForm.module.less";
+import formClasses from "../Main/Main.module.less";
 import imgSrc from "../../../assets/images/thank_you.gif";
 import classes from "./ThankYou.module.less";
 import { useContentState } from "../../../Store/Content/store";

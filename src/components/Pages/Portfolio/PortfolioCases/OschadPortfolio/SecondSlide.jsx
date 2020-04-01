@@ -20,10 +20,11 @@ export default function SecondSlide({
                 <div className={classes.image}>
                   <div className={classes.wrapper}>
                     <img src={url} alt={description} />
+                    <span className={classes.line}/>
                   </div>
                 </div>
                 <p>
-                  <span className={classes.line}/>
+                  <span className={classes.line} />
                   {description}
                 </p>
               </li>

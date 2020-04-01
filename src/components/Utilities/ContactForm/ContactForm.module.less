@@ -1,28 +1,6 @@
-@import (reference) "../../../../less/fonts";
-
 @error: #e8244e;
 
 .contactForm {
-  background-image: url(../../../../assets/images/form.jpg);
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  color: #fff;
-  opacity: 0;
-  transition: 0.5s;
-  z-index: -1;
-  display: flex;
-  align-items: flex-end;
-
-  :global .container {
-    flex: 1;
-  }
-
-  &.open {
-    opacity: 1;
-    z-index: 2;
-  }
-
   label,
   span {
     display: block;
@@ -86,30 +64,12 @@
   }
 }
 
-.closeButton {
-  position: absolute;
-  font-size: 20px;
-  right: 30px;
-  top: 30px;
-  z-index: 10;
-}
-
-.formInner {
-  padding: 0;
-}
-
 .fields {
   margin-bottom: 40px;
 }
 
-@media (min-width: 375px) {
-  .contactForm {
-    align-items: center;
-  }
-}
-
 @media (min-width: 768px) {
-  .formInner {
+  .contactForm {
     margin: 0 auto;
     max-width: 400px;
   }

@@ -1,4 +1,4 @@
-import classes from './OschadPortfolio.module.less';
+import classes from "./OschadPortfolio.module.less";
 import React from "react";
 
 export default function ThirdSlide({

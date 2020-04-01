@@ -1,34 +1,19 @@
 import React from "react";
-import ContactForm from "./ContactForm/ContactForm";
 import Spinner from "../../Utilities/Spinner/Spinner";
 import imageSrc from "../../../assets/images/web-word.png";
 import planetImgSrc from "../../../assets/images/planet.svg";
 import classes from "./Main.module.less";
 import useFetchedContent from "../../../utilities/useFetchedContent";
-import createContext from "../../../utilities/createContext";
-
-export const [Provider, useFormState] = createContext(false);
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Form from "../../Utilities/ContactForm/ContactForm";
 
 const parser = data => ({
   body: data.body[0].value,
   button: data.field_button_text[0].value
 });
 
-const Button = ({ text }) => {
-  const [, toggle] = useFormState();
-  return (
-    <button
-      className={`${classes.formToggle} btn`}
-      onClick={() => {
-        toggle(true);
-      }}
-    >
-      <span>{text}</span>
-    </button>
-  );
-};
-
 function Main() {
+  const [toggled, toggle] = React.useState(false);
   const [text, error] = useFetchedContent({
     url: "/",
     name: "main",
@@ -38,7 +23,7 @@ function Main() {
     return error.message;
   }
   return (
-    <Provider>
+    <>
       <div className={classes.mainBg}>
         <div className={`container ${classes.container}`}>
           <div className={classes.mainInner}>
@@ -54,7 +39,14 @@ function Main() {
                       __html: text.body
                     }}
                   />
-                  <Button text={text.button} />
+                  <button
+                    className={`${classes.formToggle} btn`}
+                    onClick={() => {
+                      toggle(true);
+                    }}
+                  >
+                    <span>{text.button}</span>
+                  </button>
                 </div>
                 <div className={classes.mainRight}>
                   <div className={classes.planetImage}>
@@ -68,8 +60,22 @@ function Main() {
           </div>
         </div>
       </div>
-      <ContactForm useFormState={useFormState} />
-    </Provider>
+      <div
+        className={`overlay ${classes.contactForm} ${
+          toggled ? classes.open : ""
+        }`}
+      >
+        <button
+          className={`${classes.closeButton}`}
+          onClick={() => toggle(false)}
+        >
+          <FontAwesomeIcon icon="times" />
+        </button>
+        <div className="container">
+          <Form className={classes.formInner} fallback={<Spinner />} />
+        </div>
+      </div>
+    </>
   );
 }
 

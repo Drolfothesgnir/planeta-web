@@ -1,6 +1,6 @@
-import Arrow from "../../Utilities/Arrow/Arrow";
-import classes from './OschadPortfolio.module.less';
-import portfolioClasses from '../Portfolio/PortfolioItem/PortfolioItem.module.less';
+import Arrow from "../../../../Utilities/Arrow/Arrow";
+import classes from "./OschadPortfolio.module.less";
+import portfolioClasses from "../../PortfolioItem/PortfolioItem.module.less";
 import React from "react";
 
 export default function FirstSlide({
@@ -18,7 +18,10 @@ export default function FirstSlide({
         <div className={classes.firstRow}>
           <div className={portfolioClasses.title}>
             <h1>{title}</h1>
-            <a href={url} className={`${portfolioClasses.link} ${classes.link}`}>
+            <a
+              href={url}
+              className={`${portfolioClasses.link} ${classes.link}`}
+            >
               <span>{text}</span>
               <Arrow className={`${portfolioClasses.arrow} ${classes.arrow}`} />
             </a>

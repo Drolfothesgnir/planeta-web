@@ -1,4 +1,4 @@
-import { BASE_URL } from "../../../utilities/http";
+import { BASE_URL } from "../../../../../utilities/http";
 
 export default function(data) {
   data = data.content.main_page_content.entity;
