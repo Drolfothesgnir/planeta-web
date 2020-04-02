@@ -12,6 +12,7 @@ import { Redirect } from "react-router-dom";
 import classes from "./ContactForm.module.less";
 import { formErrors, validation } from "./validation";
 import Inputmask from "inputmask";
+import Spinner from "../Spinner/Spinner";
 
 const im = new Inputmask("+380999999999", {
   placeholder: " ",
@@ -23,7 +24,7 @@ const changeHandler = ({ target: t }) => {
   t.dataset.empty = t.value ? "false" : "true";
 };
 
-function ContactForm({ className, buttonClassname, fallback }) {
+function ContactForm({ className, buttonClassname, fallback = <Spinner/> }) {
   const name = "contactForm";
   const [lang] = useLanguageState();
   const [state, dispatch] = useContentState();

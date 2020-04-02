@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function ContentPage(props) {
   const {
-    className,
+    className = '',
     menuItem,
     component: Component,
     fallback,
@@ -18,7 +18,7 @@ function ContentPage(props) {
   const [lang] = useLanguageState();
   const menu = mainMenu && mainMenu[lang];
   return menu ? (
-    <div className={`${classes.contentPage} ${className || ""}`}>
+    <div className={`${classes.contentPage} ${className}`}>
       <div
         className={`${classes.pageLabel} ${
           pageLabelClosed ? classes.closed : ""

@@ -59,7 +59,7 @@ export default function(_data) {
 
   const fourthSlide = {
     items: emails.concat(tels, locations),
-    titles: [view_mode.field_contacts.title, view_mode.field_follow_us.title]
+    titles: [view_mode.webform.title, view_mode.field_contacts.title, view_mode.field_follow_us.title]
   };
 
   return [firstSlide, secondSlide, thirdSlide, fourthSlide];

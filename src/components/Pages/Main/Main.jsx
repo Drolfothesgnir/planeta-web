@@ -72,7 +72,7 @@ function Main() {
           <FontAwesomeIcon icon="times" />
         </button>
         <div className="container">
-          <Form className={classes.formInner} fallback={<Spinner />} />
+          <Form className={classes.formInner} />
         </div>
       </div>
     </>

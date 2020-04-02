@@ -6,13 +6,14 @@ import ContactForm from '../../Utilities/ContactForm/ContactForm';
 function FourthSlide({
   content: {
     items,
-    titles: [title, followUs]
+    titles: [mainTitle, title, followUs]
   }
 }) {
   return (
     <div className={`${classes.slide} ${classes.fourth}`}>
       <div className={classes.content}>
         <div className={classes.left}>
+          <span className={classes.mainTitle}>{mainTitle}</span>
           <ContactForm className={classes.form} buttonClassname={'btn btn-dark'} />
         </div>
         <div className={classes.right}>
