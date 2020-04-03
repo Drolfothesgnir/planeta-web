@@ -5,7 +5,8 @@ export default function SecondSlide({
   content: {
     title,
     content: { description, pictures }
-  }
+  },
+    speed
 }) {
   return (
     <div className={`${classes.slide} ${classes.second}`}>
@@ -14,9 +15,9 @@ export default function SecondSlide({
         <h4>{title}</h4>
         <div dangerouslySetInnerHTML={{ __html: description }} />
         <ul>
-          {pictures.map(({ url, description }) => {
+          {pictures.map(({ url, description }, i) => {
             return (
-              <li key={description}>
+              <li key={description} style={{transitionDelay: `${speed + i / 2 * speed}ms`}}>
                 <div className={classes.image}>
                   <div className={classes.wrapper}>
                     <img src={url} alt={description} />

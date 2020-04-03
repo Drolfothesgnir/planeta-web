@@ -9,6 +9,8 @@ import parser from "./parser";
 import Spinner from "../../../../Utilities/Spinner/Spinner";
 import classes from "./OschadPortfolio.module.less";
 
+const SLIDER_SPEED = 500;
+
 function OschadPortfolio(props) {
   const [content, error] = useFetchedContent({
     url: "/block-layout?path=" + props.match.url,
@@ -20,11 +22,15 @@ function OschadPortfolio(props) {
     return error.message;
   }
   return (
-    <PortfolioItem className={classes.item}>
+    <PortfolioItem className={classes.item} settings={{ speed: SLIDER_SPEED }}>
       {content ? (
         [
           <FirstSlide content={content[0]} key={"firstSlide"} />,
-          <SecondSlide content={content[1]} key={"secondSlide"} />,
+          <SecondSlide
+            content={content[1]}
+            key={"secondSlide"}
+            speed={SLIDER_SPEED}
+          />,
           <ThirdSlide content={content[2]} key={"thirdSlide"} />,
           <FourthSlide content={content[3]} key={"fourthSlide"} />
         ]

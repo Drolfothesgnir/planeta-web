@@ -2,7 +2,7 @@ import React from "react";
 import Slider from "../Slider/Slider";
 import classes from "./PageSlider.module.less";
 
-function PageSlider({ settings, children }) {
+function PageSlider({ settings = {}, children }) {
   const sliderRef = React.useRef(null);
   const [currentSlide, setSlide] = React.useState(0);
 

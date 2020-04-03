@@ -5,7 +5,7 @@ import Arrow from "../../../Utilities/Arrow/Arrow";
 import { Link } from "react-router-dom";
 import PageSlider from "../../../Utilities/PageSlider/PageSlider";
 
-function PortfolioItem({ children, className }) {
+function PortfolioItem({ children, className, settings }) {
   return (
     <ContentPage
       className={`${className || ""} slick-height`}
@@ -15,7 +15,7 @@ function PortfolioItem({ children, className }) {
         <Arrow className={classes.arrow} />
         <span>Назад</span>
       </Link>
-      <PageSlider>
+      <PageSlider settings={settings}>
         {children}
       </PageSlider>
     </ContentPage>

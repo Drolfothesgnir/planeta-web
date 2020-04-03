@@ -136,6 +136,7 @@
 
     li {
       width: 25vw;
+      opacity: 0;
     }
 
     p {
@@ -249,5 +250,12 @@
         margin-bottom: 20px;
       }
     }
+  }
+}
+
+:global(.slick-active) .second {
+  li {
+    opacity: 1;
+    transition: opacity .5s ease-in;
   }
 }
