@@ -14,7 +14,7 @@ const webpack = require("webpack"),
 module.exports = merge(common, {
   entry: ["react-hot-loader/patch", "./src/index.js"],
   mode: "development",
-  devtool:'eval-source-map',
+  devtool: "eval-source-map",
   module: {
     rules: [
       {
@@ -79,7 +79,7 @@ module.exports = merge(common, {
   devServer: {
     contentBase: path.join(__dirname, "public/"),
     historyApiFallback: {
-      index: '/index.html'
+      index: "/index.html"
     },
     port: 3000,
     publicPath: "http://localhost:3000/",

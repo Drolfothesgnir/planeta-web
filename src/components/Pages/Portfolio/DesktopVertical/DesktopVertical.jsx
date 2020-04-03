@@ -118,7 +118,7 @@ function DesktopVertical({ items }) {
         className={classes.circle}
         style={{ transform: `rotate(${angle}deg)` }}
       >
-        <span></span>
+        <span/>
       </div>
     </div>
   );

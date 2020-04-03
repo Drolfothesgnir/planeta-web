@@ -33,9 +33,9 @@ function MainMenu() {
   const [state, dispatch] = useContentState();
   const name = "mainMenu";
   const [lang] = useLanguageState();
-  const links = state[name] && state[name][lang];
+  const links = state[name]?.[lang];
   const [toggled, toggle] = useMenuState();
-  const err = state[name] && state[name].error;
+  const err = state[name]?.error;
 
   if (!links && !err) {
     dispatch(fetchContent({ url: "/api/menu_items/main", parser, name, lang }));

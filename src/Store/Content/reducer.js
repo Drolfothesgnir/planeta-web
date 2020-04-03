@@ -1,8 +1,7 @@
 import {
   ADD_CONTENT,
   SET_ERROR,
-  SET_CONTACT_FORM_SUBMISSION_FLAG,
-    SET_CONTENT
+  SET_CONTACT_FORM_SUBMISSION_FLAG
 } from "./actionTypes";
 
 export default (state, { type, payload }) => {
@@ -15,13 +14,6 @@ export default (state, { type, payload }) => {
           ...state[name],
           [lang]: content
         }
-      };
-    }
-
-    case SET_CONTENT: {
-      return {
-        ...state,
-        [payload.name]: payload.content
       };
     }
 

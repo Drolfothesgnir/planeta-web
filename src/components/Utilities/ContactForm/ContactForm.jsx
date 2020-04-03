@@ -28,7 +28,7 @@ function ContactForm({ className, buttonClassname, fallback = <Spinner/> }) {
   const name = "contactForm";
   const [lang] = useLanguageState();
   const [state, dispatch] = useContentState();
-  const content = state[name] && state[name][lang];
+  const content = state[name]?.[lang];
   const [{ success, loading }, setStatus] = React.useState({
     success: false,
     loading: false

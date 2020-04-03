@@ -16,7 +16,7 @@ function ContentPage(props) {
   const [pageLabelClosed, setState] = React.useState(true);
   const [{ mainMenu }] = useContentState();
   const [lang] = useLanguageState();
-  const menu = mainMenu && mainMenu[lang];
+  const menu = mainMenu?.[lang];
   return menu ? (
     <div className={`${classes.contentPage} ${className}`}>
       <div
