@@ -9,7 +9,15 @@ const merge = require("webpack-merge"),
 
 module.exports = merge(common, {
   optimization: {
-    minimizer: [new TerserPlugin(), new OptimizeCSSAssetsPlugin({})]
+    minimizer: [new TerserPlugin(), new OptimizeCSSAssetsPlugin({})],
+    splitChunks: {
+      cacheGroups: {
+        default: {
+          reuseExistingChunk: true,
+          enforce: true
+        }
+      }
+    }
   },
   mode: "production",
   entry: "./src/index.js",
@@ -90,7 +98,7 @@ module.exports = merge(common, {
         removeScriptTypeAttributes: true,
         removeStyleLinkTypeAttributes: true,
         useShortDoctype: true
-      },
+      }
     }),
     new MiniCssExtractPlugin(),
     new BundleAnalyzerPlugin()

@@ -9,23 +9,6 @@ import SecondSlide from "./SecondSlide";
 import ThirdSlide from "./ThirdSlide";
 import FourthSlide from "./FourthSlide";
 
-function Content({ content }) {
-  return (
-    <PageSlider>
-      {content ? (
-        [
-          <FirstSlide key={"first"} content={content[0]} />,
-          <SecondSlide key={"second"} content={content[1]} />,
-          <ThirdSlide key={"third"} content={content[2]} />,
-          <FourthSlide key={"fourth"} content={content[3]} />
-        ]
-      ) : (
-        <Spinner />
-      )}
-    </PageSlider>
-  );
-}
-
 function About(props) {
   const [content, error] = useFetchedContent({
     url: "/block-layout?path=" + props.match.url,
@@ -38,13 +21,20 @@ function About(props) {
   }
 
   return (
-    <ContentPage
-      menuItem={"about"}
-      fallback={<Spinner />}
-      component={Content}
-      className={`slick-height`}
-      props={{ content }}
-    />
+    <ContentPage menuItem={"about"} className={`slick-height`}>
+      <PageSlider>
+        {content ? (
+          [
+            <FirstSlide key={"first"} content={content[0]} />,
+            <SecondSlide key={"second"} content={content[1]} />,
+            <ThirdSlide key={"third"} content={content[2]} />,
+            <FourthSlide key={"fourth"} content={content[3]} />
+          ]
+        ) : (
+          <Spinner />
+        )}
+      </PageSlider>
+    </ContentPage>
   );
 }
 

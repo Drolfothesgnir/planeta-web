@@ -4,14 +4,14 @@ import { useContentState } from "../../../Store/Content/store";
 import { useLanguageState } from "../../../Context/language";
 import { routeMap } from "../../../utilities/routeMap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Spinner from "../../Utilities/Spinner/Spinner";
 
 function ContentPage(props) {
   const {
     className = '',
     menuItem,
-    component: Component,
-    fallback,
-    props: addedProps = {}
+    children,
+    fallback = <Spinner/>
   } = props;
   const [pageLabelClosed, setState] = React.useState(true);
   const [{ mainMenu }] = useContentState();
@@ -39,7 +39,7 @@ function ContentPage(props) {
         </button>
       </div>
       <div className={classes.content}>
-        <Component {...props} {...addedProps} loaded={!!menu} />
+        {children}
       </div>
     </div>
   ) : (

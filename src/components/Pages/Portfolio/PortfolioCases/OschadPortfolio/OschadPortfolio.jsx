@@ -20,21 +20,18 @@ function OschadPortfolio(props) {
     return error.message;
   }
   return (
-    <PortfolioItem
-      slides={
-        content ? (
-          [
-            <FirstSlide content={content[0]} key={"firstSlide"} />,
-            <SecondSlide content={content[1]} key={"secondSlide"} />,
-            <ThirdSlide content={content[2]} key={"thirdSlide"} />,
-            <FourthSlide content={content[3]} key={"fourthSlide"} />
-          ]
-        ) : (
-          <Spinner />
-        )
-      }
-      className={classes.item}
-    />
+    <PortfolioItem className={classes.item}>
+      {content ? (
+        [
+          <FirstSlide content={content[0]} key={"firstSlide"} />,
+          <SecondSlide content={content[1]} key={"secondSlide"} />,
+          <ThirdSlide content={content[2]} key={"thirdSlide"} />,
+          <FourthSlide content={content[3]} key={"fourthSlide"} />
+        ]
+      ) : (
+        <Spinner />
+      )}
+    </PortfolioItem>
   );
 }
 

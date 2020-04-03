@@ -18,7 +18,7 @@ export default function Routes() {
         </Route>
         <Route path={"/about-us"} component={About} />
         <Route
-          path={"/portfolio/apple-pay-oschadbank"}  
+          path={"/portfolio/apple-pay-oschadbank"}
           component={OschadPortfolio}
         />
         <Route exact path={"/portfolio"}>

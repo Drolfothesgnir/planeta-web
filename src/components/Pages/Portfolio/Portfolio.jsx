@@ -43,48 +43,46 @@ function Portfolio() {
     <ContentPage
       className={`${classes.portfolio} slick-height`}
       menuItem={"portfolio"}
-      fallback={<Spinner />}
-      component={function() {
-        return items ? (
-          <>
-            <React.Suspense fallback={<Spinner />}>
-              {width >= 768 ? (
-                inlineViewMode ? (
-                  <DesktopHorizontal items={items} />
-                ) : (
-                  <DesktopVertical items={items} />
-                )
+    >
+      {items ? (
+        <>
+          <React.Suspense fallback={<Spinner />}>
+            {width >= 768 ? (
+              inlineViewMode ? (
+                <DesktopHorizontal items={items} />
               ) : (
-                <Mobile items={items} />
-              )}
-            </React.Suspense>
-            <div className={classes.viewToggle}>
-              <button
-                className={`${inlineViewMode ? classes.active : ""} ${
-                  classes.inline
-                }`}
-                onClick={() => setViewMode(true)}
-              >
-                <span />
-                <span />
-                <span />
-                <span />
-              </button>
-              <button
-                className={`${!inlineViewMode ? classes.active : ""} ${
-                  classes.vertical
-                }`}
-                onClick={() => setViewMode(false)}
-              >
-                <span />
-              </button>
-            </div>
-          </>
-        ) : (
-          <Spinner />
-        );
-      }}
-    />
+                <DesktopVertical items={items} />
+              )
+            ) : (
+              <Mobile items={items} />
+            )}
+          </React.Suspense>
+          <div className={classes.viewToggle}>
+            <button
+              className={`${inlineViewMode ? classes.active : ""} ${
+                classes.inline
+              }`}
+              onClick={() => setViewMode(true)}
+            >
+              <span />
+              <span />
+              <span />
+              <span />
+            </button>
+            <button
+              className={`${!inlineViewMode ? classes.active : ""} ${
+                classes.vertical
+              }`}
+              onClick={() => setViewMode(false)}
+            >
+              <span />
+            </button>
+          </div>
+        </>
+      ) : (
+        <Spinner />
+      )}
+    </ContentPage>
   );
 }
 
