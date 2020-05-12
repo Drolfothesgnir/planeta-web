@@ -9,9 +9,9 @@ function Header() {
     <header>
       <div className="container">
         <div className={classes.headerContent}>
-          <Logo className={classes.logo}/>
-          <NavToggle className={classes.navToggle} />
-          <LangSelector className={classes.langSelector}/>
+          <Logo className={classes.logo} />
+          <NavToggle classes={{ navToggleContainer: classes.navToggle }} />
+          <LangSelector className={classes.langSelector} />
         </div>
       </div>
     </header>

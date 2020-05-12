@@ -71,14 +71,14 @@ module.exports = merge(common, {
         use: [
           MiniCssExtractPlugin.loader,
           "css-loader",
+          "postcss-loader",
           {
             loader: "less-loader",
             options: {
               strictUnits: true,
               javascriptEnabled: true
             }
-          },
-          "postcss-loader"
+          }
         ],
         exclude: /\.module\.less$/
       }

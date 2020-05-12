@@ -23,7 +23,7 @@ function About(props) {
   console.log(content);
 
   return (
-    <ContentPage menuItem={"about"} className={`slick-height`}>
+    <ContentPage menuItem={"about"}>
       <PageSlider>
         {content ? (
           [

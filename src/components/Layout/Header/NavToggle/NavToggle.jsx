@@ -1,7 +1,7 @@
 import React from "react";
 import { useLanguageState } from "../../../../Context/language";
-import classes from "./NavToggle.module.less";
-import {useMenuState} from "../../menuContext";
+import defaultClasses from "./NavToggle.module.less";
+import { useMenuState } from "../../menuContext";
 
 const mainMenuToggle = {
   en: ["close", "menu"],
@@ -9,24 +9,34 @@ const mainMenuToggle = {
   uk: ["закрити", "меню"]
 };
 function NavToggle(props) {
-  const [toggled, toggleFunc] = useMenuState(),
-    [lang] = useLanguageState();
+  const [toggled, toggleFunc] = useMenuState();
+  const [lang] = useLanguageState();
   const text = mainMenuToggle[lang][+!toggled];
+  const classes = {...defaultClasses, ...props.classes};
+
   return (
-    <div className={`${classes.navToggleContainer} ${props.className || ""}`}>
+    <div
+      className={`${classes.navToggleContainer}`}
+    >
       <button
-        className={`${classes.navToggle} ${toggled ? classes.open : ""}`}
+        className={`${classes.navToggleButton} ${toggled ? classes.open : ""}`}
         onClick={() => {
           toggleFunc(!toggled);
         }}
       >
-        <div className={classes.burger}>
+        <div
+          className={`${classes.navToggleBurger}`}
+        >
           <span />
           <span />
           <span />
           <span />
         </div>
-        <span className={classes.menuStatus}>{text}</span>
+        <span
+          className={`${classes.navToggleMenuStatus}`}
+        >
+          {text}
+        </span>
       </button>
     </div>
   );

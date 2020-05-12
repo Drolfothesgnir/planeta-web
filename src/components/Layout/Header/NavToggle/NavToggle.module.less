@@ -1,7 +1,7 @@
 @import (reference) "../../../../less/fonts";
 @import "../../../../less/colors";
 
-.navToggle {
+.navToggleButton {
   width: 17px;
   height: 17px;
   position: relative;
@@ -9,7 +9,7 @@
   transition: 0.5s ease-in-out;
   display: block;
 
-  .burger span {
+  .navToggleBurger span {
     display: block;
     position: absolute;
     height: 2px;
@@ -35,7 +35,7 @@
   }
 
   &.open {
-    .burger {
+    .navToggleBurger {
       span {
         &:nth-child(1) {
           top: 8px;
@@ -53,7 +53,7 @@
 
         &:nth-child(4) {
           top: 8px;
-          width: 0%;
+          width: 0;
           left: 50%;
         }
       }
@@ -61,7 +61,7 @@
   }
 }
 
-.menuStatus {
+.navToggleMenuStatus {
   text-transform: uppercase;
   border-left: 1px solid @grey;
   margin-left: 35px;
@@ -81,13 +81,13 @@
     align-items: flex-start;
   }
 
-  .menuStatus {
+  .navToggleMenuStatus {
     display: block;
     font-size: 16px;
     height: 22px;
   }
 
-  .burger {
+  .navToggleBurger {
     margin-top: -2px;
   }
 }
