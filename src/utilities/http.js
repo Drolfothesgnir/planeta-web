@@ -14,8 +14,10 @@ http.interceptors.request.use(config => {
       _format: "json"
     };
 
-    if (config.params.lang && config.params.lang !== DEFAULT_LANG) {
-      config.url = `/${config.params.lang + config.url}`;
+    const { lang } = config.params;
+
+    if (lang && lang !== DEFAULT_LANG) {
+      config.url = `/${lang + config.url}`;
     }
   }
 
