@@ -17,7 +17,9 @@ export default ({ url, parser, name, expires, onlyData = true }) => {
     if (!content && !error) {
       Promise.all(
         urlList.map(url =>
-          http.get(url, { params: { lang } }).then(res => onlyData ? res.data : res)
+          http
+            .get(url, { params: { lang } })
+            .then(res => (onlyData ? res.data : res))
         )
       )
         .then(data => {
@@ -31,7 +33,7 @@ export default ({ url, parser, name, expires, onlyData = true }) => {
           setState(prev => ({ ...prev, error: err }));
         });
     } else if (content && error) {
-      setState(prev => ({...prev, error: null}))
+      setState(prev => ({ ...prev, error: null }));
     }
   });
   return [content, error];

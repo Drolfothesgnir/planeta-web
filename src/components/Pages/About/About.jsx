@@ -21,7 +21,7 @@ function About(props) {
   }
 
   return (
-    <ContentPage menuItem={"about"} className={`slick-height`}>
+    <ContentPage menuItem={"about"}>
       <PageSlider>
         {content ? (
           [

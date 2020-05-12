@@ -12,21 +12,19 @@ const parser = (data, lang) => {
   if (!data.length) {
     return null;
   }
-  const result = {};
-  data.forEach(({ title, relative, key }, index) => {
+  return data.map(({ title, relative, key }, i) => {
     const parts = relative.split("/");
     if (parts[1] === lang) {
       parts.splice(1, 1);
       relative = parts.join("/");
     }
-    result[key] = {
+    return {
       title,
       relative,
       key,
-      index: index + 1
+      index: i + 1
     };
   });
-  return result;
 };
 
 function MainMenu() {
@@ -36,11 +34,11 @@ function MainMenu() {
   const links = state[name]?.[lang];
   const [toggled, toggle] = useMenuState();
   const err = state[name]?.error;
+  const closeMenu = () => toggle(false);
 
   if (!links && !err) {
     dispatch(fetchContent({ url: "/api/menu_items/main", parser, name, lang }));
   }
-  const closeMenu = () => toggle(false);
 
   return (
     <nav
@@ -48,11 +46,11 @@ function MainMenu() {
     >
       <ul className={`${classes.mainMenuLinks}`}>
         {links
-          ? Object.values(links).map(({ title, relative, key, index, uri }) => {
+          ? links.map(({ title, relative, key }) => {
               return (
                 <li key={key} className={`${classes.navLink}`}>
                   <Link
-                    to={{ pathname: relative, state: [uri, index] }}
+                    to={{ pathname: relative }}
                     onClick={closeMenu}
                   >
                     <span className="glitch" data-text={title}>

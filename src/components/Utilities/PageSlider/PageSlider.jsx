@@ -28,7 +28,7 @@ function PageSlider({ settings = {}, children }) {
       <Slider settings={{ ...defaultSettings, ...settings }}>{children}</Slider>
       <div className={classes.navigation}>
         <ul>
-          {(Array.isArray(children) ? children : []).map((_, n) => {
+          {Array.isArray(children) && children.map((_, n) => {
             return (
               <li key={n}>
                 <button

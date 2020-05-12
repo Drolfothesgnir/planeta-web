@@ -19,44 +19,50 @@ function Main() {
     name: "main",
     parser
   });
+
+  let content;
+
   if (error) {
-    return error.message;
+    content = error.message;
+  } else if (text) {
+    content = (
+        <>
+          <div className={classes.mainLeft}>
+            <div className={classes.mainLogo}>
+              <img src={imageSrc} alt="main-logo" />
+            </div>
+            <div
+                className={classes.mainText}
+                dangerouslySetInnerHTML={{
+                  __html: text.body
+                }}
+            />
+            <button
+                className={`${classes.formToggle} btn`}
+                onClick={() => {
+                  toggle(true);
+                }}
+            >
+              <span>{text.button}</span>
+            </button>
+          </div>
+          <div className={classes.mainRight}>
+            <div className={classes.planetImage}>
+              <img src={planetImgSrc} alt="planet" />
+            </div>
+          </div>
+        </>
+    )
+  } else {
+    content = <Spinner className={classes.loader} />
   }
+
   return (
     <>
       <div className={classes.mainBg}>
         <div className={`container ${classes.container}`}>
           <div className={classes.mainInner}>
-            {text ? (
-              <>
-                <div className={classes.mainLeft}>
-                  <div className={classes.mainLogo}>
-                    <img src={imageSrc} alt="main-logo" />
-                  </div>
-                  <div
-                    className={classes.mainText}
-                    dangerouslySetInnerHTML={{
-                      __html: text.body
-                    }}
-                  />
-                  <button
-                    className={`${classes.formToggle} btn`}
-                    onClick={() => {
-                      toggle(true);
-                    }}
-                  >
-                    <span>{text.button}</span>
-                  </button>
-                </div>
-                <div className={classes.mainRight}>
-                  <div className={classes.planetImage}>
-                    <img src={planetImgSrc} alt="planet" />
-                  </div>
-                </div>
-              </>
-            ) : (
-              <Spinner className={classes.loader} />
-            )}
+            {content}
           </div>
         </div>
       </div>

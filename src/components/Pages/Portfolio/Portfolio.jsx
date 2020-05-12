@@ -40,10 +40,7 @@ function Portfolio() {
     return error.message;
   }
   return (
-    <ContentPage
-      className={`${classes.portfolio} slick-height`}
-      menuItem={"portfolio"}
-    >
+    <ContentPage classes={{ contentPage: classes.portfolio }}>
       {items ? (
         <>
           <React.Suspense fallback={<Spinner />}>
