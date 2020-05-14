@@ -15,14 +15,14 @@ const DesktopVertical = React.lazy(() =>
   import("./DesktopVertical/DesktopVertical")
 );
 
-const parser = data => {
+const parser = (data) => {
   return data.map(
     ({ title, view_node, nothing, field_image_preview: imgSrc }) => {
       return {
         title,
         link: view_node,
         buttonText: nothing,
-        imgSrc: imgSrc ? new URL(imgSrc, BASE_URL) : ""
+        imgSrc: imgSrc ? new URL(imgSrc, BASE_URL) : "",
       };
     }
   );
@@ -34,7 +34,7 @@ function Portfolio() {
   const [items, error] = useFetchedContent({
     url: "/portfolio",
     name: "portfolio",
-    parser
+    parser,
   });
   if (error) {
     return error.message;

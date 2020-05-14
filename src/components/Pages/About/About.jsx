@@ -20,8 +20,6 @@ function About(props) {
     return error.message;
   }
 
-  console.log(content);
-
   return (
     <ContentPage menuItem={"about"}>
       <PageSlider>

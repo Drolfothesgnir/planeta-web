@@ -6,7 +6,8 @@ import {
   faArrowRight,
   faArrowLeft,
   faMobileAlt,
-  faMapMarkerAlt
+  faMapMarkerAlt,
+  faClock,
 } from "@fortawesome/free-solid-svg-icons";
 import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
 
@@ -18,5 +19,6 @@ library.add(
   faArrowRight,
   faArrowLeft,
   faMapMarkerAlt,
-  faMobileAlt
+  faMobileAlt,
+  faClock
 );
