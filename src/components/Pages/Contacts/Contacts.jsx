@@ -25,7 +25,6 @@ const parser = (data) => {
     telTechnicalSupport:
       data.entity.field_technical_support[0].field_tel[0].value,
     titleWorkTogether: data.view_mode.field_work_together.title,
-    map: data.entity.body[0].value,
   };
 };
 
