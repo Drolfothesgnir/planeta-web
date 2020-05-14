@@ -1,4 +1,5 @@
-const path = require("path");
+const path = require("path"),
+  webpack = require("webpack");
 
 module.exports = {
   output: {
@@ -42,6 +43,18 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      CACHE_VERSION: JSON.stringify(
+        Math.random()
+          .toString(36)
+          .substring(2, 15) +
+          Math.random()
+            .toString(36)
+            .substring(2, 15)
+      )
+    })
+  ],
   resolve: {
     extensions: ["*", ".js", ".jsx"]
   }
