@@ -15,12 +15,15 @@ function OschadPortfolio(props) {
   const [content, error] = useFetchedContent({
     url: "/block-layout?path=" + props.match.url,
     parser,
-    name: "portfolio:oschad"
+    name: "portfolio:oschad",
   });
 
   if (error) {
     return error.message;
   }
+
+  console.log(props.match.url);
+
   return (
     <PortfolioItem className={classes.item} settings={{ speed: SLIDER_SPEED }}>
       {content ? (
@@ -32,7 +35,7 @@ function OschadPortfolio(props) {
             speed={SLIDER_SPEED}
           />,
           <ThirdSlide content={content[2]} key={"thirdSlide"} />,
-          <FourthSlide content={content[3]} key={"fourthSlide"} />
+          <FourthSlide content={content[3]} key={"fourthSlide"} />,
         ]
       ) : (
         <Spinner />

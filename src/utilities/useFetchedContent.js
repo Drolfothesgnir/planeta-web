@@ -35,6 +35,6 @@ export default ({ url, parser, name, expires, onlyData = true }) => {
     } else if (content && error) {
       setState(prev => ({ ...prev, error: null }));
     }
-  });
+  }, [content, error, urlList, lang, onlyData, isMultiple, parser, fetchedContent, name, expires]);
   return [content, error];
 };

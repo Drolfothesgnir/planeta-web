@@ -1,0 +1,46 @@
+import React from "react";
+import Slider from "../Slider/Slider";
+import classes from "./PageSlider.module.less";
+
+function PageSlider({ settings = {}, children }) {
+  const sliderRef = React.useRef(null);
+  const [currentSlide, setSlide] = React.useState(0);
+
+  function goTo(i) {
+    sliderRef.current.slickGoTo(i);
+  }
+
+  const defaultSettings = {
+    infinite: false,
+    arrows: false,
+    buttons: false,
+    dots: false,
+    ref: sliderRef,
+    beforeChange(_, next) {
+      setSlide(next);
+    },
+  };
+
+  return (
+    <>
+      <div className={classes.navigation}>
+        <ul>
+          {Array.isArray(children) &&
+            children.map((_, n) => {
+              return (
+                <li key={n}>
+                  <button
+                    className={currentSlide === n ? classes.active : ""}
+                    onClick={() => goTo(n)}
+                  />
+                </li>
+              );
+            })}
+        </ul>
+      </div>
+      <Slider settings={{ ...defaultSettings, ...settings }}>{children}</Slider>
+    </>
+  );
+}
+
+export default PageSlider;
