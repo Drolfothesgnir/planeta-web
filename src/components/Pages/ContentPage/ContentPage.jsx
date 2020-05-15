@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Spinner from "../../Utilities/Spinner/Spinner";
 
 function ContentPage(props) {
-  const { children, classes, fallback = <Spinner /> } = props;
+  const { children, classes = {}, fallback = <Spinner /> } = props;
   const [pageLabelClosed, setState] = React.useState(true);
   const [{ mainMenu }] = useContentState();
   const [lang] = useLanguageState();
