@@ -9,14 +9,13 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Provider as LangProvider } from "./Context/language";
 import ContentProvider from "./Store/Content/store";
-import storage from "./utilities/storage";
 import App from "./App";
 
 
 /* eslint-disable */
-if (storage.getItem('CACHE_VERSION') !== CACHE_VERSION) {
-  storage.clear();
-  storage.setItem('CACHE_VERSION', CACHE_VERSION);
+if (localStorage.getItem('CACHE_VERSION') !== CACHE_VERSION) {
+  localStorage.clear();
+  localStorage.setItem('CACHE_VERSION', CACHE_VERSION);
 }
 /* eslint-enable */
 
