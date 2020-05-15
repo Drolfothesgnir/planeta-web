@@ -6,27 +6,32 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Spinner from "../../Utilities/Spinner/Spinner";
 
 function ContentPage(props) {
-  const { children, fallback = <Spinner /> } = props;
+  const { children, classes = {}, fallback = <Spinner /> } = props;
   const [pageLabelClosed, setState] = React.useState(true);
   const [{ mainMenu }] = useContentState();
   const [lang] = useLanguageState();
   const menu = mainMenu?.[lang];
   const pagePath = location.pathname.split("/")[1];
   const menuItem = menu?.find(item => item.relative === "/" + pagePath);
-  const classes = {...defaultClasses, ...props.classes};
 
   return menu ? (
-    <div className={`${classes.contentPage} slick-height`}>
+    <div
+      className={`${defaultClasses.contentPage} ${classes.contentPage || ''} slick-height`}
+    >
       <div
-        className={`${classes.contentPageLabel} ${
-          pageLabelClosed ? classes.closed : ""
-        }`}
+        className={`${defaultClasses.contentPageLabel} ${
+          classes.contentPageLabel || ''
+        } ${pageLabelClosed ? defaultClasses.closed : ""}`}
       >
         <span data-page-index={`${menuItem.index}`.padStart(2, "0")}>
-          <span className={classes.contentPageText}>{menuItem.title}</span>
+          <span
+            className={`${defaultClasses.contentPageText} ${classes.contentPageText || ''}`}
+          >
+            {menuItem.title}
+          </span>
         </span>
         <button
-          className={classes.contentPageClose}
+          className={`${defaultClasses.contentPageClose} ${classes.contentPageClose || ''}`}
           onClick={() => setState(prev => !prev)}
         >
           <FontAwesomeIcon
@@ -34,7 +39,11 @@ function ContentPage(props) {
           />
         </button>
       </div>
-      <div className={classes.contentPageContent}>{children}</div>
+      <div
+        className={`${defaultClasses.contentPageContent} ${classes.contentPageContent || ''}`}
+      >
+        {children}
+      </div>
     </div>
   ) : (
     fallback
