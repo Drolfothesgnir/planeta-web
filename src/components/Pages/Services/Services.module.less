@@ -1,0 +1,86 @@
+@import (reference) "../../../less/fonts";
+@import (reference) "../../../less/colors";
+@bg-gradient: linear-gradient(10deg, #d3e7f0 1%, #ebeff1 100%);
+
+.wrapper {
+  background: @bg-gradient;
+  height: 80vh;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  height: 30px;
+  overflow: hidden;
+  position: relative;
+}
+
+.container {
+  width: 285px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.link {
+  order: 2;
+  text-align: center;
+  opacity: 40%;
+  margin-bottom: 10px;
+
+  button {
+    font-family: @oswald;
+    text-transform: uppercase;
+  }
+}
+.top {
+  opacity: 100%;
+  position: relative;
+  order: 1;
+}
+
+.btn {
+  margin-left: auto;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid black;
+  transform: rotate(90deg);
+  right: 40px;
+  top: 0;
+  background-image: url(../../../assets/images/arrow.svg);
+  background-position: center;
+  background-size: 50%;
+  background-repeat: no-repeat;
+}
+
+.activeBtn {
+  transform: rotate(270deg);
+}
+
+.open {
+  height: auto;
+}
+
+@media (min-width: 470px) {
+  .container {
+    width: 460px;
+  }
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    background: none;
+  }
+  .container {
+    width: 100%;
+    height: 100%;
+    background: @bg-gradient;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  .nav {
+    display: none;
+  }
+}

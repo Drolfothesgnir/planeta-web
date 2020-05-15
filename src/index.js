@@ -11,6 +11,14 @@ import { Provider as LangProvider } from "./Context/language";
 import ContentProvider from "./Store/Content/store";
 import App from "./App";
 
+
+/* eslint-disable */
+if (localStorage.getItem('CACHE_VERSION') !== CACHE_VERSION) {
+  localStorage.clear();
+  localStorage.setItem('CACHE_VERSION', CACHE_VERSION);
+}
+/* eslint-enable */
+
 const app = (
   <Router>
     <ContentProvider>
