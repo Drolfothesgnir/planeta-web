@@ -14,7 +14,7 @@ export default ({ url, parser, name, expires, onlyData = true }) => {
   });
   const content = fetchedContent[lang];
   useEffect(() => {
-    if (!content && !error) {
+    if (content === undefined && !error) {
       Promise.all(
         urlList.map(url =>
           http
@@ -24,7 +24,7 @@ export default ({ url, parser, name, expires, onlyData = true }) => {
       )
         .then(data => {
           data = isMultiple ? data : data[0];
-          const parsed = parser(data, lang);
+          const parsed = parser(data, lang) || null;
           const newContent = { ...fetchedContent, [lang]: parsed };
           setState({ fetchedContent: newContent, error: null });
           storage.setItem(name, newContent, expires);
@@ -36,5 +36,5 @@ export default ({ url, parser, name, expires, onlyData = true }) => {
       setState(prev => ({ ...prev, error: null }));
     }
   });
-  return [content, error];
+  return [content, error, content === undefined && !error];
 };
