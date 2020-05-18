@@ -1,0 +1,24 @@
+.slideWrapper {
+  display: none;
+}
+
+.contentWrapper {
+  padding: 150px 20px 0 20px;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    top: 85px;
+    margin-left: calc(50vw - 63px);
+    transform: translateY(-50%);
+    background-image: url(../../../../assets/images/technology.svg);
+    background-repeat: no-repeat;
+  }
+}
+
+.active {
+  display: block;
+}

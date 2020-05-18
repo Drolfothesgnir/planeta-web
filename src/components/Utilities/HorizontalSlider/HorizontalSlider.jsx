@@ -1,8 +1,8 @@
 import React from "react";
 import Slider from "../Slider/Slider";
-import classes from "./PageSlider.module.less";
+import classes from "./HorizontalSlider.module.less";
 
-function PageSlider({ settings = {}, children }) {
+function HorizontalSlider({ settings = {}, children, titles }) {
   const sliderRef = React.useRef(null);
   const [currentSlide, setSlide] = React.useState(0);
 
@@ -24,15 +24,17 @@ function PageSlider({ settings = {}, children }) {
   return (
     <>
       <div className={classes.navigation}>
-        <ul>
-          {Array.isArray(children) &&
-            children.map((_, n) => {
+        <ul className={classes.list}>
+          {titles &&
+            titles.map((data, n) => {
               return (
                 <li key={n}>
                   <button
                     className={currentSlide === n ? classes.active : ""}
                     onClick={() => goTo(n)}
-                  />
+                  >
+                    {data.field_title[0].value}
+                  </button>
                 </li>
               );
             })}
@@ -43,4 +45,4 @@ function PageSlider({ settings = {}, children }) {
   );
 }
 
-export default PageSlider;
+export default HorizontalSlider;

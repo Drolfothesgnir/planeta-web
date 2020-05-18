@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import classes from "./Services.module.less";
 import useFetchedContent from "../../../utilities/useFetchedContent";
 import ContentPage from "../ContentPage/ContentPage";
@@ -10,15 +10,7 @@ const parser = (data) => {
 
 function Services() {
   const [active, setActive] = useState(0);
-  const [slides, setSlides] = useState([]);
   const [isOpen, setOpen] = useState(false);
-
-  useEffect(() => {
-    setSlides(
-      links.map((data, index) => <Slide key={data.key} index={index} />)
-    );
-    console.log(links);
-  }, [links]);
 
   const [links, error] = useFetchedContent({
     url: "/api/menu_items/services-menu",
@@ -66,7 +58,16 @@ function Services() {
               </li>
             </ul>
 
-            <div>{slides[active]}</div>
+            <>
+              {links.map((data, index) => (
+                <Slide
+                  active={index === active ? true : false}
+                  key={data.key}
+                  index={index}
+                  data={data}
+                />
+              ))}
+            </>
           </div>
         ) : (
           <></>

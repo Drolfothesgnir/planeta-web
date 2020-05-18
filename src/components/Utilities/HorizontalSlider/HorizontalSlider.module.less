@@ -1,0 +1,36 @@
+.navigation {
+  height: 35px;
+  position: relative;
+  width: 100%;
+  overflow: scroll;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.list {
+  width: 100%;
+  height: calc(100% - 4px);
+  display: flex;
+  position: absolute;
+  top: 4px;
+  padding-left: 20px;
+
+  li {
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+  }
+
+  button {
+    white-space: nowrap;
+  }
+}
+
+.active {
+  border-bottom: 2px solid black;
+  padding-bottom: 6px;
+}
