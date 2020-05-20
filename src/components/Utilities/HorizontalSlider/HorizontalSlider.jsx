@@ -11,10 +11,8 @@ function HorizontalSlider({ settings = {}, children, titles }) {
   }
 
   const defaultSettings = {
+    lazyLoad: "progressive",
     infinite: false,
-    arrows: false,
-    buttons: false,
-    dots: false,
     ref: sliderRef,
     beforeChange(_, next) {
       setSlide(next);
