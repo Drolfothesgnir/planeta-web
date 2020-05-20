@@ -8,20 +8,20 @@ const parser = (data) => {
   return data;
 };
 
-const Slide = ({ index, active }) => {
+const Slide = () => {
   // зараз статично, так як бек не наповнений але в майбутньому має витягувутись url для запроса по конкретній сторінці
   const [animation, setAnimation] = useState(false);
   const [data, error] = useFetchedContent({
     url: "block-layout?path=/uslugi",
     parser,
-    name: "/uslugi/" + index,
+    name: `/1`,
   });
   if (error) {
     return error.message;
   }
 
   return (
-    <div className={` ${classes.slideWrapper} ${active && classes.active}`}>
+    <div className={` ${classes.slideWrapper}`}>
       {data && (
         <div>
           <Slider titles={data.content.main_page_content.entity.field_slider}>
@@ -48,7 +48,10 @@ const Slide = ({ index, active }) => {
               animation ? classes.animationWrapper : ""
             }`}
           >
-            <button className={classes.btn} onClick={() => setAnimation(true)}>
+            <button
+              className={`${classes.btn} btn btn-dark`}
+              onClick={() => setAnimation(true)}
+            >
               {data.content.main_page_content.entity.field_button_text[0].value}
             </button>
             <div className={classes.container}>
