@@ -4,17 +4,12 @@ import useFetchedContent from "../../../utilities/useFetchedContent";
 import ContentPage from "../ContentPage/ContentPage";
 import Slide from "./Slide/Slide";
 
-const parser = (data) => {
-  return data;
-};
-
 function Services() {
   const [active, setActive] = useState(0);
   const [isOpen, setOpen] = useState(false);
 
   const [links, error] = useFetchedContent({
     url: "/api/menu_items/services-menu",
-    parser,
     name: "/services-menu",
   });
   if (error) {
@@ -58,16 +53,7 @@ function Services() {
               </li>
             </ul>
 
-            <>
-              {links.map((data, index) => (
-                <Slide
-                  active={index === active ? true : false}
-                  key={data.key}
-                  index={index}
-                  data={data}
-                />
-              ))}
-            </>
+            <Slide active={active} />
           </div>
         ) : (
           <></>

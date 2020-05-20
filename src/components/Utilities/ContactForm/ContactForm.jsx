@@ -4,7 +4,7 @@ import { useContentState } from "../../../Store/Content/store";
 import { useForm } from "react-hook-form";
 import {
   fetchContent,
-  setContactFormSubmissionFlag
+  setContactFormSubmissionFlag,
 } from "../../../Store/Content/actions";
 import parser from "./parser";
 import http from "../../../utilities/http";
@@ -17,25 +17,25 @@ import Spinner from "../Spinner/Spinner";
 const im = new Inputmask("+380999999999", {
   placeholder: " ",
   removeMaskOnSubmit: true,
-  showMaskOnHover: false
+  showMaskOnHover: false,
 });
 
 const changeHandler = ({ target: t }) => {
   t.dataset.empty = t.value ? "false" : "true";
 };
 
-function ContactForm({ className, buttonClassname, fallback = <Spinner/> }) {
+function ContactForm({ className, buttonClassname, fallback = <Spinner /> }) {
   const name = "contactForm";
   const [lang] = useLanguageState();
   const [state, dispatch] = useContentState();
   const content = state[name]?.[lang];
   const [{ success, loading }, setStatus] = React.useState({
     success: false,
-    loading: false
+    loading: false,
   });
   const { register, handleSubmit, errors } = useForm({
     mode: "onChange",
-    validateCriteriaMode: "all"
+    validateCriteriaMode: "all",
   });
 
   if (!content) {
@@ -44,12 +44,12 @@ function ContactForm({ className, buttonClassname, fallback = <Spinner/> }) {
     );
   }
 
-  const submitHandler = data => {
+  const submitHandler = (data) => {
     data.webform_id = "call_back";
     setStatus({ success: false, loading: true });
     http
       .post("/webform_rest/submit", data)
-      .then(res => {
+      .then((res) => {
         if (!res.data.error) {
           dispatch(setContactFormSubmissionFlag(true));
           setStatus({ success: true, loading: false });
@@ -78,7 +78,8 @@ function ContactForm({ className, buttonClassname, fallback = <Spinner/> }) {
                       onChange={changeHandler}
                       type={type}
                       name={name}
-                      ref={e => {
+                      placeholder={title}
+                      ref={(e) => {
                         if (e && type === "tel") {
                           im.mask(e);
                         }
@@ -86,7 +87,7 @@ function ContactForm({ className, buttonClassname, fallback = <Spinner/> }) {
                       }}
                     />
 
-                    <span>{title}</span>
+                    {/* <span>{title}</span> */}
                   </label>
                   {errors[name] && (
                     <span className={classes.error}>

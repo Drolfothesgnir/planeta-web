@@ -3,7 +3,13 @@ import http from "./http";
 import { useState, useEffect } from "react";
 import { useLanguageState } from "../Context/language";
 
-export default ({ url, parser, name, expires, onlyData = true }) => {
+export default ({
+  url,
+  parser = (data) => data,
+  name,
+  expires,
+  onlyData = true,
+}) => {
   const isMultiple = Array.isArray(url);
   const urlList = isMultiple ? url : [url];
   const [lang] = useLanguageState();
@@ -33,8 +39,35 @@ export default ({ url, parser, name, expires, onlyData = true }) => {
           setState((prev) => ({ ...prev, error: err }));
         });
     } else if (content && error) {
-      setState((prev) => ({ ...prev, error: null }));
+      setState(
+        (prev) => (
+          { ...prev, error: null },
+          [
+            content,
+            error,
+            urlList,
+            lang,
+            onlyData,
+            isMultiple,
+            parser,
+            fetchedContent,
+            name,
+            expires,
+          ]
+        )
+      );
     }
-  });
+  }, [
+    content,
+    error,
+    urlList,
+    lang,
+    onlyData,
+    isMultiple,
+    parser,
+    fetchedContent,
+    name,
+    expires,
+  ]);
   return [content, error, content === undefined && !error];
 };
