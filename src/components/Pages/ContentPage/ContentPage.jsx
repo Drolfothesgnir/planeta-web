@@ -43,7 +43,7 @@ function ContentPage(props) {
         </span>
         <button
           className={`${defaultClasses.contentPageClose} ${
-            classes.contentPageClose || ""
+            defaultClasses.contentPageClose || ""
           }`}
           onClick={() => setState((prev) => !prev)}
         >
@@ -52,11 +52,15 @@ function ContentPage(props) {
           />
         </button>
         {links && (
-          <ul className={`${classes.nav} ${!pageLabelClosed && classes.open}`}>
+          <ul
+            className={`${defaultClasses.nav} ${
+              !pageLabelClosed && defaultClasses.open
+            }`}
+          >
             {links.map((data, index) => (
               <li
                 key={data.key}
-                className={`${index === active ? classes.active : ""}`}
+                className={`${index === active ? defaultClasses.active : ""}`}
               >
                 <button
                   onClick={() => {
