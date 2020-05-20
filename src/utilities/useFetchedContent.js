@@ -10,30 +10,30 @@ export default ({ url, parser, name, expires, onlyData = true }) => {
   const stored = storage.getItem(name) || {};
   const [{ fetchedContent, error }, setState] = useState({
     fetchedContent: stored,
-    error: null
+    error: null,
   });
   const content = fetchedContent[lang];
   useEffect(() => {
     if (content === undefined && !error) {
       Promise.all(
-        urlList.map(url =>
+        urlList.map((url) =>
           http
             .get(url, { params: { lang } })
-            .then(res => (onlyData ? res.data : res))
+            .then((res) => (onlyData ? res.data : res))
         )
       )
-        .then(data => {
+        .then((data) => {
           data = isMultiple ? data : data[0];
           const parsed = parser(data, lang) || null;
           const newContent = { ...fetchedContent, [lang]: parsed };
           setState({ fetchedContent: newContent, error: null });
           storage.setItem(name, newContent, expires);
         })
-        .catch(err => {
-          setState(prev => ({ ...prev, error: err }));
+        .catch((err) => {
+          setState((prev) => ({ ...prev, error: err }));
         });
     } else if (content && error) {
-      setState(prev => ({ ...prev, error: null }));
+      setState((prev) => ({ ...prev, error: null }));
     }
   });
   return [content, error, content === undefined && !error];
