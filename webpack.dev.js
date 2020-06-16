@@ -7,8 +7,8 @@ const webpack = require("webpack"),
     options: {
       strictUnits: true,
       sourceMap: true,
-      javascriptEnabled: true
-    }
+      javascriptEnabled: true,
+    },
   };
 
 module.exports = merge(common, {
@@ -21,7 +21,7 @@ module.exports = merge(common, {
         test: /\.jsx?$/,
         enforce: "pre",
         exclude: /node_modules/,
-        loader: "eslint-loader"
+        loader: "eslint-loader",
       },
       {
         test: /\.less$/,
@@ -31,15 +31,15 @@ module.exports = merge(common, {
             loader: "css-loader",
             options: {
               modules: {
-                localIdentName: "[local]___[hash:base64:5]"
+                localIdentName: "[local]___[hash:base64:5]",
               },
               sourceMap: true,
-              importLoaders: 1
-            }
+              importLoaders: 1,
+            },
           },
-          lessLoaderConfig
+          lessLoaderConfig,
         ],
-        include: /\.module\.less$/
+        include: /\.module\.less$/,
       },
       {
         test: /\.less$/,
@@ -48,12 +48,12 @@ module.exports = merge(common, {
           {
             loader: "css-loader",
             options: {
-              sourceMap: true
-            }
+              sourceMap: true,
+            },
           },
-          lessLoaderConfig
+          lessLoaderConfig,
         ],
-        exclude: /\.module\.less$/
+        exclude: /\.module\.less$/,
       },
       {
         test: /\.css$/,
@@ -63,28 +63,42 @@ module.exports = merge(common, {
             loader: "css-loader",
             options: {
               modules: {
-                localIdentName: "[local]___[hash:base64:5]"
-              }
-            }
-          }
-        ]
-      }
-    ]
+                localIdentName: "[local]___[hash:base64:5]",
+              },
+            },
+          },
+        ],
+        include: /\.module\.css$/,
+      },
+      {
+        test: /\.css$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
+        exclude: /\.module\.css$/,
+      },
+    ],
   },
   resolve: {
     alias: {
-      "react-dom": "@hot-loader/react-dom"
-    }
+      "react-dom": "@hot-loader/react-dom",
+    },
   },
   devServer: {
     contentBase: path.join(__dirname, "public/"),
     historyApiFallback: {
-      index: "/index.html"
+      index: "/index.html",
     },
     port: 3000,
     publicPath: "http://localhost:3000/",
     hotOnly: true,
-    clientLogLevel: "error"
+    clientLogLevel: "error",
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()]
+  plugins: [new webpack.HotModuleReplacementPlugin()],
 });

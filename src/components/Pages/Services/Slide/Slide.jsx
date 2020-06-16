@@ -20,6 +20,8 @@ const Slide = () => {
     return error.message;
   }
 
+  console.log(data);
+
   return (
     <div className={` ${classes.slideWrapper}`}>
       {data && (

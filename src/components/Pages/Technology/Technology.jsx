@@ -1,0 +1,68 @@
+import React from "react";
+import useFetchedContent from "../../../utilities/useFetchedContent";
+// import { Link, useRouteMatch } from "react-router-dom";
+// import ContentPage from "../ContentPage/ContentPage";
+// import classes from "./Technology.module.less";
+
+const parser = (data) => {
+  data = data.content;
+  return {
+    title: data.subtitle_for_technology.entity.body,
+    links: data.main_page_content.entity,
+  };
+};
+
+const Technology = (props) => {
+  // let { url } = useRouteMatch();
+  const data = useFetchedContent({
+    url: "/block-layout?path=" + props.match.url,
+    name: "/technology",
+    parser,
+  });
+
+  console.log(data);
+  // const links = [{ title: "drupal" }, { title: "magento" }];
+  // const { links } = data;
+  return (
+    // <div className={classes.wrapper}>
+    //   <ContentPage>
+    //     {links ? (
+    //       <div className={classes.container}>
+    //         <h1 className={classes.title}>{links[0].nothing}</h1>
+    //         <ul className={classes.technologyList}>
+    //           {links.map((data, i) => (
+    //             <li key={i} className={classes.technology}>
+    //               <object
+    //                 type="image/svg+xml"
+    //                 data={`http://back.planeta-web.co.ua${
+    //                   data.field_image.split(" ")[1]
+    //                 }`}
+    //                 className={classes.obj}
+    //               >
+    //                 <img
+    //                   src={`http://back.planeta-web.co.ua${
+    //                     data.field_image.split(" ")[1]
+    //                   }`}
+    //                   alt=""
+    //                 />
+    //               </object>
+    //               <Link
+    //                 to={`${url}${data.view_node}`}
+    //                 className={`${classes.button} btn btn-dark`}
+    //               >
+    //                 дізнатися більше
+    //               </Link>
+    //             </li>
+    //           ))}
+    //         </ul>
+    //       </div>
+    //     ) : (
+    //       ""
+    //     )}
+    //   </ContentPage>
+    // </div>
+    <p>1</p>
+  );
+};
+
+export default Technology;

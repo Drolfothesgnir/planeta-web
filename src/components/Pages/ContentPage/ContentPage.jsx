@@ -59,7 +59,7 @@ function ContentPage(props) {
           >
             {links.map((data, index) => (
               <li
-                key={data.key}
+                key={data.key ? data.key : index}
                 className={`${index === active ? defaultClasses.active : ""}`}
               >
                 <button
