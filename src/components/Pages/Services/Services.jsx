@@ -16,14 +16,34 @@ function Services() {
     return error.message;
   }
 
+  const entityContentPage = (classes, onClickFunc) => {
+    return (
+      links &&
+      links.map((data, index) => (
+        <li
+          key={data.key ? data.key : index}
+          className={`${index === active ? classes.active : ""}`}
+        >
+          <button
+            onClick={() => {
+              setActive(index);
+              setOpen(!isOpen);
+              onClickFunc();
+            }}
+          >
+            {data.title}
+          </button>
+        </li>
+      ))
+    );
+  };
+
   return (
     <div className={classes.wrapper}>
       <ContentPage
         menuItem={"contact"}
         className={`slick-height`}
-        links={links && links}
-        onLinkClickFunc={setActive}
-        active={active}
+        Entity={entityContentPage}
       >
         {links ? (
           <div className={classes.container}>

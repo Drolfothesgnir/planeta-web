@@ -1,9 +1,9 @@
 import React from "react";
-import classes from "./About.module.less";
+import classes from "../About.module.less";
 
 function FirstSlide({ content: [title, companyName, text1, text2] }) {
   return (
-    <div className={`${classes.first} ${classes.slide}`}>
+    <div className={`${classes.slide} ${classes.first}`}>
       <div className={classes.content}>
         <div className={classes.left}>
           <span className={classes.title}>{title}</span>

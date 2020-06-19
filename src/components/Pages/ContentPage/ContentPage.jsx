@@ -6,20 +6,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Spinner from "../../Utilities/Spinner/Spinner";
 
 function ContentPage(props) {
-  const {
-    links,
-    onLinkClickFunc,
-    active,
-    classes = {},
-    children,
-    fallback = <Spinner />,
-  } = props;
+  const { Entity, classes = {}, children, fallback = <Spinner /> } = props;
   const [pageLabelClosed, setState] = React.useState(true);
   const [{ mainMenu }] = useContentState();
   const [lang] = useLanguageState();
   const menu = mainMenu?.[lang];
   const pagePath = location.pathname.split("/")[1];
   const menuItem = menu?.find((item) => item.relative === "/" + pagePath);
+  const onClickFunc = () => setState((prev) => !prev);
 
   return menu ? (
     <div
@@ -51,27 +45,13 @@ function ContentPage(props) {
             icon={pageLabelClosed ? "arrow-right" : "arrow-left"}
           />
         </button>
-        {links && (
+        {Entity && (
           <ul
             className={`${defaultClasses.nav} ${
               !pageLabelClosed && defaultClasses.open
             }`}
           >
-            {links.map((data, index) => (
-              <li
-                key={data.key ? data.key : index}
-                className={`${index === active ? defaultClasses.active : ""}`}
-              >
-                <button
-                  onClick={() => {
-                    onLinkClickFunc(index);
-                    setState(!pageLabelClosed);
-                  }}
-                >
-                  {data.title}
-                </button>
-              </li>
-            ))}
+            {Entity(defaultClasses, onClickFunc)}
           </ul>
         )}
       </div>

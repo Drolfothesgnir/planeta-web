@@ -1,7 +1,8 @@
 import storage from "./storage";
 import http from "./http";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useLanguageState } from "../Context/language";
+import useStateWithDeps from './useStateWithDeps'
 
 export default ({
   url,
@@ -14,10 +15,11 @@ export default ({
   const urlList = isMultiple ? url : [url];
   const [lang] = useLanguageState();
   const stored = storage.getItem(name) || {};
-  const [{ fetchedContent, error }, setState] = useState({
+  const [{ fetchedContent, error }, setState] = useStateWithDeps({
     fetchedContent: stored,
     error: null,
-  });
+  }, [name, url]);
+
   const content = fetchedContent[lang];
   useEffect(() => {
     if (content === undefined && !error) {
@@ -41,33 +43,10 @@ export default ({
     } else if (content && error) {
       setState(
         (prev) => (
-          { ...prev, error: null },
-          [
-            content,
-            error,
-            urlList,
-            lang,
-            onlyData,
-            isMultiple,
-            parser,
-            fetchedContent,
-            name,
-            expires,
-          ]
+          { ...prev, error: null }
         )
       );
     }
-  }, [
-    content,
-    error,
-    urlList,
-    lang,
-    onlyData,
-    isMultiple,
-    parser,
-    fetchedContent,
-    name,
-    expires,
-  ]);
+  }, [content, error, urlList, lang, onlyData, isMultiple, parser, fetchedContent, name, expires, setState]);
   return [content, error, content === undefined && !error];
 };

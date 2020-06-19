@@ -1,13 +1,14 @@
 import React from "react";
-import classes from "./About.module.less";
+import classes from "../About.module.less";
 
 function ThirdSlide({ content: { title, pictures } }) {
+  console.log(pictures);
   return (
     <div className={`${classes.slide} ${classes.third}`}>
       <div className={classes.content}>
         <span className={classes.title}>{title}</span>
         <ul>
-          {pictures.map(url => (
+          {pictures.map((url) => (
             <li key={url}>
               <img src={url} alt="image" />
             </li>

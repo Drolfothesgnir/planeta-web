@@ -5,7 +5,8 @@ import ContentPage from "../ContentPage/ContentPage";
 import ContactForm from "../../Utilities/ContactForm/ContactForm";
 import ScrollBar from "simplebar-react";
 import "simplebar/src/simplebar.css";
-// import { Link, useParams } from "react-router-dom";
+import "./Scrollbar.css";
+import { Link } from "react-router-dom";
 
 const parser = (data) => {
   data = data.content.main_page_content.entity;
@@ -17,55 +18,81 @@ const parser = (data) => {
 };
 
 const TechnologyDetails = (props) => {
-  // const [isOpen, setOpen] = useState(false);
+  const [isOpen, setOpen] = useState(false);
   const [animation, setAnimation] = useState(false);
-  const [data, error] = useFetchedContent({
+  const [data] = useFetchedContent({
     url: `/block-layout?path=/${props.match.params.id}`,
     name: `/technologyDetails/${props.match.params.id}`,
     parser,
   });
-  if (error) {
-    return error.message;
-  }
-  // const { id } = useParams();
-  // const [data, error] = useFetchedContent({
-  //   url: props.match.path.split("/")[1],
-  //   name: "/technologyDetails",
-  // });
-  // if (error) {
-  //   return error.message;
-  // }
-  console.log(props.match.params.id);
-  console.log(data);
+  const [links] = useFetchedContent({
+    url: `${props.match.path.split("/")[1]}`,
+    name: "/technologyLinks",
+  });
+
+  const entityContentPage = (classes, onClickFunc) => {
+    return (
+      links &&
+      links.map((data, index) => (
+        <li
+          key={data.key ? data.key : index}
+          className={`${
+            props.match.params.id === data.title.toLowerCase()
+              ? classes.active
+              : ""
+          }`}
+        >
+          <Link
+            to={`${data.view_node.split("/")[1]}`}
+            onClick={() => {
+              setOpen(!isOpen);
+              onClickFunc();
+            }}
+          >
+            {data.title}
+          </Link>
+        </li>
+      ))
+    );
+  };
+
   return (
     <div className={classes.wrapper}>
-      <ContentPage>
+      <ContentPage Entity={entityContentPage}>
         {data ? (
           <div className={classes.container}>
-            {/* <ul className={`${classes.nav} ${isOpen && classes.open}`}>
-              {data.map((data, index) => (
-                <li
-                  key={data.key}
-                  className={`${
-                    props.match.params.id === data.title.toLowerCase() &&
-                    classes.top
+            {links ? (
+              <ul className={`${classes.nav} ${isOpen && classes.open}`}>
+                {links.map((data, index) => (
+                  <li
+                    key={index}
+                    className={`${
+                      props.match.params.id === data.title.toLowerCase() &&
+                      classes.top
                     } ${classes.link}`}
-                >
-                  <Link
-                    to={`${data.view_node.split("/")[1]}`}
-                    onClick={() => setOpen(!isOpen)}
                   >
-                    {data.title}
-                  </Link>
+                    <Link
+                      to={`${data.view_node.split("/")[1]}`}
+                      onClick={() => {
+                        setOpen(!isOpen);
+                      }}
+                    >
+                      {data.title}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <button
+                    className={`${classes.btnNav} ${
+                      isOpen && classes.activeBtn
+                    }`}
+                    onClick={() => setOpen(!isOpen)}
+                  ></button>
                 </li>
-              ))}
-              <li>
-                <button
-                  className={`${classes.btnNav} ${isOpen && classes.activeBtn}`}
-                  onClick={() => setOpen(!isOpen)}
-                ></button>
-              </li>
-            </ul> */}
+              </ul>
+            ) : (
+              ""
+            )}
             <div className={classes.contentWrapper}>
               <object
                 type="image/svg+xml"
@@ -83,11 +110,132 @@ const TechnologyDetails = (props) => {
                 >{`Технологія "${data.title}"`}</h3>
                 <ScrollBar
                   // className={classes.paragraph}
-                  style={{ maxHeight: 300 }}
+                  autoHide={false}
+                  className={classes.paragraphWrapper}
                 >
-                  {[...Array(50)].map((x, i) => (
-                    <p key={i}>{i}</p>
-                  ))}
+                  <p className={classes.paragraph}>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Asperiores sapiente assumenda, obcaecati fugit vitae numquam
+                    adipisci molestias nihil incidunt alias corrupti velit
+                    doloremque nam laudantium. Delectus illum veritatis dolorum
+                    ipsa! Lorem ipsum dolor sit amet, consectetur adipisicing
+                    elit. Asperiores sapiente assumenda, obcaecati fugit vitae
+                    numquam adipisci molestias nihil incidunt alias corrupti
+                    velit doloremque nam laudantium. Delectus illum veritatis
+                    dolorum ipsa! Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit. Asperiores sapiente assumenda, obcaecati
+                    fugit vitae numquam adipisci molestias nihil incidunt alias
+                    corrupti velit doloremque nam laudantium. Delectus illum
+                    veritatis dolorum ipsa! Lorem ipsum dolor sit amet,
+                    consectetur adipisicing elit. Asperiores sapiente assumenda,
+                    obcaecati fugit vitae numquam adipisci molestias nihil
+                    incidunt alias corrupti velit doloremque nam laudantium.
+                    Delectus illum veritatis dolorum ipsa! Lorem ipsum dolor sit
+                    amet, consectetur adipisicing elit. Asperiores sapiente
+                    assumenda, obcaecati fugit vitae numquam adipisci molestias
+                    nihil incidunt alias corrupti velit doloremque nam
+                    laudantium. Delectus illum veritatis dolorum ipsa! Lorem
+                    ipsum dolor sit amet, consectetur adipisicing elit.
+                    Asperiores sapiente assumenda, obcaecati fugit vitae numquam
+                    adipisci molestias nihil incidunt alias corrupti velit
+                    doloremque nam laudantium. Delectus illum veritatis dolorum
+                    ipsa! Lorem ipsum dolor sit amet, consectetur adipisicing
+                    elit. Asperiores sapiente assumenda, obcaecati fugit vitae
+                    numquam adipisci molestias nihil incidunt alias corrupti
+                    velit doloremque nam laudantium. Delectus illum veritatis
+                    dolorum ipsa! Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit. Asperiores sapiente assumenda, obcaecati
+                    fugit vitae numquam adipisci molestias nihil incidunt alias
+                    corrupti velit doloremque nam laudantium. Delectus illum
+                    veritatis dolorum ipsa!Delectus illum veritatis dolorum
+                    ipsa! Lorem ipsum dolor sit amet, consectetur adipisicing
+                    elit. Asperiores sapiente assumenda, obcaecati fugit vitae
+                    numquam adipisci molestias nihil incidunt alias corrupti
+                    velit doloremque nam laudantium. Delectus illum veritatis
+                    dolorum ipsa! Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit. Asperiores sapiente assumenda, obcaecati
+                    fugit vitae numquam adipisci molestias nihil incidunt alias
+                    corrupti velit doloremque nam laudantium. Delectus illum
+                    veritatis dolorum ipsa! Lorem ipsum dolor sit amet,
+                    consectetur adipisicing elit. Asperiores sapiente assumenda,
+                    obcaecati fugit vitae numquam adipisci molestias nihil
+                    incidunt alias corrupti velit doloremque nam laudantium.
+                    Delectus illum veritatis dolorum ipsa! Lorem ipsum dolor sit
+                    amet, consectetur adipisicing elit. Asperiores sapiente
+                    assumenda, obcaecati fugit vitae numquam adipisci molestias
+                    nihil incidunt alias corrupti velit doloremque nam
+                    laudantium. Delectus illum veritatis dolorum ipsa!Delectus
+                    illum veritatis dolorum ipsa! Lorem ipsum dolor sit amet,
+                    consectetur adipisicing elit. Asperiores sapiente assumenda,
+                    obcaecati fugit vitae numquam adipisci molestias nihil
+                    incidunt alias corrupti velit doloremque nam laudantium.
+                    Delectus illum veritatis dolorum ipsa! Lorem ipsum dolor sit
+                    amet, consectetur adipisicing elit. Asperiores sapiente
+                    assumenda, obcaecati fugit vitae numquam adipisci molestias
+                    nihil incidunt alias corrupti velit doloremque nam
+                    laudantium. Delectus illum veritatis dolorum ipsa! Lorem
+                    ipsum dolor sit amet, consectetur adipisicing elit.
+                    Asperiores sapiente assumenda, obcaecati fugit vitae numquam
+                    adipisci molestias nihil incidunt alias corrupti velit
+                    doloremque nam laudantium. Delectus illum veritatis dolorum
+                    ipsa! Lorem ipsum dolor sit amet, consectetur adipisicing
+                    elit. Asperiores sapiente assumenda, obcaecati fugit vitae
+                    numquam adipisci molestias nihil incidunt alias corrupti
+                    velit doloremque nam laudantium. Delectus illum veritatis
+                    dolorum ipsa!Delectus illum veritatis dolorum ipsa! Lorem
+                    ipsum dolor sit amet, consectetur adipisicing elit.
+                    Asperiores sapiente assumenda, obcaecati fugit vitae numquam
+                    adipisci molestias nihil incidunt alias corrupti velit
+                    doloremque nam laudantium. Delectus illum veritatis dolorum
+                    ipsa! Lorem ipsum dolor sit amet, consectetur adipisicing
+                    elit. Asperiores sapiente assumenda, obcaecati fugit vitae
+                    numquam adipisci molestias nihil incidunt alias corrupti
+                    velit doloremque nam laudantium. Delectus illum veritatis
+                    dolorum ipsa! Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit. Asperiores sapiente assumenda, obcaecati
+                    fugit vitae numquam adipisci molestias nihil incidunt alias
+                    corrupti velit doloremque nam laudantium. Delectus illum
+                    veritatis dolorum ipsa! Lorem ipsum dolor sit amet,
+                    consectetur adipisicing elit. Asperiores sapiente assumenda,
+                    obcaecati fugit vitae numquam adipisci molestias nihil
+                    incidunt alias corrupti velit doloremque nam laudantium.
+                    Delectus illum veritatis dolorum ipsa!Delectus illum
+                    veritatis dolorum ipsa! Lorem ipsum dolor sit amet,
+                    consectetur adipisicing elit. Asperiores sapiente assumenda,
+                    obcaecati fugit vitae numquam adipisci molestias nihil
+                    incidunt alias corrupti velit doloremque nam laudantium.
+                    Delectus illum veritatis dolorum ipsa! Lorem ipsum dolor sit
+                    amet, consectetur adipisicing elit. Asperiores sapiente
+                    assumenda, obcaecati fugit vitae numquam adipisci molestias
+                    nihil incidunt alias corrupti velit doloremque nam
+                    laudantium. Delectus illum veritatis dolorum ipsa! Lorem
+                    ipsum dolor sit amet, consectetur adipisicing elit.
+                    Asperiores sapiente assumenda, obcaecati fugit vitae numquam
+                    adipisci molestias nihil incidunt alias corrupti velit
+                    doloremque nam laudantium. Delectus illum veritatis dolorum
+                    ipsa! Lorem ipsum dolor sit amet, consectetur adipisicing
+                    elit. Asperiores sapiente assumenda, obcaecati fugit vitae
+                    numquam adipisci molestias nihil incidunt alias corrupti
+                    velit doloremque nam laudantium. Delectus illum veritatis
+                    dolorum ipsa!Delectus illum veritatis dolorum ipsa! Lorem
+                    ipsum dolor sit amet, consectetur adipisicing elit.
+                    Asperiores sapiente assumenda, obcaecati fugit vitae numquam
+                    adipisci molestias nihil incidunt alias corrupti velit
+                    doloremque nam laudantium. Delectus illum veritatis dolorum
+                    ipsa! Lorem ipsum dolor sit amet, consectetur adipisicing
+                    elit. Asperiores sapiente assumenda, obcaecati fugit vitae
+                    numquam adipisci molestias nihil incidunt alias corrupti
+                    velit doloremque nam laudantium. Delectus illum veritatis
+                    dolorum ipsa! Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit. Asperiores sapiente assumenda, obcaecati
+                    fugit vitae numquam adipisci molestias nihil incidunt alias
+                    corrupti velit doloremque nam laudantium. Delectus illum
+                    veritatis dolorum ipsa! Lorem ipsum dolor sit amet,
+                    consectetur adipisicing elit. Asperiores sapiente assumenda,
+                    obcaecati fugit vitae numquam adipisci molestias nihil
+                    incidunt alias corrupti velit doloremque nam laudantium.
+                    Delectus illum veritatis dolorum ipsa!
+                  </p>
                 </ScrollBar>
               </div>
             </div>
