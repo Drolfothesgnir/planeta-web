@@ -2,7 +2,6 @@ import React from "react";
 import classes from "../About.module.less";
 
 function ThirdSlide({ content: { title, pictures } }) {
-  console.log(pictures);
   return (
     <div className={`${classes.slide} ${classes.third}`}>
       <div className={classes.content}>

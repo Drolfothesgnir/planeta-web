@@ -20,8 +20,6 @@ const Technology = (props) => {
     parser,
   });
 
-  console.log(data);
-  // const links = [{ title: "drupal" }, { title: "magento" }];
   const links = data?.links;
   return (
     <div className={classes.wrapper}>
