@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./About.module.less";
+import classes from "../About.module.less";
 
 function ThirdSlide({ content: { title, pictures } }) {
   return (
@@ -7,7 +7,7 @@ function ThirdSlide({ content: { title, pictures } }) {
       <div className={classes.content}>
         <span className={classes.title}>{title}</span>
         <ul>
-          {pictures.map(url => (
+          {pictures.map((url) => (
             <li key={url}>
               <img src={url} alt="image" />
             </li>

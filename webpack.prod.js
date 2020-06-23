@@ -14,16 +14,16 @@ module.exports = merge(common, {
       cacheGroups: {
         default: {
           reuseExistingChunk: true,
-          enforce: true
-        }
-      }
-    }
+          enforce: true,
+        },
+      },
+    },
   },
   mode: "production",
   entry: "./src/index.js",
   output: {
     path: __dirname + "/dist",
-    filename: "bundle.js"
+    filename: "bundle.js",
   },
   module: {
     rules: [
@@ -35,12 +35,19 @@ module.exports = merge(common, {
             loader: "css-loader",
             options: {
               modules: {
-                localIdentName: "[local]___[hash:base64:5]"
-              }
-            }
+                localIdentName: "[hash:base64]",
+              },
+              importLoaders: 1,
+            },
           },
-          "postcss-loader"
-        ]
+          "postcss-loader",
+        ],
+        include: /\.module\.css$/,
+      },
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
+        exclude: /\.module\.css$/,
       },
       {
         test: /\.less$/,
@@ -50,21 +57,21 @@ module.exports = merge(common, {
             loader: "css-loader",
             options: {
               modules: {
-                localIdentName: "[hash:base64]"
+                localIdentName: "[hash:base64]",
               },
-              importLoaders: 1
-            }
+              importLoaders: 1,
+            },
           },
           "postcss-loader",
           {
             loader: "less-loader",
             options: {
               strictUnits: true,
-              javascriptEnabled: true
-            }
-          }
+              javascriptEnabled: true,
+            },
+          },
         ],
-        include: /\.module\.less$/
+        include: /\.module\.less$/,
       },
       {
         test: /\.less$/,
@@ -76,13 +83,13 @@ module.exports = merge(common, {
             loader: "less-loader",
             options: {
               strictUnits: true,
-              javascriptEnabled: true
-            }
-          }
+              javascriptEnabled: true,
+            },
+          },
         ],
-        exclude: /\.module\.less$/
-      }
-    ]
+        exclude: /\.module\.less$/,
+      },
+    ],
   },
   plugins: [
     new CleanWebpackPlugin(),
@@ -97,10 +104,10 @@ module.exports = merge(common, {
         removeRedundantAttributes: true,
         removeScriptTypeAttributes: true,
         removeStyleLinkTypeAttributes: true,
-        useShortDoctype: true
-      }
+        useShortDoctype: true,
+      },
     }),
     new MiniCssExtractPlugin(),
-    new BundleAnalyzerPlugin()
-  ]
+    new BundleAnalyzerPlugin(),
+  ],
 });

@@ -1,13 +1,13 @@
 import React from "react";
-import classes from "./About.module.less";
+import classes from "../About.module.less";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ContactForm from "../../Utilities/ContactForm/ContactForm";
+import ContactForm from "../../../Utilities/ContactForm/ContactForm";
 
 function FourthSlide({
   content: {
     items,
-    titles: [mainTitle, title, followUs]
-  }
+    titles: [mainTitle, title, followUs],
+  },
 }) {
   return (
     <div className={`${classes.slide} ${classes.fourth}`}>
@@ -32,7 +32,7 @@ function FourthSlide({
             ))}
           </ul>
           <span className={classes.title}>{followUs}</span>
-          <div>
+          <div className={classes.socialNetwork}>
             <i>
               <FontAwesomeIcon icon={["fab", "facebook-f"]} />
             </i>

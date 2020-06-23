@@ -1,8 +1,8 @@
 import React from "react";
-import classes from "./About.module.less";
+import classes from "../About.module.less";
 
 function SecondSlide({
-  content: { description, firmDescription, pictures, title }
+  content: { description, firmDescription, pictures, title },
 }) {
   return (
     <div className={`${classes.slide} ${classes.second}`}>

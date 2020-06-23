@@ -11,6 +11,12 @@ const OschadPortfolio = React.lazy(() =>
 const About = React.lazy(() => import("../../Pages/About/About"));
 const Contacts = React.lazy(() => import("../../Pages/Contacts/Contacts"));
 const Services = React.lazy(() => import("../../Pages/Services/Services"));
+const Technology = React.lazy(() =>
+  import("../../Pages/Technology/Technology")
+);
+const TechnologyDetails = React.lazy(() =>
+  import("../../Pages/Technology/TechnologyDetails")
+);
 
 export default function Routes() {
   return (
@@ -25,6 +31,8 @@ export default function Routes() {
           path={"/portfolio/apple-pay-oschadbank"}
           component={OschadPortfolio}
         />
+        <Route exact path={"/technology"} component={Technology} />
+        <Route exact path="/technology/:id" component={TechnologyDetails} />
         <Route path={"/uslugi"} component={Services} />
         <Route exact path={"/portfolio"} component={Portfolio} />
         <Route exact path="/" component={Main} />
