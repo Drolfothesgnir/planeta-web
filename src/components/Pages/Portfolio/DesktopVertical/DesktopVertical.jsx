@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Slider from "../../../Utilities/Slider/Slider";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,8 +16,8 @@ function getPrevAndNextIndex(max, current) {
   return current === 0
     ? [max - 1, 1]
     : current === max - 1
-    ? [max - 2, 0]
-    : [current - 1, current + 1];
+      ? [max - 2, 0]
+      : [current - 1, current + 1];
 }
 
 function DesktopVertical({ items }) {
@@ -28,6 +28,16 @@ function DesktopVertical({ items }) {
     items.length,
     currentSlide >= items.length ? 0 : currentSlide
   );
+  const slide = (y) => {
+    y > 0 ? next() : prev();
+  };
+  const wheelHandler = (e) => slide(e.deltaY);
+  useEffect(() => {
+    addEventListener("wheel", wheelHandler);
+    return () => {
+      removeEventListener("wheel", wheelHandler);
+    };
+  });
 
   const prev = () => {
     sliderRef.current.slickPrev();
@@ -74,9 +84,9 @@ function DesktopVertical({ items }) {
       >
         {items.map(({ title, buttonText, link, imgSrc }) => {
           return (
-            <div key={title} className={classes.slide}>
-              <span className={classes.bgTitle}>{title}</span>
-              <div className={classes.slideContent}>
+            <div key={title} className={classes.slide} style={{ backgroundColor: '#f3f4f6' }}>
+              <span className={classes.bgTitle} style={{ color: 'red' }}>{title}</span>
+              <Link to={link} className={classes.slideContent}>
                 <div className={classes.leftContent}>
                   <h2>{title}</h2>
                   <Link className={`btn btn-portfolio`} to={link}>
@@ -86,7 +96,7 @@ function DesktopVertical({ items }) {
                 <div className={classes.image}>
                   <img src={imgSrc} alt={title} />
                 </div>
-              </div>
+              </Link>
             </div>
           );
         })}
@@ -104,21 +114,21 @@ function DesktopVertical({ items }) {
         className={`${classes.verticalButton} ${classes.prev}`}
         onClick={prev}
       >
-        <Arrow className={classes.arrow}/>
+        <Arrow className={classes.arrow} />
         <span>{items[prevIndex].title}</span>
       </button>
       <button
         className={`${classes.verticalButton} ${classes.next}`}
         onClick={next}
       >
-        <Arrow className={classes.arrow}/>
+        <Arrow className={classes.arrow} />
         <span>{items[nextIndex].title}</span>
       </button>
       <div
         className={classes.circle}
         style={{ transform: `rotate(${angle}deg)` }}
       >
-        <span/>
+        <span />
       </div>
     </div>
   );

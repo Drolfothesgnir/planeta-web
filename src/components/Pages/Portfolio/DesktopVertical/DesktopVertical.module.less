@@ -5,15 +5,14 @@
   height: 100%;
   position: relative;
 
-  :global(.slick-slide) {
-    background-color: #f55455;
-    color: #f55455;
-
-    &:nth-child(even) {
-      background-color: #3e71d7;
-      color: #3e71d7;
-    }
-  }
+  // :global(.slick-slide) {
+  //   background-color: #f55455;
+    // color: #f55455;
+    // &:nth-child(even) {
+    //   background-color: #3e71d7;
+    //   color: #3e71d7;
+    // }
+  // }
 }
 
 .slide {
@@ -165,6 +164,16 @@
   bottom: -380px;
   left: calc(50% - 250px);
   transition: 0.5s;
+  span {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    background-color: #000000;
+    border-radius: 100%;
+    transform: translate(0, -50%);
+    width: 10px;
+    height: 10px;
+  }
 }
 
 @media (min-width: 1024px) {
