@@ -14,7 +14,6 @@
     // }
   // }
 }
-
 .slide {
   height: 100%;
   position: relative;
@@ -76,6 +75,11 @@
     height: 135px;
     display: flex;
     align-items: center;
+  }
+  p {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
   :global(.btn) {
@@ -165,14 +169,22 @@
   left: calc(50% - 250px);
   transition: 0.5s;
   span {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    background-color: #000000;
-    border-radius: 100%;
-    transform: translate(0, -50%);
+    display: block;
+    border-radius: 50%;
     width: 10px;
     height: 10px;
+    position: absolute;
+    opacity: 0;
+
+    &.hoverButton {
+      transition: 0.3s;
+      cursor: pointer;
+      background-size: contain;
+      &:hover {
+        opacity: 1;
+        transform: scale(2);
+      }
+    }
   }
 }
 
@@ -253,7 +265,7 @@
     margin-top: 6vw;
 
     h2 {
-      width: 170%;
+      width: 120%;
     }
   }
 
@@ -261,5 +273,10 @@
     bottom: calc(50% - 250px);
     left: auto;
     right: -280px;
+  }
+}
+@media (min-width: 1280px){
+  .link {
+    display: flex;
   }
 }

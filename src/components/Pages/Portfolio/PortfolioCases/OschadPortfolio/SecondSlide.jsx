@@ -17,7 +17,10 @@ export default function SecondSlide({
         <ul>
           {pictures.map(({ url, description }, i) => {
             return (
-              <li key={description} style={{transitionDelay: `${speed + i / 2 * speed}ms`}}>
+              <li key={description}
+                  style={{transitionDelay: `${speed + i / 2 * speed}ms`}}
+                  // className={`animate__animated animate__fast animate__fadeInDown`}
+              >
                 <div className={classes.image}>
                   <div className={classes.wrapper}>
                     <img src={url} alt={description} />

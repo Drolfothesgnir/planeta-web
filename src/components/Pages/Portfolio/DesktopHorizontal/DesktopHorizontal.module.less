@@ -2,6 +2,24 @@
 
 .desktopHorizontal {
   height: 100%;
+  .arr {
+    width: 13px;
+    position: absolute;
+    bottom: 15px;
+    cursor: pointer;
+
+    line {
+      stroke: #000000;
+    }
+  }
+  .next {
+    right: 40px;
+    transform: rotate(90deg);
+  }
+  .prev {
+    left: 40px;
+    transform: rotate(-90deg);
+  }
 
   :global(.slick-slide) {
     .slide {
@@ -41,6 +59,16 @@
     flex-grow: 0;
     font-size: 30px;
   }
+}
+
+.slideLink {
+  height: 100%;
+
+  //.1 {
+  //  &:hover {
+  //    background-color: violet;
+  //  }
+  //}
 }
 
 .image {

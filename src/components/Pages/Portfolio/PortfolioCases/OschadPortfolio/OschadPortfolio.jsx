@@ -22,10 +22,8 @@ function OschadPortfolio(props) {
     return error.message;
   }
 
-  console.log(props.match.url);
-
   return (
-    <PortfolioItem className={classes.item} settings={{ speed: SLIDER_SPEED }}>
+    <PortfolioItem className={classes.item} settings={{ speed: SLIDER_SPEED }} color='#f3f4f6'>
       {content ? (
         [
           <FirstSlide content={content[0]} key={"firstSlide"} />,

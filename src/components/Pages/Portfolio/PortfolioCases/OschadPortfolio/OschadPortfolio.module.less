@@ -11,6 +11,15 @@
   background-color: @slide-bg;
   color: @text-shadow;
 }
+.second {
+  background-color: @slide-bg;
+}
+.third {
+  background-color: @slide-bg;
+}
+.fourth {
+  background-color: @slide-bg;
+}
 
 .slide {
   height: 100%;
@@ -31,7 +40,7 @@
     opacity: 0.2;
     display: block;
     position: absolute;
-    font-size: 25vh;
+    font-size: 27vh;
     text-transform: uppercase;
     line-height: 0.9;
     font-weight: 800;
@@ -246,6 +255,8 @@
 
     .firstRow {
       display: flex;
+      height: 100%;
+      align-items: center;
     }
 
     .secondRow {
@@ -262,5 +273,86 @@
   li {
     opacity: 1;
     transition: opacity .5s ease-in;
+  }
+}
+
+@media (max-width: 768px){
+  .slide {
+    position: relative;
+
+    &.first {
+      padding-left: 0;
+
+      .firstRow {
+        flex-direction: column;
+      }
+      .secondRow {
+        padding-right: 0;
+        flex-direction: column;
+        li {
+          width: 100%;
+          margin-bottom: 30px;
+        }
+      }
+      .image {
+        width: 100%;
+      }
+      .bgTitle {
+
+      }
+      h1 {
+        margin-top: 0;
+        text-align: center;
+        line-height: 45px;
+        font-size: 40px;
+      }
+    }
+    &.second {
+      margin-bottom: 40px;
+      h4 {
+        + div {
+          width: 100%;
+        }
+      }
+
+      ul {
+        flex-direction: column;
+
+        li {
+          opacity: 1;
+          width: 100%;
+        }
+      }
+    }
+
+    &.third {
+      .slideContent {
+        flex-direction: column;
+        padding-right: 0;
+        > div {
+          margin-bottom: 20px;
+        }
+        .left {
+          height: 250px;
+          img {
+            position: absolute;
+            left: 0;
+          }
+        }
+      }
+    }
+
+    &.fourth {
+      padding-left: 0;
+      .firstRow {
+        flex-direction: column;
+      }
+      ul {
+        height: 300px;
+        img {
+          position: absolute;
+        }
+      }
+    }
   }
 }

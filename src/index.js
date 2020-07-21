@@ -3,6 +3,7 @@ import "core-js/modules/es.array.iterator";
 import "core-js/modules/es.string.pad-start";
 import "core-js/modules/web.url";
 import "core-js/modules/web.url-search-params";
+import "animate.css/animate.css";
 
 import React from "react";
 import ReactDOM from "react-dom";
