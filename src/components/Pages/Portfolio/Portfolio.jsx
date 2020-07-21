@@ -30,7 +30,8 @@ const parser = (data) => {
 
 function Portfolio() {
   const { width } = useWindowSize();
-  const [inlineViewMode, setViewMode] = React.useState(false);
+  const [inlineViewMode, setViewMode] = React.useState(localStorage.getItem('viewMode'));
+  // const viewMode = localStorage.getItem('viewMode')
   const [items, error] = useFetchedContent({
     url: "/portfolio",
     name: "portfolio",
@@ -45,7 +46,7 @@ function Portfolio() {
         <>
           <React.Suspense fallback={<Spinner />}>
             {width >= 768 ? (
-              inlineViewMode ? (
+              inlineViewMode !== 'false' ? (
                 <DesktopHorizontal items={items} />
               ) : (
                 <DesktopVertical items={items} />
@@ -56,10 +57,13 @@ function Portfolio() {
           </React.Suspense>
           <div className={classes.viewToggle}>
             <button
-              className={`${inlineViewMode ? classes.active : ""} ${
+              className={`${inlineViewMode !== 'false' ? classes.active : ""} ${
                 classes.inline
               }`}
-              onClick={() => setViewMode(true)}
+              onClick={() => {
+                setViewMode('true')
+                localStorage.setItem('viewMode', 'true')
+              }}
             >
               <span />
               <span />
@@ -67,10 +71,14 @@ function Portfolio() {
               <span />
             </button>
             <button
-              className={`${!inlineViewMode ? classes.active : ""} ${
+              className={`${inlineViewMode === 'false' ? classes.active : ""} ${
                 classes.vertical
               }`}
-              onClick={() => setViewMode(false)}
+              onClick={() => {
+                setViewMode('false')
+                localStorage.setItem('viewMode', 'false')
+              }}
+
             >
               <span />
             </button>
